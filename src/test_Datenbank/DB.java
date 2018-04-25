@@ -91,7 +91,7 @@ public class DB {
 	}
 	
 	public void fügeKundeEin(Kunde k) throws SQLException{
-		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?)";
+		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, k.getVorname());
 		ps.setString(2, k.getNachname());
@@ -103,7 +103,7 @@ public class DB {
 	}
 	
 	public void löscheKunde(Kunde k) throws SQLException{
-		String sql="DELETE FROM kunde WHERE Vorname=? AND Nachname=? AND EMail=? AND TelefonNr=? AND AnID=?";
+		String sql="DELETE FROM kunde WHERE Vorname=? AND Nachname=? AND EMail=? AND TelefonNr=? AND AnID=?;";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, k.getVorname());
 		ps.setString(2, k.getNachname());
@@ -115,7 +115,7 @@ public class DB {
 	}
 	
 	public void fügeRechnungEin(Rechnung r) throws SQLException{
-		String sql="INSERT INTO rechnung(Datum, Bezahlt, Zahlungsziel, KdNr, TransNr) VALUES (?,?,?,?,?)";
+		String sql="INSERT INTO rechnung(Datum, Bezahlt, Zahlungsziel, KdNr, TransNr) VALUES (?,?,?,?,?);";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, r.getDatum());
 		ps.setString(2, r.getBezahlt());
@@ -127,7 +127,7 @@ public class DB {
 	}
 	
 	public void löscheRechnung(Rechnung r) throws SQLException{
-		String sql="DELETE FROM rechnung WHERE Datum=? AND bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?";
+		String sql="DELETE FROM rechnung WHERE Datum=? AND bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?;";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, r.getDatum());
 		ps.setString(2, r.getBezahlt());
@@ -139,7 +139,7 @@ public class DB {
 	}
 	
 	public void fügeGeschäftskundeEin(Geschäftskunde gk) throws SQLException{
-		String sql="INSERT INTO geschäftskunde(KDNr, Firmenname, RechtsformID) VALUES (?,?,?)";
+		String sql="INSERT INTO geschäftskunde(KDNr, Firmenname, RechtsformID) VALUES (?,?,?);";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, gk.getKDNr());
 		ps.setString(2, gk.getFirmenname());
@@ -148,7 +148,7 @@ public class DB {
 	}
 	
 	public void löscheGeschäftskunde(Geschäftskunde gk) throws SQLException{
-		String sql="DELETE FROM geschäftskunde WHERE KDNr=? AND Firmenname=? AND RechtsformID=?";
+		String sql="DELETE FROM geschäftskunde WHERE KDNr=? AND Firmenname=? AND RechtsformID=?;";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, gk.getKDNr());
 		ps.setString(2, gk.getFirmenname());
@@ -158,7 +158,7 @@ public class DB {
 	}
 	
 	public void fügeAnschriftEin(Anschrift a) throws SQLException{
-		String sql="INSERT INTO anschrift(Strasse, HausNr, PLZ, Ort, LaID) VALUES(?,?,?,?,?)";
+		String sql="INSERT INTO anschrift(Strasse, HausNr, PLZ, Ort, LaID) VALUES(?,?,?,?,?);";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, a.getStrasse());
 		ps.setString(2, a.getHausNr());
@@ -169,7 +169,7 @@ public class DB {
 	}
 	
 	public void löscheAnschrift(Anschrift a) throws SQLException{
-		String sql="DELETE FROM anschrift WHERE Strasse=? AND HausNr=? AND PLZ=? AND Ort=? AND LaID=?";
+		String sql="DELETE FROM anschrift WHERE Strasse=? AND HausNr=? AND PLZ=? AND Ort=? AND LaID=?;";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, a.getStrasse());
 		ps.setString(2, a.getHausNr());
@@ -181,7 +181,7 @@ public class DB {
 	}
 	
 	public void fügeRechnungspositionEin(Rechnung.Rechnungsposition rp) throws SQLException{
-		String sql="INSERT INTO rechnungsposition(RechnungsID, PositionsNr, ArtikelID, Menge) VALUES(?,?,?,?)";
+		String sql="INSERT INTO rechnungsposition(RechnungsID, PositionsNr, ArtikelID, Menge) VALUES(?,?,?,?);";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, rp.getNr());
 		ps.setString(2, rp.getPositionsNr());
@@ -191,7 +191,7 @@ public class DB {
 		
 	}
 	public void löscheRechnungsposition(Rechnung.Rechnungsposition rp) throws SQLException{
-		String sql="DELETE FROM rechnungsposition WHERE RechnungsID=? AND PositionsNr=? AND ArtikelID=? AND Menge=?";
+		String sql="DELETE FROM rechnungsposition WHERE RechnungsID=? AND PositionsNr=? AND ArtikelID=? AND Menge=?;";
 		ps=con.prepareStatement(sql);
 		ps.setString(1, rp.getNr());
 		ps.setString(2, rp.getPositionsNr());
@@ -199,6 +199,20 @@ public class DB {
 		ps.setString(4, rp.getMenge());
 		ps.execute();
 		
+	}
+	public void fügeLandEin(Land la) throws SQLException{
+		String sql="INSERT INTO land(ID, Land) VALUES(?,?);";
+		ps=con.prepareStatement(sql);
+		ps.setString(1, la.getId());
+		ps.setString(2, la.getLand());
+		ps.execute();
+	}
+	public void löscheLand(Land la) throws SQLException{
+		String sql="DELETE FROM land WHERE ID=? AND LAND=?;";
+		ps=con.prepareStatement(sql);
+		ps.setString(1, la.getId());
+		ps.setString(2, la.getLand());
+		ps.execute();
 	}
 
 }

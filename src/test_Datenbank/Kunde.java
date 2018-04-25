@@ -58,5 +58,25 @@ public class Kunde {
 	}
 	
 	
+	public int getNr() {
+		return nr;
+	}
+
+	public void setNr(int nr) {
+		this.nr = nr;
+	}
+
+	@Override
+	public boolean equals(Object kd){
+		if(kd==null) return false;;
+		if(kd==this) return true;
+		Kunde kneu=(Kunde) kd;
+		if(this.getNr()==kneu.getNr())
+			return true;
+		else 
+			return false;
+	}
+	
+	
 
 }

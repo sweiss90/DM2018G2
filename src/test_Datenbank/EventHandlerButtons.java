@@ -117,6 +117,26 @@ public class EventHandlerButtons implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else if(e.getSource()==testgui.getLaSende()){
+			Land la=new Land(testgui.getLatf1().getText(), testgui.getLatf2().getText());
+			if(true){
+				try{
+					testgui.getVb().fügeLandEin(la);
+				}catch(Exception ex){}
+			}else{
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else if(e.getSource()==testgui.getLaLösche()){
+			Land la=new Land(testgui.getLatf1().getText(), testgui.getLatf2().getText());
+			if(true){
+				try{
+					testgui.getVb().löscheLand(la);
+				}catch(Exception ex){}
+			}else{
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+		}
 				
 		
 	}

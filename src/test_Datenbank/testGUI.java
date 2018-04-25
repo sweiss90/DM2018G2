@@ -567,7 +567,9 @@ public class testGUI {
 		p32=new JPanel();
 		
 		laSende=new JButton("Absenden");
+		laSende.addActionListener(new EventHandlerButtons(this));
 		laLösche=new JButton("Löschen");
+		laLösche.addActionListener(new EventHandlerButtons(this));
 		laDatensatz=new JLabel("<datensatz>");
 		laÄndern=new JButton("Ändern");
 		
@@ -1160,6 +1162,88 @@ public class testGUI {
 
 	public void setRptf8(TextField rptf8) {
 		this.rptf8 = rptf8;
+	}
+	
+	
+
+
+	public TextField getLatf1() {
+		return latf1;
+	}
+
+
+	public void setLatf1(TextField latf1) {
+		this.latf1 = latf1;
+	}
+
+
+	public TextField getLatf2() {
+		return latf2;
+	}
+
+
+	public void setLatf2(TextField latf2) {
+		this.latf2 = latf2;
+	}
+
+
+	public TextField getLatf3() {
+		return latf3;
+	}
+
+
+	public void setLatf3(TextField latf3) {
+		this.latf3 = latf3;
+	}
+
+
+	public TextField getLatf4() {
+		return latf4;
+	}
+
+
+	public void setLatf4(TextField latf4) {
+		this.latf4 = latf4;
+	}
+
+
+	public JButton getLaSende() {
+		return laSende;
+	}
+
+
+	public void setLaSende(JButton laSende) {
+		this.laSende = laSende;
+	}
+
+
+	public JButton getLaÄndern() {
+		return laÄndern;
+	}
+
+
+	public void setLaÄndern(JButton laÄndern) {
+		this.laÄndern = laÄndern;
+	}
+
+
+	public JButton getLaLösche() {
+		return laLösche;
+	}
+
+
+	public void setLaLösche(JButton laLösche) {
+		this.laLösche = laLösche;
+	}
+
+
+	public JLabel getLaDatensatz() {
+		return laDatensatz;
+	}
+
+
+	public void setLaDatensatz(JLabel laDatensatz) {
+		this.laDatensatz = laDatensatz;
 	}
 
 

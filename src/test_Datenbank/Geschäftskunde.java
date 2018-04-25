@@ -1,14 +1,15 @@
 package test_Datenbank;
 
-public class Geschäftskunde {
+public class Geschäftskunde extends Kunde{
 	private String KDNr;
 	private String Firmenname;
 	private String RechtsformID;
 	
 	public Geschäftskunde(String kDNr, String firmenname, String rechtsformID) {
-		this.KDNr = kDNr;
-		this.Firmenname = firmenname;
-		this.RechtsformID = rechtsformID;
+		super(null, null, null, null, null);
+		this.KDNr=kDNr;
+		this.Firmenname=firmenname;
+		this.RechtsformID=rechtsformID;
 	}
 
 	public String getKDNr() {
