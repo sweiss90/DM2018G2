@@ -1,5 +1,4 @@
 package test_Datenbank;
-//Hallo
 
 public class Anschrift {
 	private int id;
