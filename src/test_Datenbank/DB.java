@@ -48,7 +48,7 @@ public class DB {
 			
 		}
 	}
-	public String lesenJava(){
+	public ArrayList<LinkedHashMap<String, String>> lesenJava(){
 		try{
 			return konvertiereJava(ps.executeQuery());
 		} catch(Exception e){
@@ -56,10 +56,10 @@ public class DB {
 			throw new RuntimeException("DB lesenJava: "+e.getMessage());
 		}
 	}
-	private String konvertiereJava(ResultSet rs) throws SQLException{
+	private ArrayList<LinkedHashMap<String, String>> konvertiereJava(ResultSet rs) throws SQLException{
 		ArrayList<LinkedHashMap<String, String>> daten=new ArrayList<>();
 		int anz_spalten=rs.getMetaData().getColumnCount();
-		if(anz_spalten==0) return "<keine Datensätze>";
+		if(anz_spalten==0) return daten;
 		while(rs.next()){
 			LinkedHashMap<String, String> datensatz=new LinkedHashMap<>();
 			for(int i=1;i<=anz_spalten;i++){
@@ -72,7 +72,7 @@ public class DB {
 			}
 			daten.add(datensatz);
 		}
-		return(konvertiereErgebnisTabelle(daten));
+		return daten;
 	}
 	public void schreiben(){
 		try{
@@ -82,8 +82,11 @@ public class DB {
 			throw new RuntimeException("DB schreiben: "+e.getMessage());
 		}
 	}
+	
+	//Hier muss noch irgendwas geändert werden - ich weiß nur nicht was.
+	//Könntest du bei gelegenheit mal drüber schauen?
 	private String konvertiereErgebnisTabelle(ArrayList<LinkedHashMap<String, String>> tab){
-		String erg=new String("<HTML>");
+		ArrayList<LinkedHashMap<String, String>> erg=new String("<HTML>");
 		for(LinkedHashMap<String, String> datensatz:tab){
 			erg+=""+datensatz+"<br>";
 		}
