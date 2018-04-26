@@ -48,7 +48,7 @@ public class DB {
 			
 		}
 	}
-	public ArrayList<LinkedHashMap<String, String>> lesenJava(){
+	public String lesenJava(){
 		try{
 			return konvertiereJava(ps.executeQuery());
 		} catch(Exception e){
@@ -56,10 +56,10 @@ public class DB {
 			throw new RuntimeException("DB lesenJava: "+e.getMessage());
 		}
 	}
-	private ArrayList<LinkedHashMap<String, String>> konvertiereJava(ResultSet rs) throws SQLException{
+	private String konvertiereJava(ResultSet rs) throws SQLException{
 		ArrayList<LinkedHashMap<String, String>> daten=new ArrayList<>();
 		int anz_spalten=rs.getMetaData().getColumnCount();
-		if(anz_spalten==0) return daten;
+		if(anz_spalten==0) return "<kein Datensatz vorhanden!>";
 		while(rs.next()){
 			LinkedHashMap<String, String> datensatz=new LinkedHashMap<>();
 			for(int i=1;i<=anz_spalten;i++){
@@ -72,7 +72,7 @@ public class DB {
 			}
 			daten.add(datensatz);
 		}
-		return daten;
+		return konvertiereErgebnisTabelle(daten);
 	}
 	public void schreiben(){
 		try{
@@ -85,12 +85,15 @@ public class DB {
 	
 	//Hier muss noch irgendwas geändert werden - ich weiß nur nicht was.
 	//Könntest du bei gelegenheit mal drüber schauen?
+	
+	// -> wenn wir den String entfernen und ArrayList<> verwenden, lässt sich die Tabelle nicht mehr 
+	// vernünftig im JLabel formatieren -> insofern würde ich den String verwenden
 	private String konvertiereErgebnisTabelle(ArrayList<LinkedHashMap<String, String>> tab){
-		ArrayList<LinkedHashMap<String, String>> erg=new String("<HTML>");
+		String erg=new String("<HTML>");
 		for(LinkedHashMap<String, String> datensatz:tab){
-			erg+=""+datensatz+"<br>";
+			erg+=datensatz+"<br>";
 		}
-		return erg;
+		return (erg+="</HTML>");
 	}
 	
 	public void fügeKundeEin(Kunde k) throws SQLException{
