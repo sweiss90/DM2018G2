@@ -108,12 +108,12 @@ public class Rechnung {
 			this.menge = menge;
 		}
 		
-		
-		
-		
-		
-		
-		
 	}
+	@Override
+	public String toString(){
+		return ("{ "+this.getNr()+", "+this.getDatum()+", "+this.getBezahlt()+
+				", "+this.getZahlungsziel()+", "+this.getKdNr()+", "+getTransNr()+" }");
+	}
+	   
 
 }

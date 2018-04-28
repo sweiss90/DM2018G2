@@ -16,7 +16,11 @@ public class Land {
 	public String getLand() {
 		return land;
 	}
+	@Override
+	public String toString(){
+		return "{ ID= "+getId()+", Land= "+getLand()+" }";
 	
+	}
 	
 
 }

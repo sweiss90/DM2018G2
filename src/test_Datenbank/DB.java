@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -21,6 +22,7 @@ public class DB {
 			e.printStackTrace();
 			throw new RuntimeException("Der DB-Zugang ist nicht vorhanden!");
 		}
+		
 	}
 	
 	public void close(){
@@ -48,7 +50,11 @@ public class DB {
 			
 		}
 	}
-	public String lesenJava(){
+	public ArrayList<LinkedHashMap<String, String>> lesenJava2() throws SQLException{
+		Statement stm=con.createStatement();
+		return konvertiereJava(stm.executeQuery("Select * FROM kunde"));
+	}
+	public ArrayList<LinkedHashMap<String, String>> lesenJava(){
 		try{
 			return konvertiereJava(ps.executeQuery());
 		} catch(Exception e){
@@ -56,10 +62,10 @@ public class DB {
 			throw new RuntimeException("DB lesenJava: "+e.getMessage());
 		}
 	}
-	private String konvertiereJava(ResultSet rs) throws SQLException{
+	public ArrayList<LinkedHashMap<String, String>> konvertiereJava(ResultSet rs) throws SQLException{
 		ArrayList<LinkedHashMap<String, String>> daten=new ArrayList<>();
 		int anz_spalten=rs.getMetaData().getColumnCount();
-		if(anz_spalten==0) return "<kein Datensatz vorhanden!>";
+		if(anz_spalten==0) return null;
 		while(rs.next()){
 			LinkedHashMap<String, String> datensatz=new LinkedHashMap<>();
 			for(int i=1;i<=anz_spalten;i++){
@@ -72,7 +78,8 @@ public class DB {
 			}
 			daten.add(datensatz);
 		}
-		return konvertiereErgebnisTabelle(daten);
+		//return konvertiereErgebnisTabelle(daten);
+		return daten;
 	}
 	public void schreiben(){
 		try{
@@ -83,11 +90,7 @@ public class DB {
 		}
 	}
 	
-	//Hier muss noch irgendwas geändert werden - ich weiß nur nicht was.
-	//Könntest du bei gelegenheit mal drüber schauen?
 	
-	// -> wenn wir den String entfernen und ArrayList<> verwenden, lässt sich die Tabelle nicht mehr 
-	// vernünftig im JLabel formatieren -> insofern würde ich den String verwenden
 	private String konvertiereErgebnisTabelle(ArrayList<LinkedHashMap<String, String>> tab){
 		String erg=new String("<HTML>");
 		for(LinkedHashMap<String, String> datensatz:tab){
@@ -96,29 +99,9 @@ public class DB {
 		return (erg+="</HTML>");
 	}
 	
-	public void fügeKundeEin(Kunde k) throws SQLException{
-		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";
-		ps=con.prepareStatement(sql);
-		ps.setString(1, k.getVorname());
-		ps.setString(2, k.getNachname());
-		ps.setString(3, k.getEmail());
-		ps.setString(4, k.getTelefonNr());
-		ps.setString(5, k.getAnID());
-		ps.execute();
-		
-	}
 	
-	public void löscheKunde(Kunde k) throws SQLException{
-		String sql="DELETE FROM kunde WHERE Vorname=? AND Nachname=? AND EMail=? AND TelefonNr=? AND AnID=?;";
-		ps=con.prepareStatement(sql);
-		ps.setString(1, k.getVorname());
-		ps.setString(2, k.getNachname());
-		ps.setString(3, k.getEmail());
-		ps.setString(4, k.getTelefonNr());
-		ps.setString(5, k.getAnID());
-		ps.execute();
-		
-	}
+	
+	
 	
 	public void fügeRechnungEin(Rechnung r) throws SQLException{
 		String sql="INSERT INTO rechnung(Datum, Bezahlt, Zahlungsziel, KdNr, TransNr) VALUES (?,?,?,?,?);";
@@ -220,5 +203,33 @@ public class DB {
 		ps.setString(2, la.getLand());
 		ps.execute();
 	}
+
+	public PreparedStatement getPs() {
+		return ps;
+	}
+
+	public void setPs(PreparedStatement ps) {
+		this.ps = ps;
+	}
+
+	public Connection getCon() {
+		return con;
+	}
+
+	public void setCon(Connection con) {
+		this.con = con;
+	}
+
+	public int getCounter_prepared() {
+		return counter_prepared;
+	}
+
+	public void setCounter_prepared(int counter_prepared) {
+		this.counter_prepared = counter_prepared;
+	}
+	
+	
+	
+	
 
 }
