@@ -107,12 +107,16 @@ public class Rechnung {
 		public void setMenge(String menge) {
 			this.menge = menge;
 		}
-		
+		@Override
+		public String toString(){
+			return "{ Rechnungsnummer= "+getNr()+", Positionsnummer= "+getPositionsNr()+", Artikel= "+getArtikelID()
+					+", Menge= "+getMenge()+" }";
+		}
 	}
 	@Override
 	public String toString(){
-		return ("{ "+this.getNr()+", "+this.getDatum()+", "+this.getBezahlt()+
-				", "+this.getZahlungsziel()+", "+this.getKdNr()+", "+getTransNr()+" }");
+		return "{ "+this.getNr()+", "+this.getDatum()+", "+this.getBezahlt()+
+				", "+this.getZahlungsziel()+", "+this.getKdNr()+", "+getTransNr()+" }";
 	}
 	   
 
