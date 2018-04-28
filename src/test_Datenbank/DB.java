@@ -220,5 +220,21 @@ public class DB {
 		ps.setString(2, la.getLand());
 		ps.execute();
 	}
+	
+	public String einfachEins(int i) throws SQLException {
+		String sql ="SELECT* FROM rechnung WHERE bezahlt = ?;";
+		ps=con.prepareStatement(sql);
+		ps.setInt(1, i);
+		String querry = konvertiereJava(ps.executeQuery());
+		return querry;
+	}
+	
+	public String einfachZwei() {
+		
+	}
+	
+	
+	
+	
 
 }
