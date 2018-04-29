@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.*;
 
@@ -187,7 +188,7 @@ public class testGUI {
 	
 	private DB vb=null;
 	
-	public testGUI(DB vb){
+	public testGUI(DB vb) throws SQLException{
 		
 		this.vb=vb;
 		
@@ -198,6 +199,7 @@ public class testGUI {
 		//--------------------Kunde--------------------------
 		
 		vb.setSQL("SELECT * FROM kunde");
+		KundenListe.getkundenListe().kundenListeAktualisieren(vb);
 		p1=new JPanel();
 		p2=new JPanel();
 		p3=new JPanel();
@@ -207,8 +209,8 @@ public class testGUI {
 		kSende.addActionListener(new EventHandlerButtons(this));
 		kLösche=new JButton("Löschen");
 		kLösche.addActionListener(new EventHandlerButtons(this));
-		kDatensatz=new JLabel(vb.lesenJava());
-		kDatensatz.setSize(50, 700);
+		//kDatensatz=new JLabel(KundenListe.get);
+		//kDatensatz.setSize(50, 700);
 		kÄndern=new JButton("Ändern");
 		
 		ktf1=new TextField("Vorname");
@@ -240,7 +242,7 @@ public class testGUI {
 		p2.add(kSende);
 		p2.add(kLösche);
 		
-		p3.add(new JLabel(vb.lesenJava()));
+		p3.add(new JLabel(KundenListe.getkundenListe().toString()));
 		
 		p4.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p4.add(ktf6);
@@ -255,7 +257,7 @@ public class testGUI {
 		//-------------------------------------------------------
 		//------------------Rechnung-----------------------------
 		vb.setSQL("SELECT * FROM rechnung");
-		
+		RechnungsListe.getRechnungsListe().rechnungsListeAktualisieren(vb);
 		p5 =new JPanel();
 		p6=new JPanel();
 		p7=new JPanel();
@@ -298,7 +300,7 @@ public class testGUI {
 		p6.add(rSende);
 		p6.add(rLösche);
 		
-		p7.add(new JLabel(vb.lesenJava()));
+		p7.add(new JLabel(RechnungsListe.getRechnungsListe().toString()));
 			
 		p8.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p8.add(rtf6);
@@ -351,7 +353,7 @@ public class testGUI {
 		p10.add(gkSende);
 		p10.add(gkLösche);
 		
-		p11.add(new JLabel(vb.lesenJava()));
+	//	p11.add(new JLabel(vb.lesenJava()));
 	
 		p12.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p12.add(gktf4);
@@ -407,7 +409,7 @@ public class testGUI {
 		p14.add(aSende);
 		p14.add(aLösche);
 		
-		p15.add(new JLabel(vb.lesenJava()));
+		//p15.add(new JLabel(vb.lesenJava()));
 		
 		p16.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p16.add(atf6);
@@ -463,7 +465,7 @@ public class testGUI {
 		p18.add(rpSende);
 		p18.add(rpLösche);
 		
-		p19.add(new JLabel(vb.lesenJava()));
+		//p19.add(new JLabel(vb.lesenJava()));
 		
 		p20.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p20.add(rptf5);
@@ -505,7 +507,7 @@ public class testGUI {
 		p22.add(ufSende);
 		p22.add(ufLösche);
 		
-		p23.add(new JLabel(vb.lesenJava()));
+		//p23.add(new JLabel(vb.lesenJava()));
 		
 		p24.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p24.add(uftf2);
@@ -547,7 +549,7 @@ public class testGUI {
 		p26.add(arSende);
 		p26.add(arLösche);
 		
-		p27.add(new JLabel(vb.lesenJava()));
+		//p27.add(new JLabel(vb.lesenJava()));
 		
 		p28.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p28.add(artf3);
@@ -593,7 +595,7 @@ public class testGUI {
 		p30.add(laSende);
 		p30.add(laLösche);
 		
-		p31.add(new JLabel(vb.lesenJava()));
+		//p31.add(new JLabel(vb.lesenJava()));
 		
 		p32.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p32.add(latf3);
@@ -637,7 +639,7 @@ public class testGUI {
 		p34.add(zaSende);
 		p34.add(zaLösche);
 		
-		p35.add(new JLabel(vb.lesenJava()));
+		//p35.add(new JLabel(vb.lesenJava()));
 		
 		p36.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p36.add(zatf3);
@@ -1247,7 +1249,7 @@ public class testGUI {
 	}
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException{
 		DB d=new DB();
 		new testGUI(d);
 

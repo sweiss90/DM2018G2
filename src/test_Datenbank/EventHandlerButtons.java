@@ -20,10 +20,10 @@ public class EventHandlerButtons implements ActionListener {
 	public void actionPerformed(ActionEvent e){
 		if(e.getSource()==testgui.getkSende()){
 			
-			Kunde k=new Kunde(testgui.getKtf1().getText(), testgui.getKtf2().getText(), testgui.getKtf3().getText(),testgui.getKtf4().getText(),testgui.getKtf5().getText());
-			if(eingabenPrüfenKunde(k)){ 
+			Kunde k=new Kunde(null, testgui.getKtf1().getText(), testgui.getKtf2().getText(), testgui.getKtf3().getText(),testgui.getKtf4().getText(),testgui.getKtf5().getText());
+			if(true){ 
 				try{
-				 testgui.getVb().fügeKundeEin(k);
+				 KundenListe.getkundenListe().fügeKundeEin(testgui.getVb(), k);
 				 }
 				 catch(Exception ex){}
 			}else{
@@ -31,10 +31,10 @@ public class EventHandlerButtons implements ActionListener {
 			}
 		}
 		else if(e.getSource()==testgui.getkLösche()){
-			Kunde k=new Kunde(testgui.getKtf1().getText(), testgui.getKtf2().getText(), testgui.getKtf3().getText(),testgui.getKtf4().getText(), testgui.getKtf5().getText());
-			if(eingabenPrüfenKunde(k)){
+			Kunde k=new Kunde(null, testgui.getKtf1().getText(), testgui.getKtf2().getText(), testgui.getKtf3().getText(),testgui.getKtf4().getText(), testgui.getKtf5().getText());
+			if(true){
 			try{
-				 testgui.getVb().löscheKunde(k);
+				 KundenListe.getkundenListe().löscheKunde(testgui.getVb(), k);
 				 }
 				 catch(Exception ex){}
 			}else{
@@ -45,7 +45,7 @@ public class EventHandlerButtons implements ActionListener {
 			Rechnung r=new Rechnung(testgui.getRtf1().getText(), testgui.getRtf2().getText(), testgui.getRtf3().getText(), testgui.getRtf4().getText(), testgui.getRtf5().getText());
 			if(eingabenPrüfenRechnung(r)){
 				try{
-					testgui.getVb().fügeRechnungEin(r);
+					RechnungsListe.getRechnungsListe().fügeRechnungEin(testgui.getVb(),  r);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -54,7 +54,7 @@ public class EventHandlerButtons implements ActionListener {
 			Rechnung r=new Rechnung(testgui.getRtf1().getText(), testgui.getRtf2().getText(), testgui.getRtf3().getText(), testgui.getRtf4().getText(), testgui.getRtf5().getText());
 			if(true){
 				try{
-					testgui.getVb().löscheRechnung(r);
+					RechnungsListe.getRechnungsListe().löscheRechnung(testgui.getVb(), r);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);

@@ -15,7 +15,6 @@ public class Anschrift {
 		this.ort = ort;
 		this.laID = laID;
 	}
-
 	public String getStrasse() {
 		return strasse;
 	}
@@ -34,6 +33,14 @@ public class Anschrift {
 
 	public String getLaID() {
 		return laID;
+	}
+	public int getId() {
+		return id;
+	}
+	@Override
+	public String toString(){
+		return "{ "+ this.getId()+", "+this.getStrasse()+", "+this.getHausNr()+
+				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLaID()+" }";
 	}
 
 	
