@@ -18,6 +18,7 @@ public class DB {
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			con=DriverManager.getConnection("jdbc:mysql://localhost/rechnungsverwaltung_kopie", "root", "");
+			setCon(con);
 		} catch(Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Der DB-Zugang ist nicht vorhanden!");
