@@ -25,6 +25,8 @@ public class DB {
 		
 	}
 	
+	
+	
 	public void close(){
 		finalize();
 	}
@@ -204,11 +206,11 @@ public class DB {
 		ps.execute();
 	}
 	
-	public String einfachEins(int i) throws SQLException {
+	public ArrayList<LinkedHashMap<String, String>> einfachEins(int i) throws SQLException {
 		String sql ="SELECT* FROM rechnung WHERE bezahlt = ?;";
 		ps=con.prepareStatement(sql);
 		ps.setInt(1, i);
-		String querry = konvertiereJava(ps.executeQuery());
+		ArrayList<LinkedHashMap<String, String>> querry = konvertiereJava(ps.executeQuery());
 		return querry;
 	}
 	
