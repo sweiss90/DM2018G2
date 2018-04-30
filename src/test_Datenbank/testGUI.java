@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import javax.swing.*;
 
@@ -79,6 +80,8 @@ public class testGUI {
 	private TextField ktf8=null;
 	private TextField ktf9=null;
 	private TextField ktf10=null;
+	
+	private JComboBox cb=null;
 	
 	private TextField rtf1=null;
 	private TextField rtf2=null;
@@ -200,6 +203,7 @@ public class testGUI {
 		
 		vb.setSQL("SELECT * FROM kunde");
 		KundenListe.getkundenListe().kundenListeAktualisieren(vb);
+		
 		p1=new JPanel();
 		p2=new JPanel();
 		p3=new JPanel();
@@ -212,6 +216,7 @@ public class testGUI {
 		//kDatensatz=new JLabel(KundenListe.get);
 		//kDatensatz.setSize(50, 700);
 		kÄndern=new JButton("Ändern");
+		kÄndern.addActionListener(new EventHandlerButtons(this));
 		
 		ktf1=new TextField("Vorname");
 		ktf2=new TextField("Nachname");
@@ -224,6 +229,8 @@ public class testGUI {
 		ktf8=new TextField("Email");
 		ktf9=new TextField("Telefonnummer");
 		ktf10=new TextField("AN_ID");
+		
+		cb=new JComboBox(KundenListe.getkundenListe().getkListe().toArray());
 		
 		p1.setLayout(new GridLayout());
 		p2.setLayout(new GridLayout(10,4));
@@ -245,6 +252,7 @@ public class testGUI {
 		p3.add(new JLabel(KundenListe.getkundenListe().toString()));
 		
 		p4.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p4.add(cb);
 		p4.add(ktf6);
 		p4.add(ktf7);
 		p4.add(ktf8);
@@ -315,6 +323,7 @@ public class testGUI {
 		//------------------------------------------------------
 		//--------------Geschäftskunde
 		vb.setSQL("SELECT * FROM geschäftskunde");
+		GeschaeftskundenListe.getGeschaeftskundenListe().geschaeftskundenListeAktualisieren(vb);
 		
 		p9 =new JPanel();
 		p10=new JPanel();
@@ -353,7 +362,7 @@ public class testGUI {
 		p10.add(gkSende);
 		p10.add(gkLösche);
 		
-	//	p11.add(new JLabel(vb.lesenJava()));
+		p11.add(new JLabel(GeschaeftskundenListe.getGeschaeftskundenListe().toString()));
 	
 		p12.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p12.add(gktf4);
@@ -366,7 +375,8 @@ public class testGUI {
 		//---------------------------------------------------------------------------------
 		//-----------------------------Anschrift-------------------------------------------
 		vb.setSQL("SELECT * FROM anschrift");
-
+		AnschriftenListe.getAnschriftenListe().anschriftenListeAktualisieren(vb);
+		
 		p13 =new JPanel();
 		p14=new JPanel();
 		p15=new JPanel();
@@ -409,7 +419,7 @@ public class testGUI {
 		p14.add(aSende);
 		p14.add(aLösche);
 		
-		//p15.add(new JLabel(vb.lesenJava()));
+		p15.add(new JLabel(AnschriftenListe.getAnschriftenListe().toString()));
 		
 		p16.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p16.add(atf6);
@@ -425,7 +435,8 @@ public class testGUI {
 		//---------------------Rechnungsposition------------------------
 		
 		vb.setSQL("SELECT * FROM rechnungsposition");
-
+		RechnungspositionsListe.getRechnungspositionsListe().rechnungsPositionsListeAktualisieren(vb);
+		
 		p17 =new JPanel();
 		p18=new JPanel();
 		p19=new JPanel();
@@ -465,7 +476,7 @@ public class testGUI {
 		p18.add(rpSende);
 		p18.add(rpLösche);
 		
-		//p19.add(new JLabel(vb.lesenJava()));
+		p19.add(new JLabel(RechnungspositionsListe.getRechnungspositionsListe().toString()));
 		
 		p20.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p20.add(rptf5);
@@ -479,6 +490,8 @@ public class testGUI {
 		//----------------------------------------------------------
 		//---------------Unternehmensform---------------------------
 		vb.setSQL("SELECT * FROM unternehmensform");
+		RechtsformListe.getRechtsformListe().rechtsformListeAktualisieren(vb);
+		
 
 		p21 =new JPanel();
 		p22=new JPanel();
@@ -507,7 +520,7 @@ public class testGUI {
 		p22.add(ufSende);
 		p22.add(ufLösche);
 		
-		//p23.add(new JLabel(vb.lesenJava()));
+		p23.add(new JLabel(RechtsformListe.getRechtsformListe().toString()));
 		
 		p24.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p24.add(uftf2);
@@ -518,7 +531,8 @@ public class testGUI {
 		//-------------------------------------------------------------------------------------
 		//----------------------------Artikel--------------------------------------------------
 		vb.setSQL("SELECT * FROM artikel");
-
+		ArtikelListe.getArtikelListe().artikelListeAktualisieren(vb);
+		
 		p25=new JPanel();
 		p26=new JPanel();
 		p27=new JPanel();
@@ -549,7 +563,7 @@ public class testGUI {
 		p26.add(arSende);
 		p26.add(arLösche);
 		
-		//p27.add(new JLabel(vb.lesenJava()));
+		p27.add(new JLabel(ArtikelListe.getArtikelListe().toString()));
 		
 		p28.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p28.add(artf3);
@@ -562,7 +576,8 @@ public class testGUI {
 		//-------------------------Land---------------------------------------------------
 		
 		vb.setSQL("SELECT * FROM land");
-
+		LaenderListe.getLaenderListe().laenderListeAktualisieren(vb);
+		
 		p29=new JPanel();
 		p30=new JPanel();
 		p31=new JPanel();
@@ -595,7 +610,7 @@ public class testGUI {
 		p30.add(laSende);
 		p30.add(laLösche);
 		
-		//p31.add(new JLabel(vb.lesenJava()));
+		p31.add(new JLabel(LaenderListe.getLaenderListe().toString()));
 		
 		p32.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p32.add(latf3);
@@ -1247,6 +1262,81 @@ public class testGUI {
 	public void setLaDatensatz(JLabel laDatensatz) {
 		this.laDatensatz = laDatensatz;
 	}
+	
+
+
+	public JButton getkÄndern() {
+		return kÄndern;
+	}
+
+
+	public void setkÄndern(JButton kÄndern) {
+		this.kÄndern = kÄndern;
+	}
+	
+
+
+	public JComboBox getCb() {
+		return cb;
+	}
+
+
+	public void setCb(JComboBox cb) {
+		this.cb = cb;
+	}
+	
+	
+
+
+	public TextField getKtf6() {
+		return ktf6;
+	}
+
+
+	public void setKtf6(TextField ktf6) {
+		this.ktf6 = ktf6;
+	}
+
+
+	public TextField getKtf7() {
+		return ktf7;
+	}
+
+
+	public void setKtf7(TextField ktf7) {
+		this.ktf7 = ktf7;
+	}
+
+
+	public TextField getKtf8() {
+		return ktf8;
+	}
+
+
+	public void setKtf8(TextField ktf8) {
+		this.ktf8 = ktf8;
+	}
+
+
+	public TextField getKtf9() {
+		return ktf9;
+	}
+
+
+	public void setKtf9(TextField ktf9) {
+		this.ktf9 = ktf9;
+	}
+
+
+	public TextField getKtf10() {
+		return ktf10;
+	}
+
+
+	public void setKtf10(TextField ktf10) {
+		this.ktf10 = ktf10;
+	}
+
 
 
 	public static void main(String[] args) throws SQLException{
@@ -1254,5 +1344,6 @@ public class testGUI {
 		new testGUI(d);
 
 	}
+	
 
 }

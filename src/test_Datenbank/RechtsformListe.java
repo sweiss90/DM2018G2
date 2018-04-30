@@ -72,11 +72,4 @@ public class RechtsformListe {
 		}
 		return (erg+="</HTML>");
 	}
-
-	
-	
-	
-	
-	
-
 }

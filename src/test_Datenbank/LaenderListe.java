@@ -61,7 +61,7 @@ public class LaenderListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Land la=new Land(datensatz.get("LaID"), datensatz.get("Land"));
+			Land la=new Land(datensatz.get("ID"), datensatz.get("Land"));
 			this.fügeLandEin(la);
 		}
 	}

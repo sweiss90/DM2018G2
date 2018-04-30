@@ -66,7 +66,7 @@ public class AnschriftenListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Anschrift a=new Anschrift(datensatz.get("Strasse"), datensatz.get("HausNr"), datensatz.get("PLZ"), 
+			Anschrift a=new Anschrift(datensatz.get("ID"), datensatz.get("Strasse"), datensatz.get("HausNr"), datensatz.get("PLZ"), 
 						datensatz.get("Ort"), datensatz.get("LaID"));
 			this.fügeAnschriftEin(a);
 		}

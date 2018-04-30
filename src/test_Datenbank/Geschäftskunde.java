@@ -62,7 +62,7 @@ public class Geschäftskunde extends Kunde{
 	}
 	@Override
 	public String toString(){
-		return "{ KDNr= "+getKDNr()+", Firmenname= "+getFirmenname()+", Rechtsform= "+getRechtsformID()+" };";
+		return "{ KDNr= "+getKDNr()+", Firmenname= "+getFirmenname()+", RechtsformID= "+getRechtsformID()+" };";
 	}
 	
 	

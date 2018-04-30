@@ -1,14 +1,15 @@
 package test_Datenbank;
 
 public class Anschrift {
-	private int id;
+	private String id;
 	private String strasse;
 	private String hausNr;
 	private String plZ;
 	private String ort;
 	private String laID;
 	
-	public Anschrift(String strasse, String hausNr, String plZ, String ort, String laID) {
+	public Anschrift(String id,String strasse, String hausNr, String plZ, String ort, String laID) {
+		this.id=id;
 		this.strasse = strasse;
 		this.hausNr = hausNr;
 		this.plZ = plZ;
@@ -34,7 +35,7 @@ public class Anschrift {
 	public String getLaID() {
 		return laID;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 	@Override

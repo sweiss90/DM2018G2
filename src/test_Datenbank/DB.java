@@ -216,7 +216,7 @@ public class DB {
 	}
 	
 	public String einfachZwei() {
-		
+		return "";
 	}
 	
 	

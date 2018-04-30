@@ -35,12 +35,27 @@ public class EventHandlerButtons implements ActionListener {
 			if(true){
 			try{
 				 KundenListe.getkundenListe().löscheKunde(testgui.getVb(), k);
+				
 				 }
 				 catch(Exception ex){}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else if(e.getSource()==testgui.getkÄndern()){
+			Kunde kundAlt=(Kunde) testgui.getCb().getSelectedItem();
+ 			Kunde kundNeu=new Kunde(kundAlt.getNr(), testgui.getKtf6().getText(), testgui.getKtf7().getText(), testgui.getKtf9().getText(),testgui.getKtf8().getText(), testgui.getKtf10().getText());
+			if(true){
+			try{
+				KundenListe.getkundenListe().ändereKunde(testgui.getVb(), kundNeu, kundAlt);
+				
+				 }
+				 catch(Exception ex){throw new RuntimeException("Ändern nicht möglich!");}
+			}else{
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
 		else if(e.getSource()==testgui.getrSende()){
 			Rechnung r=new Rechnung(testgui.getRtf1().getText(), testgui.getRtf2().getText(), testgui.getRtf3().getText(), testgui.getRtf4().getText(), testgui.getRtf5().getText());
 			if(eingabenPrüfenRechnung(r)){
@@ -78,7 +93,7 @@ public class EventHandlerButtons implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 		}
 		else if(e.getSource()==testgui.getaSende()){
-			Anschrift a=new Anschrift(testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
+			Anschrift a=new Anschrift(null, testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
 			if(true){
 				try{
 					testgui.getVb().fügeAnschriftEin(a);
@@ -87,7 +102,7 @@ public class EventHandlerButtons implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 		}
 		else if(e.getSource()==testgui.getaLösche()){
-			Anschrift a=new Anschrift(testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
+			Anschrift a=new Anschrift(null, testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
 			if(true){
 				try{
 					testgui.getVb().löscheAnschrift(a);

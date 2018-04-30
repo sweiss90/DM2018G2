@@ -1,6 +1,9 @@
 package test_Datenbank;
 
 import java.util.ArrayList.*;
+
+import javax.swing.JOptionPane;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -75,6 +78,23 @@ public class KundenListe {
 		//SQL-Befehl absenden
 		db.getPs().execute();
 		getkundenListe().entferneKunde(k);
+	}
+	public void ändereKunde(DB db, Kunde kundeNeu, Kunde kundeAlt) throws SQLException{
+		String sql="UPDATE kunde SET Vorname=?, Nachname=?, TelefonNr=?, Email=?, AnID=? WHERE Nr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, kundeNeu.getVorname());
+		db.getPs().setString(2, kundeNeu.getNachname());
+		db.getPs().setString(3, kundeNeu.getTelefonNr());
+		db.getPs().setString(4, kundeNeu.getEmail());
+		db.getPs().setString(5, kundeNeu.getAnID());
+		db.getPs().setString(6, kundeNeu.getNr());
+
+		
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getkundenListe().entferneKunde(kundeAlt);
+		getkundenListe().fügeKundeHinzu(kundeNeu);
+		
 	}
 	public void kundenListeAktualisieren(DB db) throws SQLException{
 		kundenListe.leereKundenListe();

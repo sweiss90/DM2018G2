@@ -109,7 +109,7 @@ public class Rechnung {
 		}
 		@Override
 		public String toString(){
-			return "{ Rechnungsnummer= "+getNr()+", Positionsnummer= "+getPositionsNr()+", Artikel= "+getArtikelID()
+			return "{ RechnungsID= "+getNr()+", PositionsNr= "+getPositionsNr()+", Artikel= "+getArtikelID()
 					+", Menge= "+getMenge()+" }";
 		}
 	}

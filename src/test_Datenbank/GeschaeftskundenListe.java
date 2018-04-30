@@ -63,7 +63,7 @@ public class GeschaeftskundenListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Geschäftskunde gk=new Geschäftskunde(datensatz.get("KDNr"), datensatz.get("Firmenname"), datensatz.get("RechtsformId")); 
+			Geschäftskunde gk=new Geschäftskunde(datensatz.get("KDNr"), datensatz.get("Firmenname"), datensatz.get("RechtsformID")); 
 			this.fügeGeschaeftskundeEin(gk);
 		}
 	}

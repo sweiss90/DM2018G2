@@ -21,7 +21,7 @@ public class Artikel {
 	}
 	@Override
 	public String toString() {
-		return "{ "+this.getId()+", "+this.getBezeichnung()+", "+this.getPreis()+" }";
+		return "{ ID= "+this.getId()+", Bezeichnung= "+this.getBezeichnung()+", Preis= "+this.getPreis()+" }";
 	}
 	
 	

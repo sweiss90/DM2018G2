@@ -1,7 +1,9 @@
 package test_Datenbank;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class ArtikelListe {
 	//Singleton-Pattern
@@ -28,6 +30,9 @@ public class ArtikelListe {
 	public ArrayList<Artikel> getaListe() {
 		return aListe;
 	}
+	public void leereListe(){
+		aListe.clear();
+	}
 	public void fügeArtikelEin(DB db, Artikel ar) throws SQLException{
 		String sql="INSERT INTO artikel(Id, Bezeichnung, Preis) VALUES(?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
@@ -49,6 +54,16 @@ public class ArtikelListe {
 		//SQL-Befehl ausführen
 		db.getPs().execute();
 		getArtikelListe().entferneArtikel(ar);
+	}
+	public void artikelListeAktualisieren(DB db) throws SQLException{
+		artikelListe.leereListe();
+		String sql="SELECT * FROM artikel;";
+		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
+		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
+		for(LinkedHashMap<String, String> datensatz:ergebnis){
+			Artikel a=new Artikel(datensatz.get("ID"), datensatz.get("Bezeichnung"), datensatz.get("Preis"));
+			this.fügeArtikelEin(a);
+		}
 	}
 	@Override
 	public String toString(){
