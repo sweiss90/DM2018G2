@@ -54,6 +54,17 @@ public class RechtsformListe {
 		db.getPs().execute();
 		getRechtsformListe().entferneRechtsform(rf);
 	}
+	public void ändereRechtsform(DB db, Rechtsform rfNeu, Rechtsform rfAlt) throws SQLException{
+		String sql="UPDATE unternehmensform SET Rechtsform=? WHERE ID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, rfNeu.getRechtsform());
+		db.getPs().setString(2, rfNeu.getId());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getRechtsformListe().entferneRechtsform(rfAlt);
+		getRechtsformListe().fügeRechtsformHinzu(rfNeu);
+	}
 	public void rechtsformListeAktualisieren(DB db) throws SQLException{
 		getRechtsformListe().leereListe();//suboptimal, da wenig performant 
 		String sql="SELECT * FROM unternehmensform;";

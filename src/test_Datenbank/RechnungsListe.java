@@ -65,6 +65,24 @@ public class RechnungsListe {
 		db.getPs().execute();
 		getRechnungsListe().entferneRechnung(r);
 	}
+	public void ändereRechnung(DB db, Rechnung rechnungNeu, Rechnung rechnungAlt) throws SQLException{
+		String sql="UPDATE rechnung SET Datum=?, Bezahlt=?, Zahlungsziel=?, KdNr=?, TransNr=? WHERE Nr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, rechnungNeu.getDatum());
+		db.getPs().setString(2, rechnungNeu.getBezahlt());
+		db.getPs().setString(3, rechnungNeu.getZahlungsziel());
+		db.getPs().setString(4, rechnungNeu.getKdNr());
+		db.getPs().setString(5, rechnungNeu.getTransNr());
+		db.getPs().setString(6, rechnungNeu.getNr());
+
+		
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getRechnungsListe().entferneRechnung(rechnungAlt);
+		getRechnungsListe().fügeRechnungHinzu(rechnungNeu);
+		
+	}
+	
 	public void rechnungsListeAktualisieren(DB db) throws SQLException{
 		this.leereRechnungsListe();//suboptimal, da wenig performant 
 		getRechnungsListe().leereRechnungsListe();

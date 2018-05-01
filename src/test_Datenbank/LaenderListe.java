@@ -55,6 +55,17 @@ public class LaenderListe {
 		db.getPs().execute();
 		getLaenderListe().entferneLand(la);
 	}
+	public void ändereLand(DB db, Land laNeu, Land laAlt) throws SQLException{
+		String sql="UPDATE land SET land=? WHERE ID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, laNeu.getLand());
+		db.getPs().setString(2, laNeu.getId());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getLaenderListe().entferneLand(laAlt);
+		getLaenderListe().fügeLandEin(laNeu);
+	}
 	public void laenderListeAktualisieren(DB db) throws SQLException{
 		laenderListe.leereLaenderListe();
 		String sql="SELECT * FROM land;";

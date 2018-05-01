@@ -55,6 +55,19 @@ public class ArtikelListe {
 		db.getPs().execute();
 		getArtikelListe().entferneArtikel(ar);
 	}
+	public void ändereArtikel(DB db, Artikel arNeu, Artikel arAlt) throws SQLException{
+		String sql="UPDATE artikel SET Bezeichnung=?, Preis=? WHERE ID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, arNeu.getBezeichnung());
+		db.getPs().setString(2, arNeu.getPreis());
+		db.getPs().setString(3, arNeu.getId());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getArtikelListe().entferneArtikel(arAlt);
+		getArtikelListe().fügeArtikelEin(arNeu);
+	}
+	
 	public void artikelListeAktualisieren(DB db) throws SQLException{
 		artikelListe.leereListe();
 		String sql="SELECT * FROM artikel;";

@@ -57,6 +57,20 @@ public class GeschaeftskundenListe {
 		db.getPs().execute();
 		getGeschaeftskundenListe().entferneGeschaeftskunde(gk);
 	}
+	public void ändereGeschäftskunde(DB db, Geschäftskunde gkNeu, Geschäftskunde gkAlt) throws SQLException{
+		String sql="UPDATE geschäftskunde SET KDNr=?, Firmenname=?, RechtsformID=? WHERE KDNr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, gkNeu.getKDNr());
+		db.getPs().setString(2, gkNeu.getFirmenname());
+		db.getPs().setString(3, gkNeu.getRechtsformID());
+		db.getPs().setString(4, gkNeu.getKDNr());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getGeschaeftskundenListe().entferneGeschaeftskunde(gkAlt);
+		getGeschaeftskundenListe().fügeGeschaeftskundeEin(gkNeu);
+	
+	}
 	public void geschaeftskundenListeAktualisieren(DB db) throws SQLException{
 		geschaeftskundenListe.leereListe();
 		String sql="SELECT * FROM geschäftskunde;";

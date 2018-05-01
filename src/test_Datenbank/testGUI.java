@@ -81,7 +81,9 @@ public class testGUI {
 	private TextField ktf9=null;
 	private TextField ktf10=null;
 	
-	private JComboBox cb=null;
+	private JComboBox kCb=null;
+	private JComboBox rCb=null;
+	private JComboBox gkCb=null;
 	
 	private TextField rtf1=null;
 	private TextField rtf2=null;
@@ -146,38 +148,47 @@ public class testGUI {
 	private JButton kSende=null;
 	private JButton kÄndern=null;
 	private JButton kLösche=null;
+	private JButton kAktualisiere=null;
 	
 	private JButton rSende=null;
 	private JButton rÄndern=null;
 	private JButton rLösche=null;
+	private JButton rAktualisiere=null;
 	
 	private JButton gkSende=null;
 	private JButton gkÄndern=null;
 	private JButton gkLösche=null;
+	private JButton gkAktualisiere=null;
 	
 	private JButton aSende=null;
 	private JButton aÄndern=null;
 	private JButton aLösche=null;
+	private JButton aAktualisiere=null;
 	
 	private JButton rpSende=null;
 	private JButton rpÄndern=null;
 	private JButton rpLösche=null;
+	private JButton rpAktualisiere=null;
 	
 	private JButton ufSende=null;
 	private JButton ufÄndern=null;
 	private JButton ufLösche=null;
+	private JButton ufAktualisiere=null;
 	
 	private JButton arSende=null;
 	private JButton arÄndern=null;
 	private JButton arLösche=null;
+	private JButton arAktualisiere=null;
 	
 	private JButton laSende=null;
 	private JButton laÄndern=null;
 	private JButton laLösche=null;
+	private JButton laAktualisiere=null;
 	
 	private JButton zaSende=null;
 	private JButton zaÄndern=null;
 	private JButton zaLösche=null;
+	private JButton zaAktualisiere=null;
 
 	private JLabel kDatensatz=null;
 	private JLabel rDatensatz=null;
@@ -213,10 +224,12 @@ public class testGUI {
 		kSende.addActionListener(new EventHandlerButtons(this));
 		kLösche=new JButton("Löschen");
 		kLösche.addActionListener(new EventHandlerButtons(this));
-		//kDatensatz=new JLabel(KundenListe.get);
+		kDatensatz=new JLabel("<Datensatz>");
 		//kDatensatz.setSize(50, 700);
 		kÄndern=new JButton("Ändern");
 		kÄndern.addActionListener(new EventHandlerButtons(this));
+		kAktualisiere=new JButton("Anzeige aktualisieren");
+		kAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		ktf1=new TextField("Vorname");
 		ktf2=new TextField("Nachname");
@@ -230,7 +243,9 @@ public class testGUI {
 		ktf9=new TextField("Telefonnummer");
 		ktf10=new TextField("AN_ID");
 		
-		cb=new JComboBox(KundenListe.getkundenListe().getkListe().toArray());
+		kCb=new JComboBox(KundenListe.getkundenListe().getkListe().toArray());
+		kCb.addActionListener(new EventHandlerJComboBoxes(this));
+		kDatensatz.setText(KundenListe.getkundenListe().toString());
 		
 		p1.setLayout(new GridLayout());
 		p2.setLayout(new GridLayout(10,4));
@@ -249,16 +264,17 @@ public class testGUI {
 		p2.add(kSende);
 		p2.add(kLösche);
 		
-		p3.add(new JLabel(KundenListe.getkundenListe().toString()));
+		p3.add(kDatensatz);
 		
 		p4.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
-		p4.add(cb);
+		p4.add(kCb);
 		p4.add(ktf6);
 		p4.add(ktf7);
 		p4.add(ktf8);
 		p4.add(ktf9);
 		p4.add(ktf10);
 		p4.add(kÄndern);
+		p4.add(kAktualisiere);
 		
 		tp.add("Kunde", p1);
 		
@@ -277,6 +293,9 @@ public class testGUI {
 		rLösche.addActionListener(new EventHandlerButtons(this));
 		rDatensatz=new JLabel("<datensatz>");
 		rÄndern=new JButton("Ändern");
+		rÄndern.addActionListener(new EventHandlerButtons(this));
+		rAktualisiere=new JButton("Anzeige aktualisieren");
+		rAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		rtf1=new TextField("Datum");
 		rtf2=new TextField("Bezahlt");
@@ -289,6 +308,10 @@ public class testGUI {
 		rtf8=new TextField("Zahlungsziel");
 		rtf9=new TextField("Kundenummer");
 		rtf10=new TextField("Transaktionsnummer");
+		
+		rCb=new JComboBox(RechnungsListe.getRechnungsListe().getRListe().toArray());
+		rCb.addActionListener(new EventHandlerJComboBoxes(this));
+		rDatensatz.setText(RechnungsListe.getRechnungsListe().toString());
 		
 		p5.setLayout(new GridLayout());
 		p6.setLayout(new GridLayout(10,4));
@@ -308,15 +331,17 @@ public class testGUI {
 		p6.add(rSende);
 		p6.add(rLösche);
 		
-		p7.add(new JLabel(RechnungsListe.getRechnungsListe().toString()));
+		p7.add(rDatensatz);
 			
 		p8.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p8.add(rCb);
 		p8.add(rtf6);
 		p8.add(rtf7);
 		p8.add(rtf8);
 		p8.add(rtf9);
 		p8.add(rtf10);
 		p8.add(rÄndern);
+		p8.add(rAktualisiere);
 		
 		tp.add("Rechnung", p5);
 		
@@ -336,6 +361,7 @@ public class testGUI {
 		gkLösche.addActionListener(new EventHandlerButtons(this));
 		gkDatensatz=new JLabel("<datensatz>");
 		gkÄndern=new JButton("Ändern");
+		gkÄndern.addActionListener(new EventHandlerButtons(this));
 		
 		gktf1=new TextField("Kundennummer");
 		gktf2=new TextField("Firmenname");
@@ -344,6 +370,9 @@ public class testGUI {
 		gktf4=new TextField("Kundennummer");
 		gktf5=new TextField("Firmenname");
 		gktf6=new TextField("RechtsformID");
+		
+		gkCb=new JComboBox(GeschaeftskundenListe.getGeschaeftskundenListe().getGkListe().toArray());
+		gkCb.addActionListener(new EventHandlerJComboBoxes(this));
 		
 		
 		p9.setLayout(new GridLayout());
@@ -363,8 +392,8 @@ public class testGUI {
 		p10.add(gkLösche);
 		
 		p11.add(new JLabel(GeschaeftskundenListe.getGeschaeftskundenListe().toString()));
-	
 		p12.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p12.add(gkCb);
 		p12.add(gktf4);
 		p12.add(gktf5);
 		p12.add(gktf6);
@@ -1276,13 +1305,13 @@ public class testGUI {
 	
 
 
-	public JComboBox getCb() {
-		return cb;
+	public JComboBox getKCb() {
+		return kCb;
 	}
 
 
-	public void setCb(JComboBox cb) {
-		this.cb = cb;
+	public void setkCb(JComboBox cb) {
+		this.kCb = kCb;
 	}
 	
 	
@@ -1336,7 +1365,85 @@ public class testGUI {
 	public void setKtf10(TextField ktf10) {
 		this.ktf10 = ktf10;
 	}
+	
+	
+	
+	
 
+
+
+	public JComboBox getGkCb() {
+		return gkCb;
+	}
+
+
+	public void setGkCb(JComboBox gkCb) {
+		this.gkCb = gkCb;
+	}
+
+
+	public JButton getrÄndern() {
+		return rÄndern;
+	}
+
+
+	public void setrÄndern(JButton rÄndern) {
+		this.rÄndern = rÄndern;
+	}
+
+
+	public JComboBox getrCb() {
+		return rCb;
+	}
+
+
+	public void setrCb(JComboBox rCb) {
+		this.rCb = rCb;
+	}
+	
+	public JButton getkAktualisiere() {
+		return kAktualisiere;
+	}
+
+
+	public void setkAktualisiere(JButton kAktualisiere) {
+		this.kAktualisiere = kAktualisiere;
+	}
+	
+	
+
+
+	public JLabel getkDatensatz() {
+		return kDatensatz;
+	}
+
+
+	public void setkDatensatz(JLabel kDatensatz) {
+		this.kDatensatz = kDatensatz;
+	}
+	
+	
+
+
+	public JButton getrAktualisiere() {
+		return rAktualisiere;
+	}
+
+
+	public void setrAktualisiere(JButton rAktualisiere) {
+		this.rAktualisiere = rAktualisiere;
+	}
+	
+
+
+	public JLabel getrDatensatz() {
+		return rDatensatz;
+	}
+
+
+	public void setrDatensatz(JLabel rDatensatz) {
+		this.rDatensatz = rDatensatz;
+	}
 
 
 	public static void main(String[] args) throws SQLException{

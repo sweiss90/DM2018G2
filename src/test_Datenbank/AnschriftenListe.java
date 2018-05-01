@@ -60,6 +60,22 @@ public class AnschriftenListe {
 		db.getPs().execute();
 		getAnschriftenListe().entferneAnschrift(a);
 	}
+	public void ändereAnschrift(DB db, Anschrift anNeu, Anschrift anAlt) throws SQLException{
+		String sql="UPDATE anschrift SET Strasse=?, HausNr=?, PLZ=?, Ort=?, LaID=? WHERE AnID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, anNeu.getStrasse());
+		db.getPs().setString(2, anNeu.getHausNr());
+		db.getPs().setString(3, anNeu.getPlZ());
+		db.getPs().setString(4, anNeu.getOrt());
+		db.getPs().setString(5, anNeu.getLaID());
+		db.getPs().setString(6, anNeu.getId());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+		getAnschriftenListe().entferneAnschrift(anAlt);
+		getAnschriftenListe().fügeAnschriftEin(anNeu);
+	}
+	
 	public void anschriftenListeAktualisieren(DB db) throws SQLException{
 		anschriftenListe.leereAnschriftenListe();
 		String sql="SELECT * FROM anschrift;";
@@ -71,6 +87,7 @@ public class AnschriftenListe {
 			this.fügeAnschriftEin(a);
 		}
 	}
+	
 	@Override
 	public String toString(){
 		String erg=new String("<HTML>");

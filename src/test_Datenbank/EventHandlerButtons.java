@@ -43,7 +43,7 @@ public class EventHandlerButtons implements ActionListener {
 			}
 		}
 		else if(e.getSource()==testgui.getkÄndern()){
-			Kunde kundAlt=(Kunde) testgui.getCb().getSelectedItem();
+			Kunde kundAlt=(Kunde) testgui.getKCb().getSelectedItem();
  			Kunde kundNeu=new Kunde(kundAlt.getNr(), testgui.getKtf6().getText(), testgui.getKtf7().getText(), testgui.getKtf9().getText(),testgui.getKtf8().getText(), testgui.getKtf10().getText());
 			if(true){
 			try{
@@ -74,6 +74,16 @@ public class EventHandlerButtons implements ActionListener {
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 		}
+		else if(e.getSource()==testgui.getrÄndern()){
+			Rechnung rechnungAlt=(Rechnung)testgui.getrCb().getSelectedItem();
+			Rechnung rechnungNeu=new Rechnung(rechnungAlt.getNr(), testgui.getRtf6().getText(), testgui.getRtf7().getText(), testgui.getRtf8().getText(), testgui.getRtf9().getText(), testgui.getRtf10().getText());
+			if(true){
+				try{
+					RechnungsListe.getRechnungsListe().ändereRechnung(testgui.getVb(), rechnungNeu, rechnungAlt);
+				}catch(Exception ex){}
+			}else
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
 		else if(e.getSource()==testgui.getGkSende()){
 			Geschäftskunde gk=new Geschäftskunde(testgui.getGktf1().getText(), testgui.getGktf2().getText(), testgui.getGktf3().getText());
 			if(true){
@@ -88,6 +98,16 @@ public class EventHandlerButtons implements ActionListener {
 			if(true){
 				try{
 					testgui.getVb().löscheGeschäftskunde(gk);
+				}catch(Exception ex){}
+			}else
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(e.getSource()==testgui.getGkÄndern()){
+			Geschäftskunde gkAlt=(Geschäftskunde)testgui.getGkCb().getSelectedItem();
+			Geschäftskunde gkNeu=new Geschäftskunde(testgui.getGktf4().getText(), testgui.getGktf5().getText(), testgui.getGktf6().getText());
+			if(true){
+				try{
+					GeschaeftskundenListe.getGeschaeftskundenListe().ändereGeschäftskunde(testgui.getVb(), gkNeu, gkAlt);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
