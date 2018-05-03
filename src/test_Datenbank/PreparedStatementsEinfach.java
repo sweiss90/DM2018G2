@@ -85,7 +85,7 @@ public class PreparedStatementsEinfach {
 	}
 	
 	public ArrayList<LinkedHashMap<String, String>> viertesStatement(String wohnOrt) throws SQLException{
-		String sql = "SELECT* FROM kunde INNER JOIN anschrift WHERE kunde.AnID=anschrift.ID AND anschrift.Ort= \"München\";";
+		String sql = "SELECT* FROM kunde INNER JOIN anschrift WHERE kunde.AnID=anschrift.ID AND anschrift.Ort=?;";
 		
 		psEinfach = conStatement.prepareStatement(sql);
 		psEinfach.setString(1, wohnOrt);		
