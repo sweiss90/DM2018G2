@@ -43,6 +43,12 @@ public class Anschrift {
 		return "{ "+ this.getId()+", "+this.getStrasse()+", "+this.getHausNr()+
 				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLaID()+" }";
 	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public void setHausNr(String hausNr) {
+		this.hausNr = hausNr;
+	}
 
 	
 }
