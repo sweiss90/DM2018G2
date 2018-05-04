@@ -17,7 +17,7 @@ public class DB {
 	public DB(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			con=DriverManager.getConnection("jdbc:mysql://localhost/rechnugsverwaltung", "root", "");
+			con=DriverManager.getConnection("jdbc:mysql://localhost/rechnungsverwaltung_kopie", "root", "");
 			setCon(con);
 		} catch(Exception e) {
 			e.printStackTrace();
