@@ -28,21 +28,6 @@ public class EventHandlerJComboBoxes implements ActionListener {
 			testgui.getRtf9().setText(r.getKdNr());
 			testgui.getRtf10().setText(r.getTransNr());
 		}
-		else if(e.getSource()==testgui.getGkCb()){
-			Geschäftskunde gk=(Geschäftskunde)testgui.getGkCb().getSelectedItem();
-			testgui.getGktf4().setText(gk.getKDNr());
-			testgui.getGktf5().setText(gk.getFirmenname());
-			testgui.getGktf6().setText(gk.getRechtsformID());
-		}
-		else if(e.getSource()==testgui.getaCb()){
-			Anschrift a=(Anschrift)testgui.getaCb().getSelectedItem();
-			testgui.getAtf6().setText(a.getStrasse());
-			testgui.getAtf7().setText(a.getHausNr());
-			testgui.getAtf8().setText(a.getPlZ());
-			testgui.getAtf9().setText(a.getOrt());
-			testgui.getAtf10().setText(a.getLaID());
-			
-		}
 	}
 	
 	
