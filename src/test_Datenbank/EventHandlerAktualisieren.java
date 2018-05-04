@@ -28,6 +28,20 @@ public class EventHandlerAktualisieren implements ActionListener {
 				gui.getrCb().setModel(new JComboBox(RechnungsListe.getRechnungsListe().getRListe().toArray()).getModel());
 			}catch(Exception ex){};
 		}
+		else if(e.getSource()==gui.getGkAktualisiere()){
+			try{
+				GeschaeftskundenListe.getGeschaeftskundenListe().geschaeftskundenListeAktualisieren(gui.getVb());
+				gui.getGkDatensatz().setText(GeschaeftskundenListe.getGeschaeftskundenListe().toString());
+				gui.getGkCb().setModel(new JComboBox(GeschaeftskundenListe.getGeschaeftskundenListe().getGkListe().toArray()).getModel());
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==gui.getaAktualisiere()){
+			try{
+				AnschriftenListe.getAnschriftenListe().anschriftenListeAktualisieren(gui.getVb());
+				gui.getaDatensatz().setText(AnschriftenListe.getAnschriftenListe().toString());
+				gui.getaCb().setModel(new JComboBox(AnschriftenListe.getAnschriftenListe().getaListe().toArray()).getModel());
+			}catch(Exception ex){};
+		}
 	}
 	
 	

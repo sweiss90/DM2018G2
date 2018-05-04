@@ -130,6 +130,16 @@ public class EventHandlerButtons implements ActionListener {
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 		}
+		else if(e.getSource()==testgui.getaÄndern()){
+			Anschrift aAlt=(Anschrift)testgui.getaCb().getSelectedItem();
+			Anschrift aNeu=new Anschrift(aAlt.getId(),testgui.getAtf6().getText(), testgui.getAtf7().getText(), testgui.getAtf8().getText(), testgui.getAtf9().getText(), testgui.getAtf10().getText());
+			if(true){
+				try{
+					AnschriftenListe.getAnschriftenListe().ändereAnschrift(testgui.getVb(), aNeu, aAlt);
+				}catch(Exception ex){}
+			}else
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
 		else if(e.getSource()==testgui.getRpSende()){
 			Rechnung r=new Rechnung(testgui.getRptf1().getText(), null, null, null ,null, null);
 			Rechnung.Rechnungsposition rp= r.new Rechnungsposition(testgui.getRptf2().getText(), testgui.getRptf3().getText(), testgui.getRptf4().getText());
@@ -152,6 +162,17 @@ public class EventHandlerButtons implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else if(e.getSource()==testgui.getRpÄndern()){
+			Rechnung r=new Rechnung(testgui.getRptf5().getText(), null, null, null, null); //verbessern!!
+			Rechnung.Rechnungsposition rpAlt=(Rechnung.Rechnungsposition) testgui.getRpCb().getSelectedItem();
+			Rechnung.Rechnungsposition rpNeu=r.new Rechnungsposition(testgui.getRptf6().getText(), testgui.getRptf7().getText(), testgui.getRptf8().getText());
+			try{
+				RechnungspositionsListe.getRechnungspositionsListe().ändereRechnungsposition(testgui.getVb(), rpNeu, rpAlt);
+			}catch(Exception ex){};
+		}
+		
+			
+			
 		else if(e.getSource()==testgui.getLaSende()){
 			Land la=new Land(testgui.getLatf1().getText(), testgui.getLatf2().getText());
 			if(true){

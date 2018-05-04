@@ -84,6 +84,8 @@ public class testGUI {
 	private JComboBox kCb=null;
 	private JComboBox rCb=null;
 	private JComboBox gkCb=null;
+	private JComboBox aCb=null;
+	private JComboBox rpCb=null;
 	
 	private TextField rtf1=null;
 	private TextField rtf2=null;
@@ -362,6 +364,8 @@ public class testGUI {
 		gkDatensatz=new JLabel("<datensatz>");
 		gkÄndern=new JButton("Ändern");
 		gkÄndern.addActionListener(new EventHandlerButtons(this));
+		gkAktualisiere=new JButton("Anzeige aktualisieren");
+		gkAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		gktf1=new TextField("Kundennummer");
 		gktf2=new TextField("Firmenname");
@@ -373,6 +377,7 @@ public class testGUI {
 		
 		gkCb=new JComboBox(GeschaeftskundenListe.getGeschaeftskundenListe().getGkListe().toArray());
 		gkCb.addActionListener(new EventHandlerJComboBoxes(this));
+		gkDatensatz.setText(GeschaeftskundenListe.getGeschaeftskundenListe().toString());
 		
 		
 		p9.setLayout(new GridLayout());
@@ -385,19 +390,22 @@ public class testGUI {
 		p9.add(p12);
 		
 		p10.add(new JLabel("<html><span style='font-size:15px'>Datensatz einfügen oder löschen</span></html>"));
+		
 		p10.add(gktf1);
 		p10.add(gktf2);
 		p10.add(gktf3);
 		p10.add(gkSende);
 		p10.add(gkLösche);
 		
-		p11.add(new JLabel(GeschaeftskundenListe.getGeschaeftskundenListe().toString()));
+		p11.add(gkDatensatz);
+	
 		p12.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p12.add(gkCb);
 		p12.add(gktf4);
 		p12.add(gktf5);
 		p12.add(gktf6);
 		p12.add(gkÄndern);
+		p12.add(gkAktualisiere);
 		
 		tp.add("Geschäftskunde", p9);
 		
@@ -417,6 +425,9 @@ public class testGUI {
 		aLösche.addActionListener(new EventHandlerButtons(this));
 		aDatensatz=new JLabel("<datensatz>");
 		aÄndern=new JButton("Ändern");
+		aÄndern.addActionListener(new EventHandlerButtons(this));
+		aAktualisiere=new JButton("Anzeige aktualisieren");
+		aAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		atf1=new TextField("Strasse");
 		atf2=new TextField("Nummer");
@@ -429,6 +440,10 @@ public class testGUI {
 		atf8=new TextField("PLZ");
 		atf9=new TextField("Ort");
 		atf10=new TextField("LandID");
+		
+		aCb=new JComboBox(AnschriftenListe.getAnschriftenListe().getaListe().toArray());
+		aCb.addActionListener(new EventHandlerJComboBoxes(this));
+		aDatensatz.setText(AnschriftenListe.getAnschriftenListe().toString());
 		
 		p13.setLayout(new GridLayout());
 		p14.setLayout(new GridLayout(10,4));
@@ -448,15 +463,17 @@ public class testGUI {
 		p14.add(aSende);
 		p14.add(aLösche);
 		
-		p15.add(new JLabel(AnschriftenListe.getAnschriftenListe().toString()));
+		p15.add(aDatensatz);
 		
 		p16.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p16.add(aCb);
 		p16.add(atf6);
 		p16.add(atf7);
 		p16.add(atf8);
 		p16.add(atf9);
 		p16.add(atf10);
 		p16.add(aÄndern);
+		p16.add(aAktualisiere);
 		
 		tp.add("Anschrift", p13);
 		
@@ -477,6 +494,8 @@ public class testGUI {
 		rpLösche.addActionListener(new EventHandlerButtons(this));
 		rpDatensatz=new JLabel("<datensatz>");
 		rpÄndern=new JButton("Ändern");
+		rpAktualisiere=new JButton("Anzeige aktualisieren");
+		rpAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		rptf1=new TextField("RechnungsID");
 		rptf2=new TextField("Positionsnummer");
@@ -487,6 +506,10 @@ public class testGUI {
 		rptf6=new TextField("Positionsnummer");
 		rptf7=new TextField("ArtikelID");
 		rptf8=new TextField("Menge");
+		
+		rpCb=new JComboBox(RechnungspositionsListe.getRechnungspositionsListe().getRpListe().toArray());
+		rpCb.addActionListener(new EventHandlerJComboBoxes(this));
+		rpDatensatz.setText(RechnungspositionsListe.getRechnungspositionsListe().toString());
 		
 		p17.setLayout(new GridLayout());
 		p18.setLayout(new GridLayout(10,4));
@@ -505,14 +528,16 @@ public class testGUI {
 		p18.add(rpSende);
 		p18.add(rpLösche);
 		
-		p19.add(new JLabel(RechnungspositionsListe.getRechnungspositionsListe().toString()));
+		p19.add(rpDatensatz);
 		
 		p20.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p20.add(rpCb);
 		p20.add(rptf5);
 		p20.add(rptf6);
 		p20.add(rptf7);
 		p20.add(rptf8);
 		p20.add(rpÄndern);
+		p20.add(rpAktualisiere);
 		
 		tp.add("Rechnungsposition", p17);
 		
@@ -1443,6 +1468,104 @@ public class testGUI {
 
 	public void setrDatensatz(JLabel rDatensatz) {
 		this.rDatensatz = rDatensatz;
+	}
+	
+	
+
+
+	public JButton getGkAktualisiere() {
+		return gkAktualisiere;
+	}
+
+
+	public void setGkAktualisiere(JButton gkAktualisiere) {
+		this.gkAktualisiere = gkAktualisiere;
+	}
+	
+	
+	
+
+
+	public JComboBox getaCb() {
+		return aCb;
+	}
+
+
+	public void setaCb(JComboBox aCb) {
+		this.aCb = aCb;
+	}
+
+
+	public JButton getaAktualisiere() {
+		return aAktualisiere;
+	}
+
+
+	public void setaAktualisiere(JButton aAktualisiere) {
+		this.aAktualisiere = aAktualisiere;
+	}
+	
+
+
+	public TextField getAtf6() {
+		return atf6;
+	}
+
+
+	public void setAtf6(TextField atf6) {
+		this.atf6 = atf6;
+	}
+
+
+	public TextField getAtf7() {
+		return atf7;
+	}
+
+
+	public void setAtf7(TextField atf7) {
+		this.atf7 = atf7;
+	}
+
+
+	public TextField getAtf8() {
+		return atf8;
+	}
+
+
+	public void setAtf8(TextField atf8) {
+		this.atf8 = atf8;
+	}
+
+
+	public TextField getAtf9() {
+		return atf9;
+	}
+
+
+	public void setAtf9(TextField atf9) {
+		this.atf9 = atf9;
+	}
+
+
+	public TextField getAtf10() {
+		return atf10;
+	}
+
+
+	public void setAtf10(TextField atf10) {
+		this.atf10 = atf10;
+	}
+	
+	
+
+
+	public JComboBox getRpCb() {
+		return rpCb;
+	}
+
+
+	public void setRpCb(JComboBox rpCb) {
+		this.rpCb = rpCb;
 	}
 
 

@@ -61,7 +61,7 @@ public class AnschriftenListe {
 		getAnschriftenListe().entferneAnschrift(a);
 	}
 	public void ändereAnschrift(DB db, Anschrift anNeu, Anschrift anAlt) throws SQLException{
-		String sql="UPDATE anschrift SET Strasse=?, HausNr=?, PLZ=?, Ort=?, LaID=? WHERE AnID=?;";
+		String sql="UPDATE anschrift SET Strasse=?, HausNr=?, PLZ=?, Ort=?, LaID=? WHERE ID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, anNeu.getStrasse());
 		db.getPs().setString(2, anNeu.getHausNr());

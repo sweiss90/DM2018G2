@@ -9,7 +9,10 @@ public class Anschrift {
 	private String laID;
 	
 	public Anschrift(String id,String strasse, String hausNr, String plZ, String ort, String laID) {
+		this(strasse, hausNr, plZ, ort, laID);
 		this.id=id;
+	}
+	public Anschrift(String strasse, String hausNr, String plZ, String ort, String laID){
 		this.strasse = strasse;
 		this.hausNr = hausNr;
 		this.plZ = plZ;
@@ -32,7 +35,7 @@ public class Anschrift {
 		return ort;
 	}
 
-	public String getLaID() {
+	public String getLaID() {//fdjsfkdjs
 		return laID;
 	}
 	public String getId() {
