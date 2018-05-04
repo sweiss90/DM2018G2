@@ -61,6 +61,9 @@ public class Kunde {
 	public void setNr(String nr) {
 		this.nr = nr;
 	}
+	
+	//HashCode fehlt -> sonst funktioniert equals nicht
+	
 	@Override
 	public boolean equals(Object kd){
 		if(kd==null) return false;;
