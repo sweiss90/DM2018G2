@@ -69,6 +69,16 @@ public class testGUI {
 	private JPanel p35=null;
 	private JPanel p36=null;
 	
+	private JPanel p37=null;
+	private JPanel p38=null;
+	private JPanel p39=null;
+	private JPanel p40=null;
+	
+	private JPanel p41=null;
+	private JPanel p42=null;
+	private JPanel p43=null;
+	private JPanel p44=null;
+	
 	private TextField ktf1=null;
 	private TextField ktf2=null;
 	private TextField ktf3=null;
@@ -99,6 +109,10 @@ public class testGUI {
 	private JComboBox rpCb=null;
 	@SuppressWarnings("rawtypes")
 	private JComboBox zaCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox beCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox kkCb=null;
 	
 	
 	private TextField rtf1=null;
@@ -161,6 +175,16 @@ public class testGUI {
 	private TextField zatf3=null;
 	private TextField zatf4=null;
 	
+	private TextField betf1=null;
+	private TextField betf2=null;
+	private TextField betf3=null;
+	private TextField betf4=null;
+	
+	private TextField kktf1=null;
+	private TextField kktf2=null;
+	private TextField kktf3=null;
+	private TextField kktf4=null;
+	
 	private JButton kSende=null;
 	private JButton kÄndern=null;
 	private JButton kLösche=null;
@@ -205,6 +229,17 @@ public class testGUI {
 	private JButton zaÄndern=null;
 	private JButton zaLösche=null;
 	private JButton zaAktualisiere=null;
+	
+	private JButton beSende=null;
+	private JButton beÄndern=null;
+	private JButton beLösche=null;
+	private JButton beAktualisiere=null;
+	
+	private JButton kkSende=null;
+	private JButton kkÄndern=null;
+	private JButton kkLösche=null;
+	private JButton kkAktualisiere=null;
+
 
 	private JLabel kDatensatz=null;
 	private JLabel rDatensatz=null;
@@ -215,6 +250,8 @@ public class testGUI {
 	private JLabel arDatensatz=null;
 	private JLabel laDatensatz=null;
 	private JLabel zaDatensatz=null;
+	private JLabel beDatensatz=null;
+	private JLabel kkDatensatz=null;
 	
 	private DB vb=null;
 	
@@ -225,7 +262,6 @@ public class testGUI {
 		
 		jf=new JFrame("Rechnungsverwaltung");
 		tp=new JTabbedPane();
-		
 		//--------------------Kunde--------------------------
 		
 		vb.setSQL("SELECT * FROM kunde");
@@ -775,7 +811,116 @@ public class testGUI {
 		tp.add("Zahlungsart", p33);
 		
 		//-----------------------------------------------------------------------------------------------
+		//-------------------------------------Bankeinzug---------------------------------------
+		vb.setSQL("SELECT * FROM bankeinzug");// ->wird eigl nicht mehr benötigt
+		BankeinzugListe.getBankeinzugListe().bankeinzugListeAktualisieren(vb);
+
+		p37=new JPanel();
+		p38=new JPanel();
+		p39=new JPanel();
+		p40=new JPanel();
 		
+		beSende=new JButton("Absenden");
+		beSende.addActionListener(new EventHandlerButtons(this));
+		beLösche=new JButton("Löschen");
+		beLösche.addActionListener(new EventHandlerButtons(this));
+		beDatensatz=new JLabel("<datensatz>");
+		beÄndern=new JButton("Ändern");
+		beÄndern.addActionListener(new EventHandlerButtons(this));
+		beAktualisiere=new JButton("Anzeige aktualisieren");
+		beAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
+		
+		betf1=new TextField("IBAN");
+		betf2=new TextField("BIC");
+		betf3=new TextField("IBAN");
+		betf4=new TextField("BIC");
+		
+		beCb=new JComboBox(BankeinzugListe.getBankeinzugListe().getbeListe().toArray());
+		beCb.addActionListener(new EventHandlerJComboBoxes(this));
+		beDatensatz.setText(BankeinzugListe.getBankeinzugListe().toString());
+	
+		p37.setLayout(new GridLayout());
+		p38.setLayout(new GridLayout(10,4));
+		p39.setLayout(new GridLayout(1,1));
+		p40.setLayout(new GridLayout(10,4));
+		
+		p37.add(p38);
+		p37.add(p39);
+		p37.add(p40);
+		
+		p38.add(new JLabel("<html><span style='font-size:15px'>Datensatz einfügen oder löschen</span></html>"));
+		p38.add(betf1);
+		p38.add(betf2);
+		p38.add(beSende);
+		p38.add(beLösche);
+		
+		p39.add(beDatensatz);
+		
+		p40.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p40.add(beCb);
+		p40.add(betf3);
+		p40.add(betf4);
+		p40.add(beÄndern);
+		p40.add(beAktualisiere);
+		
+		tp.add("Bankeinzug", p37);
+				
+	  //-----------------------------------------------------------------------------------------------
+	  //------------------------------------Kreditkarte---------------------------------------
+		vb.setSQL("SELECT * FROM kreditkarte");// ->wird eigl nicht mehr benötigt
+		KreditkarteListe.getKreditkarteListe().kreditkarteListeAktualisieren(vb);
+
+		p41=new JPanel();
+		p42=new JPanel();
+		p43=new JPanel();
+		p44=new JPanel();
+		
+		kkSende=new JButton("Absenden");
+		kkSende.addActionListener(new EventHandlerButtons(this));
+		kkLösche=new JButton("Löschen");
+		kkLösche.addActionListener(new EventHandlerButtons(this));
+		kkDatensatz=new JLabel("<datensatz>");
+		kkÄndern=new JButton("Ändern");
+		kkÄndern.addActionListener(new EventHandlerButtons(this));
+		kkAktualisiere=new JButton("Anzeige aktualisieren");
+		kkAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
+		
+		kktf1=new TextField("KaNr");
+		kktf2=new TextField("Ablaufdatum");
+		kktf3=new TextField("KaNr");
+		kktf4=new TextField("Ablaufdatum");
+		
+		kkCb=new JComboBox(KreditkarteListe.getKreditkarteListe().getkkListe().toArray());
+		kkCb.addActionListener(new EventHandlerJComboBoxes(this));
+		kkDatensatz.setText(KreditkarteListe.getKreditkarteListe().toString());
+	
+		p41.setLayout(new GridLayout());
+		p42.setLayout(new GridLayout(10,4));
+		p43.setLayout(new GridLayout(1,1));
+		p44.setLayout(new GridLayout(10,4));
+		
+		p41.add(p42);
+		p41.add(p43);
+		p41.add(p44);
+		
+		p42.add(new JLabel("<html><span style='font-size:15px'>Datensatz einfügen oder löschen</span></html>"));
+		p42.add(kktf1);
+		p42.add(kktf2);
+		p42.add(kkSende);
+		p42.add(kkLösche);
+		
+		p43.add(kkDatensatz);
+		
+		p44.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p44.add(kkCb);
+		p44.add(kktf3);
+		p44.add(kktf4);
+		p44.add(kkÄndern);
+		p44.add(kkAktualisiere);
+		
+		tp.add("Kreditkarte", p41);	
+						
+			//-----------------------------------------------------------------------------------------------	
 		
 		
 		
@@ -1525,6 +1670,543 @@ public class testGUI {
 
 	public void setrDatensatz(JLabel rDatensatz) {
 		this.rDatensatz = rDatensatz;
+	}
+	
+	
+
+
+	public JFrame getJf() {
+		return jf;
+	}
+
+
+	public JTabbedPane getTp() {
+		return tp;
+	}
+
+
+	public JPanel getP1() {
+		return p1;
+	}
+
+
+	public JPanel getP2() {
+		return p2;
+	}
+
+
+	public JPanel getP3() {
+		return p3;
+	}
+
+
+	public JPanel getP4() {
+		return p4;
+	}
+
+
+	public JPanel getP5() {
+		return p5;
+	}
+
+
+	public JPanel getP6() {
+		return p6;
+	}
+
+
+	public JPanel getP7() {
+		return p7;
+	}
+
+
+	public JPanel getP8() {
+		return p8;
+	}
+
+
+	public JPanel getP9() {
+		return p9;
+	}
+
+
+	public JPanel getP10() {
+		return p10;
+	}
+
+
+	public JPanel getP11() {
+		return p11;
+	}
+
+
+	public JPanel getP12() {
+		return p12;
+	}
+
+
+	public JPanel getP13() {
+		return p13;
+	}
+
+
+	public JPanel getP14() {
+		return p14;
+	}
+
+
+	public JPanel getP15() {
+		return p15;
+	}
+
+
+	public JPanel getP16() {
+		return p16;
+	}
+
+
+	public JPanel getP17() {
+		return p17;
+	}
+
+
+	public JPanel getP18() {
+		return p18;
+	}
+
+
+	public JPanel getP19() {
+		return p19;
+	}
+
+
+	public JPanel getP20() {
+		return p20;
+	}
+
+
+	public JPanel getP21() {
+		return p21;
+	}
+
+
+	public JPanel getP22() {
+		return p22;
+	}
+
+
+	public JPanel getP23() {
+		return p23;
+	}
+
+
+	public JPanel getP24() {
+		return p24;
+	}
+
+
+	public JPanel getP25() {
+		return p25;
+	}
+
+
+	public JPanel getP26() {
+		return p26;
+	}
+
+
+	public JPanel getP27() {
+		return p27;
+	}
+
+
+	public JPanel getP28() {
+		return p28;
+	}
+
+
+	public JPanel getP29() {
+		return p29;
+	}
+
+
+	public JPanel getP30() {
+		return p30;
+	}
+
+
+	public JPanel getP31() {
+		return p31;
+	}
+
+
+	public JPanel getP32() {
+		return p32;
+	}
+
+
+	public JPanel getP33() {
+		return p33;
+	}
+
+
+	public JPanel getP34() {
+		return p34;
+	}
+
+
+	public JPanel getP35() {
+		return p35;
+	}
+
+
+	public JPanel getP36() {
+		return p36;
+	}
+
+
+	public JPanel getP37() {
+		return p37;
+	}
+
+
+	public JPanel getP38() {
+		return p38;
+	}
+
+
+	public JPanel getP39() {
+		return p39;
+	}
+
+
+	public JPanel getP40() {
+		return p40;
+	}
+
+
+	public JPanel getP41() {
+		return p41;
+	}
+
+
+	public JPanel getP42() {
+		return p42;
+	}
+
+
+	public JPanel getP43() {
+		return p43;
+	}
+
+
+	public JPanel getP44() {
+		return p44;
+	}
+
+
+	public JComboBox getkCb() {
+		return kCb;
+	}
+
+
+	public JComboBox getAnCb() {
+		return anCb;
+	}
+
+
+	public JComboBox getArCb() {
+		return arCb;
+	}
+
+
+	public JComboBox getLaCb() {
+		return laCb;
+	}
+
+
+	public JComboBox getUfCb() {
+		return ufCb;
+	}
+
+
+	public JComboBox getRpCb() {
+		return rpCb;
+	}
+
+
+	public JComboBox getZaCb() {
+		return zaCb;
+	}
+
+
+	public JComboBox getBeCb() {
+		return beCb;
+	}
+
+
+	public JComboBox getKkCb() {
+		return kkCb;
+	}
+
+
+	public TextField getAtf6() {
+		return atf6;
+	}
+
+
+	public TextField getAtf7() {
+		return atf7;
+	}
+
+
+	public TextField getAtf8() {
+		return atf8;
+	}
+
+
+	public TextField getAtf9() {
+		return atf9;
+	}
+
+
+	public TextField getAtf10() {
+		return atf10;
+	}
+
+
+	public TextField getUftf1() {
+		return uftf1;
+	}
+
+
+	public TextField getUftf2() {
+		return uftf2;
+	}
+
+
+	public TextField getArtf1() {
+		return artf1;
+	}
+
+
+	public TextField getArtf2() {
+		return artf2;
+	}
+
+
+	public TextField getArtf3() {
+		return artf3;
+	}
+
+
+	public TextField getArtf4() {
+		return artf4;
+	}
+
+
+	public TextField getZatf1() {
+		return zatf1;
+	}
+
+
+	public TextField getZatf2() {
+		return zatf2;
+	}
+
+
+	public TextField getZatf3() {
+		return zatf3;
+	}
+
+
+	public TextField getZatf4() {
+		return zatf4;
+	}
+
+
+	public TextField getBetf1() {
+		return betf1;
+	}
+
+
+	public TextField getBetf2() {
+		return betf2;
+	}
+
+
+	public TextField getBetf3() {
+		return betf3;
+	}
+
+
+	public TextField getBetf4() {
+		return betf4;
+	}
+
+
+	public TextField getKktf1() {
+		return kktf1;
+	}
+
+
+	public TextField getKktf2() {
+		return kktf2;
+	}
+
+
+	public TextField getKktf3() {
+		return kktf3;
+	}
+
+
+	public TextField getKktf4() {
+		return kktf4;
+	}
+
+
+	public JButton getGkAktualisiere() {
+		return gkAktualisiere;
+	}
+
+
+	public JButton getaAktualisiere() {
+		return aAktualisiere;
+	}
+
+
+	public JButton getRpAktualisiere() {
+		return rpAktualisiere;
+	}
+
+
+	public JButton getUfSende() {
+		return ufSende;
+	}
+
+
+	public JButton getUfÄndern() {
+		return ufÄndern;
+	}
+
+
+	public JButton getUfLösche() {
+		return ufLösche;
+	}
+
+
+	public JButton getUfAktualisiere() {
+		return ufAktualisiere;
+	}
+
+
+	public JButton getArSende() {
+		return arSende;
+	}
+
+
+	public JButton getArÄndern() {
+		return arÄndern;
+	}
+
+
+	public JButton getArLösche() {
+		return arLösche;
+	}
+
+
+	public JButton getArAktualisiere() {
+		return arAktualisiere;
+	}
+
+
+	public JButton getLaAktualisiere() {
+		return laAktualisiere;
+	}
+
+
+	public JButton getZaSende() {
+		return zaSende;
+	}
+
+
+	public JButton getZaÄndern() {
+		return zaÄndern;
+	}
+
+
+	public JButton getZaLösche() {
+		return zaLösche;
+	}
+
+
+	public JButton getZaAktualisiere() {
+		return zaAktualisiere;
+	}
+
+
+	public JButton getBeSende() {
+		return beSende;
+	}
+
+
+	public JButton getBeÄndern() {
+		return beÄndern;
+	}
+
+
+	public JButton getBeLösche() {
+		return beLösche;
+	}
+
+
+	public JButton getBeAktualisiere() {
+		return beAktualisiere;
+	}
+
+
+	public JButton getKkSende() {
+		return kkSende;
+	}
+
+
+	public JButton getKkÄndern() {
+		return kkÄndern;
+	}
+
+
+	public JButton getKkLösche() {
+		return kkLösche;
+	}
+
+
+	public JButton getKkAktualisiere() {
+		return kkAktualisiere;
+	}
+
+
+	public JLabel getUfDatensatz() {
+		return ufDatensatz;
+	}
+
+
+	public JLabel getArDatensatz() {
+		return arDatensatz;
+	}
+
+
+	public JLabel getZaDatensatz() {
+		return zaDatensatz;
+	}
+
+
+	public JLabel getBeDatensatz() {
+		return beDatensatz;
+	}
+
+
+	public JLabel getKkDatensatz() {
+		return kkDatensatz;
 	}
 
 
