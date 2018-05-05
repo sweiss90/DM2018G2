@@ -1,10 +1,10 @@
 package test_Datenbank;
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.Collection;
+//import java.util.Collection;
 
 import javax.swing.*;
 
@@ -27,7 +27,7 @@ public class testGUI {
 	private JPanel p2=null;
 	private JPanel p3=null;
 	private JPanel p4=null;
-	private JLabel l1=null;
+	//private JLabel l1=null;
 	
 	private JPanel p5=null;
 	private JPanel p6=null;
@@ -81,9 +81,25 @@ public class testGUI {
 	private TextField ktf9=null;
 	private TextField ktf10=null;
 	
+	@SuppressWarnings("rawtypes")
 	private JComboBox kCb=null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox rCb=null;
+	@SuppressWarnings("rawtypes")
 	private JComboBox gkCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox anCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox arCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox laCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox ufCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox rpCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox zaCb=null;
+	
 	
 	private TextField rtf1=null;
 	private TextField rtf2=null;
@@ -362,6 +378,8 @@ public class testGUI {
 		gkDatensatz=new JLabel("<datensatz>");
 		gkÄndern=new JButton("Ändern");
 		gkÄndern.addActionListener(new EventHandlerButtons(this));
+		gkAktualisiere=new JButton("Anzeige aktualisieren");
+		gkAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		gktf1=new TextField("Kundennummer");
 		gktf2=new TextField("Firmenname");
@@ -373,6 +391,7 @@ public class testGUI {
 		
 		gkCb=new JComboBox(GeschaeftskundenListe.getGeschaeftskundenListe().getGkListe().toArray());
 		gkCb.addActionListener(new EventHandlerJComboBoxes(this));
+		gkDatensatz.setText(GeschaeftskundenListe.getGeschaeftskundenListe().toString());
 		
 		
 		p9.setLayout(new GridLayout());
@@ -391,13 +410,15 @@ public class testGUI {
 		p10.add(gkSende);
 		p10.add(gkLösche);
 		
-		p11.add(new JLabel(GeschaeftskundenListe.getGeschaeftskundenListe().toString()));
+		p11.add(gkDatensatz);
+	
 		p12.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
 		p12.add(gkCb);
 		p12.add(gktf4);
 		p12.add(gktf5);
 		p12.add(gktf6);
 		p12.add(gkÄndern);
+		p12.add(gkAktualisiere);
 		
 		tp.add("Geschäftskunde", p9);
 		
@@ -417,6 +438,9 @@ public class testGUI {
 		aLösche.addActionListener(new EventHandlerButtons(this));
 		aDatensatz=new JLabel("<datensatz>");
 		aÄndern=new JButton("Ändern");
+		aÄndern.addActionListener(new EventHandlerButtons(this));
+		aAktualisiere=new JButton("Anzeige aktualisieren");
+		aAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		atf1=new TextField("Strasse");
 		atf2=new TextField("Nummer");
@@ -429,6 +453,10 @@ public class testGUI {
 		atf8=new TextField("PLZ");
 		atf9=new TextField("Ort");
 		atf10=new TextField("LandID");
+		
+		anCb=new JComboBox(AnschriftenListe.getAnschriftenListe().getaListe().toArray());
+		anCb.addActionListener(new EventHandlerJComboBoxes(this));
+		aDatensatz.setText(AnschriftenListe.getAnschriftenListe().toString());
 		
 		p13.setLayout(new GridLayout());
 		p14.setLayout(new GridLayout(10,4));
@@ -448,15 +476,17 @@ public class testGUI {
 		p14.add(aSende);
 		p14.add(aLösche);
 		
-		p15.add(new JLabel(AnschriftenListe.getAnschriftenListe().toString()));
+		p15.add(aDatensatz);
 		
 		p16.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p16.add(anCb);
 		p16.add(atf6);
 		p16.add(atf7);
 		p16.add(atf8);
 		p16.add(atf9);
 		p16.add(atf10);
 		p16.add(aÄndern);
+		p16.add(aAktualisiere);
 		
 		tp.add("Anschrift", p13);
 		
@@ -477,6 +507,9 @@ public class testGUI {
 		rpLösche.addActionListener(new EventHandlerButtons(this));
 		rpDatensatz=new JLabel("<datensatz>");
 		rpÄndern=new JButton("Ändern");
+		rpÄndern.addActionListener(new EventHandlerButtons(this));
+		rpAktualisiere=new JButton("Anzeige aktualisieren");
+		rpAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		rptf1=new TextField("RechnungsID");
 		rptf2=new TextField("Positionsnummer");
@@ -487,6 +520,10 @@ public class testGUI {
 		rptf6=new TextField("Positionsnummer");
 		rptf7=new TextField("ArtikelID");
 		rptf8=new TextField("Menge");
+		
+		rpCb=new JComboBox(RechnungspositionsListe.getRechnungspositionsListe().getRpListe().toArray());
+		rpCb.addActionListener(new EventHandlerJComboBoxes(this));
+		rpDatensatz.setText(RechnungspositionsListe.getRechnungspositionsListe().toString());
 		
 		p17.setLayout(new GridLayout());
 		p18.setLayout(new GridLayout(10,4));
@@ -505,14 +542,16 @@ public class testGUI {
 		p18.add(rpSende);
 		p18.add(rpLösche);
 		
-		p19.add(new JLabel(RechnungspositionsListe.getRechnungspositionsListe().toString()));
+		p19.add(rpDatensatz);
 		
 		p20.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p20.add(rpCb);
 		p20.add(rptf5);
 		p20.add(rptf6);
 		p20.add(rptf7);
 		p20.add(rptf8);
 		p20.add(rpÄndern);
+		p20.add(rpAktualisiere);
 		
 		tp.add("Rechnungsposition", p17);
 		
@@ -528,12 +567,21 @@ public class testGUI {
 		p24=new JPanel();
 		
 		ufSende=new JButton("Absenden");
+		ufSende.addActionListener(new EventHandlerButtons(this));
 		ufLösche=new JButton("Löschen");
+		ufLösche.addActionListener(new EventHandlerButtons(this));
 		ufDatensatz=new JLabel("<datensatz>");
 		ufÄndern=new JButton("Ändern");
+		ufÄndern.addActionListener(new EventHandlerButtons(this));
+		ufAktualisiere=new JButton("Anzeige aktualisieren");
+		ufAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		uftf1=new TextField("Rechtsform");
 		uftf2=new TextField("Rechtsform");
+		
+		ufCb=new JComboBox(RechtsformListe.getRechtsformListe().getRfListe().toArray());
+		ufCb.addActionListener(new EventHandlerJComboBoxes(this));
+		ufDatensatz.setText(RechtsformListe.getRechtsformListe().toString());
 		
 		p21.setLayout(new GridLayout());
 		p22.setLayout(new GridLayout(10,4));
@@ -549,11 +597,13 @@ public class testGUI {
 		p22.add(ufSende);
 		p22.add(ufLösche);
 		
-		p23.add(new JLabel(RechtsformListe.getRechtsformListe().toString()));
+		p23.add(ufDatensatz);
 		
 		p24.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p24.add(ufCb);
 		p24.add(uftf2);
 		p24.add(ufÄndern);
+		p24.add(ufAktualisiere);
 		
 		tp.add("Unternehmensform", p21);
 		
@@ -568,14 +618,23 @@ public class testGUI {
 		p28=new JPanel();
 		
 		arSende=new JButton("Absenden");
+		arSende.addActionListener(new EventHandlerButtons(this));
 		arLösche=new JButton("Löschen");
+		arLösche.addActionListener(new EventHandlerButtons(this));
 		arDatensatz=new JLabel("<datensatz>");
 		arÄndern=new JButton("Ändern");
+		arÄndern.addActionListener(new EventHandlerButtons(this));
+		arAktualisiere=new JButton("Anzeige aktualisieren");
+		arAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		artf1=new TextField("Bezeichung");
 		artf2=new TextField("Preis");
 		artf3=new TextField("Bezeichnung");
 		artf4=new TextField("Preis");
+		
+		arCb=new JComboBox(ArtikelListe.getArtikelListe().getaListe().toArray());
+		arCb.addActionListener(new EventHandlerJComboBoxes(this));
+		arDatensatz.setText(ArtikelListe.getArtikelListe().toString());
 		
 		p25.setLayout(new GridLayout());
 		p26.setLayout(new GridLayout(10,4));
@@ -592,12 +651,14 @@ public class testGUI {
 		p26.add(arSende);
 		p26.add(arLösche);
 		
-		p27.add(new JLabel(ArtikelListe.getArtikelListe().toString()));
+		p27.add(arDatensatz);
 		
 		p28.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p28.add(arCb);
 		p28.add(artf3);
 		p28.add(artf4);
 		p28.add(arÄndern);
+		p28.add(arAktualisiere);
 		
 		tp.add("Artikel", p25);
 		
@@ -618,11 +679,18 @@ public class testGUI {
 		laLösche.addActionListener(new EventHandlerButtons(this));
 		laDatensatz=new JLabel("<datensatz>");
 		laÄndern=new JButton("Ändern");
+		laÄndern.addActionListener(new EventHandlerButtons(this));
+		laAktualisiere=new JButton("Anzeige aktualisieren");
+		laAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		latf1=new TextField("ID");
 		latf2=new TextField("Land");
 		latf3=new TextField("ID");
 		latf4=new TextField("Land");
+		
+		laCb=new JComboBox(LaenderListe.getLaenderListe().getLaListe().toArray());
+		laCb.addActionListener(new EventHandlerJComboBoxes(this));
+		laDatensatz.setText(LaenderListe.getLaenderListe().toString());
 		
 		p29.setLayout(new GridLayout());
 		p30.setLayout(new GridLayout(10,4));
@@ -639,19 +707,22 @@ public class testGUI {
 		p30.add(laSende);
 		p30.add(laLösche);
 		
-		p31.add(new JLabel(LaenderListe.getLaenderListe().toString()));
+		p31.add(laDatensatz);
 		
 		p32.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p32.add(laCb);
 		p32.add(latf3);
 		p32.add(latf4);
 		p32.add(laÄndern);
+		p32.add(laAktualisiere);
 		
 		tp.add("Land", p29);
 		
 		//----------------------------------------------------------------------------------------
 		//------------------------------------- Zahlungsart---------------------------------------
 		
-		vb.setSQL("SELECT * FROM zahlungsart");
+		vb.setSQL("SELECT * FROM zahlungsart");// ->wird eigl nicht mehr benötigt
+		ZahlungsartListe.getZahlungsartListe().zahlungsartListeAktualisieren(vb);
 
 		p33=new JPanel();
 		p34=new JPanel();
@@ -659,15 +730,24 @@ public class testGUI {
 		p36=new JPanel();
 		
 		zaSende=new JButton("Absenden");
+		zaSende.addActionListener(new EventHandlerButtons(this));
 		zaLösche=new JButton("Löschen");
+		zaLösche.addActionListener(new EventHandlerButtons(this));
 		zaDatensatz=new JLabel("<datensatz>");
 		zaÄndern=new JButton("Ändern");
+		zaÄndern.addActionListener(new EventHandlerButtons(this));
+		zaAktualisiere=new JButton("Anzeige aktualisieren");
+		zaAktualisiere.addActionListener(new EventHandlerAktualisieren(this));
 		
 		zatf1=new TextField("ZANr");
 		zatf2=new TextField("KDNr");
 		zatf3=new TextField("ZANr");
 		zatf4=new TextField("KDNr");
 		
+		zaCb=new JComboBox(ZahlungsartListe.getZahlungsartListe().getZaListe().toArray());
+		zaCb.addActionListener(new EventHandlerJComboBoxes(this));
+		zaDatensatz.setText(ZahlungsartListe.getZahlungsartListe().toString());
+	
 		p33.setLayout(new GridLayout());
 		p34.setLayout(new GridLayout(10,4));
 		p35.setLayout(new GridLayout(1,1));
@@ -683,12 +763,14 @@ public class testGUI {
 		p34.add(zaSende);
 		p34.add(zaLösche);
 		
-		//p35.add(new JLabel(vb.lesenJava()));
+		p35.add(zaDatensatz);
 		
 		p36.add(new JLabel("<html><span style='font-size:15px'>Datensatz ändern</span></html>"));
+		p36.add(zaCb);
 		p36.add(zatf3);
 		p36.add(zatf4);
 		p36.add(zaÄndern);
+		p36.add(zaAktualisiere);
 		
 		tp.add("Zahlungsart", p33);
 		

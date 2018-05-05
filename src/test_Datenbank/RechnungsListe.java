@@ -53,7 +53,7 @@ public class RechnungsListe {
 		getRechnungsListe().fügeRechnungHinzu(r);
 	}
 	public void löscheRechnung(DB db, Rechnung r) throws SQLException{
-		String sql="DELETE FROM rechnung WHERE Datum=? AND bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?;";
+		String sql="DELETE FROM rechnung WHERE Datum=? AND Bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, r.getDatum());
 		db.getPs().setString(2, r.getBezahlt());

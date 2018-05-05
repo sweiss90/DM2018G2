@@ -2,7 +2,7 @@ package test_Datenbank;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+//import java.sql.SQLException;
 
 import javax.swing.JComboBox;
 
@@ -28,6 +28,7 @@ public class EventHandlerAktualisieren implements ActionListener {
 				gui.getrCb().setModel(new JComboBox(RechnungsListe.getRechnungsListe().getRListe().toArray()).getModel());
 			}catch(Exception ex){};
 		}
+		//else if(e.getSource()==g)
 	}
 	
 	

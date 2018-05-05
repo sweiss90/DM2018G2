@@ -58,7 +58,7 @@ public class EventHandlerButtons implements ActionListener {
 		
 		else if(e.getSource()==testgui.getrSende()){
 			Rechnung r=new Rechnung(testgui.getRtf1().getText(), testgui.getRtf2().getText(), testgui.getRtf3().getText(), testgui.getRtf4().getText(), testgui.getRtf5().getText());
-			if(eingabenPrüfenRechnung(r)){
+			if(true){
 				try{
 					RechnungsListe.getRechnungsListe().fügeRechnungEin(testgui.getVb(),  r);
 				}catch(Exception ex){}
