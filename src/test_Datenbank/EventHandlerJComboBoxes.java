@@ -12,7 +12,6 @@ public class EventHandlerJComboBoxes implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		Object o=e;
 		if(e.getSource()==testgui.getKCb()){
 			Kunde k=(Kunde)testgui.getKCb().getSelectedItem();
 			testgui.getKtf6().setText(k.getVorname());

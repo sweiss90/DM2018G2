@@ -88,7 +88,7 @@ public class EventHandlerButtons implements ActionListener {
 			Geschäftskunde gk=new Geschäftskunde(testgui.getGktf1().getText(), testgui.getGktf2().getText(), testgui.getGktf3().getText());
 			if(true){
 				try{
-					testgui.getVb().fügeGeschäftskundeEin(gk);
+					GeschaeftskundenListe.getGeschaeftskundenListe().fügeGeschäftskundeEin(testgui.getVb(), gk);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -97,7 +97,7 @@ public class EventHandlerButtons implements ActionListener {
 			Geschäftskunde gk=new Geschäftskunde(testgui.getGktf1().getText(), testgui.getGktf2().getText(), testgui.getGktf3().getText());
 			if(true){
 				try{
-					testgui.getVb().löscheGeschäftskunde(gk);
+					GeschaeftskundenListe.getGeschaeftskundenListe().löscheGeschäftskunde(testgui.getVb(), gk);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -116,7 +116,7 @@ public class EventHandlerButtons implements ActionListener {
 			Anschrift a=new Anschrift(null, testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
 			if(true){
 				try{
-					testgui.getVb().fügeAnschriftEin(a);
+					AnschriftenListe.getAnschriftenListe().fügeAnschriftEin(testgui.getVb(), a);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -125,7 +125,17 @@ public class EventHandlerButtons implements ActionListener {
 			Anschrift a=new Anschrift(null, testgui.getAtf1().getText(), testgui.getAtf2().getText(), testgui.getAtf3().getText(), testgui.getAtf4().getText(), testgui.getAtf5().getText());
 			if(true){
 				try{
-					testgui.getVb().löscheAnschrift(a);
+					AnschriftenListe.getAnschriftenListe().löscheAnschrift(testgui.getVb(), a);
+				}catch(Exception ex){}
+			}else
+				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(e.getSource()==testgui.getaÄndern()){
+			Anschrift aAlt=(Anschrift)testgui.getAnCb().getSelectedItem();
+			Anschrift aNeu=new Anschrift(aAlt.getId(), testgui.getAtf6().getText(), testgui.getAtf7().getText(), testgui.getAtf8().getText(), testgui.getAtf9().getText(), testgui.getAtf10().getText());
+			if(true){
+				try{
+					AnschriftenListe.getAnschriftenListe().ändereAnschrift(testgui.getVb(), aNeu, aAlt);
 				}catch(Exception ex){}
 			}else
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
