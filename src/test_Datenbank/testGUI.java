@@ -113,8 +113,20 @@ public class testGUI {
 	private JComboBox beCb=null;
 	@SuppressWarnings("rawtypes")
 	private JComboBox kkCb=null;
+	@SuppressWarnings("rawtypes")
+	private JComboBox eA=null;
 	
 	
+	public JComboBox geteA() {
+		return eA;
+	}
+
+
+	public void seteA(JComboBox eA) {
+		this.eA = eA;
+	}
+
+
 	private TextField rtf1=null;
 	private TextField rtf2=null;
 	private TextField rtf3=null;
@@ -921,9 +933,13 @@ public class testGUI {
 		tp.add("Kreditkarte", p41);	
 						
 			//-----------------------------------------------------------------------------------------------	
+		JPanel p45=new JPanel();
+		tp.add("Einfache Abfragen", p45);
+		String[] a = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"};
+		eA = new JComboBox(a);
 		
-		
-		
+		p45.add(eA);
+		eA.addActionListener(new EventHandlerEinfacheAbfragen(this));
 		
 		
 		jf.add(tp);

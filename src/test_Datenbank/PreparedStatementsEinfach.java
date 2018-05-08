@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 
 public class PreparedStatementsEinfach {
 	
+	//DB ersetzen durch testGUI-Attribut
 	private DB db=null;
 	private PreparedStatement psEinfach = null;
 	private Connection conStatement = null;
@@ -28,6 +29,7 @@ public class PreparedStatementsEinfach {
 		this.db = db;
 		setConStatement(db.getCon());
 	}
+	
 
 	public Connection getConStatement() {
 		return conStatement;
