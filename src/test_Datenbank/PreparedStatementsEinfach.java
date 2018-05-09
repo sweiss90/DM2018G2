@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 
 public class PreparedStatementsEinfach {
 	
-	private testGUI gui;;
+private testGUI gui;
 	private PreparedStatement psEinfach = null;
 	private Connection conStatement = null;
 	
@@ -20,6 +20,7 @@ public class PreparedStatementsEinfach {
 
 	
 	//Getter- und Setter-Methoden
+
 	
 
 	public Connection getConStatement() {

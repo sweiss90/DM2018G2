@@ -115,9 +115,7 @@ public class testGUI {
 	private JComboBox beCb=null;
 	@SuppressWarnings("rawtypes")
 	private JComboBox kkCb=null;
-	private JComboBox eA=null;
-	
-	
+
 	private TextField rtf1=null;
 	private TextField rtf2=null;
 	private TextField rtf3=null;
@@ -929,6 +927,7 @@ public class testGUI {
 		
 		tp.add("Kreditkarte", p41);	
 						
+
 		//--------------------------------------------------------------------------------------------------	
 		//---------------------Einfache Abfragen-------------------------------------------------------------
 		JPanel p45=new JPanel();
@@ -1055,9 +1054,10 @@ public class testGUI {
 		JPanel p56=new JPanel();
 		p56.setLayout(new FlowLayout());
 		
-		JPanel p57, p58, p59, p60, p61, p62, p63;
-		JTextField ka1, ka2, ka3, ka4, ka5, ka6, ka7, ka8, ka9, ka10, ka11, ka12, ka13, ka14, ka15;
-		JButton k11, k12, k13, k14, k15, k16, k17, k18, k19;
+		JPanel p57, p58, p59, p60, p61, p62, p63, p64, p65, p66, p67, p68, p69, p70, p71;
+		JTextField ka1, ka2, ka3, ka4, ka5, ka6, ka7, ka8, ka9, ka10, ka11, ka12, ka13, ka14, ka15, ka16, ka17, ka18, ka19, ka20, ka21, ka22, ka23,
+				ka24, ka25, ka26, ka27, ka28, ka29, ka30, ka31, ka32, ka33, ka34, ka35, ka36, ka37;
+		JButton k11, k12, k13, k14, k15, k16, k17, k18, k19, k20, k21, k22, k23, k24, k25, k26, k27;
 		
 		
 		String k1="<HTML>1.)<font size=3>Gib alle Namen von Privatkunden sowie den Betrag von deren Rechnungen aus,"
@@ -1145,7 +1145,187 @@ public class testGUI {
 		
 		p56.add(p61);
 		
+		String k6="<HTML>6.)<font size=3>Gib alle Rechnungsnummern derjenigen Rechnungen aus, bei denen der Kunde den Ort ___?___ hat. </font></HTML>";
+		p62=new JPanel();
+		p62.setLayout(new FlowLayout());
+		ka15=new JTextField("(Ort)     ");
+	
+		k16=new JButton("Datensätze anzeigen");
+		k16.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p62.add(new JLabel(k6));
+		p62.add(ka15);
+		p62.add(k16);
+		
+		p56.add(p62);
+		
+		String k7="<HTML>7.)<font size=3>Gib alle Rechnungen aus deren Betrag zwischen"
+				+ " __?__ GE und __?__ GE ist<br/> und die mindestens __?__ Rechnungspositionen mit einer"
+				+ " Artikelmenge<br/> von jeweils >=__?__ ME haben. </font></HTML>";
+		p63=new JPanel();
+		p63.setLayout(new FlowLayout());
+		ka16=new JTextField("(Untergrenze)     ");
+		ka17=new JTextField("(Obergrenze)     ");
+		ka18=new JTextField("(Anzahl)     ");
+		ka19=new JTextField("(Menge)     ");
+	
+		k17=new JButton("Datensätze anzeigen");
+		k17.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p63.add(new JLabel(k7));
+		p63.add(ka16);
+		p63.add(ka17);
+		p63.add(ka18);
+		p63.add(ka19);
+		p63.add(k17);
+		
+		p56.add(p63);
+		
+		String k8="<HTML>8.)<font size=3> Gib alle Artikel aus, die in mehr als __?__ Rechnungspositionen vorkommen<br/>"
+				+ " und deren dazugehörige Rechnungen bezahlt sind und einen Rechnungsbetrag von mindestens __?__ GE haben.</font></HTML>";
+		p64=new JPanel();
+		p64.setLayout(new FlowLayout());
+		ka20=new JTextField("(Menge)     ");
+		ka21=new JTextField("(Betrag)     ");
+	
+		k18=new JButton("Datensätze anzeigen");
+		k18.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p64.add(new JLabel(k8));
+		p64.add(ka20);
+		p64.add(ka21);
+		p64.add(k18);
+		
+		p56.add(p64);
+		
 		tp.add("Komplexe Abfragen", p56);
+		
+		String k9="<HTML>9.)<font size=3>Gib alle Artikel aus, die in mehr als<br/>"
+				+ " __?__ Rechnungspositionen vorkommen und deren dazugehörige Rechnung<br/>"
+				+ " zwischen dem __?__ und __?__ erstellt wurde. </font></HTML>";
+		p65=new JPanel();
+		p65.setLayout(new FlowLayout());
+		ka22=new JTextField("(Menge)     ");
+		ka23=new JTextField("(Datum)     ");
+		ka24=new JTextField("(Datum)     ");
+	
+		k19=new JButton("Datensätze anzeigen");
+		k19.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p65.add(new JLabel(k9));
+		p65.add(ka22);
+		p65.add(ka23);
+		p65.add(ka24);
+		p65.add(k19);
+		
+		p56.add(p65);
+		
+		String k10="<HTML>10.)<font size=3> Gib alle Rechnungen mit Zahlungsziel __?__ und<br/>"
+				+ " deren dazugehöriger Geschäftskunde eine Anschrift in __?__ hat. </font></HTML>";
+		p66=new JPanel();
+		p66.setLayout(new FlowLayout());
+		ka25=new JTextField("(Datum)     ");
+		ka26=new JTextField("(Ort)     ");
+	
+		k20=new JButton("Datensätze anzeigen");
+		k20.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p66.add(new JLabel(k10));
+		p66.add(ka25);
+		p66.add(ka26);
+		p66.add(k20);
+		
+		p56.add(p66);
+		
+		tp.add("Komplexe Abfragen(1)", p56);
+		
+		
+		//-------------neuer Tab-----------------------------------------------------
+		JPanel jp57=new JPanel();
+		String s1="<HTML>11.)<font size=3> Gib alle Kunden aus, deren Kundenumsatz größer"
+				+ " als __?__ GE ist und deren Anschrift in ___?___ ist.</font></HTML>";
+		p67=new JPanel();
+		p67.setLayout(new FlowLayout());
+		ka27=new JTextField("(Umsatz)     ");
+		ka28=new JTextField("(Ort)     ");
+	
+		k21=new JButton("Datensätze anzeigen");
+		k21.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p67.add(new JLabel(s1));
+		p67.add(ka27);
+		p67.add(ka28);
+		p67.add(k21);
+		
+		jp57.add(p67);
+		
+		String s2="<HTML>12.)<font size=3> Gib alle Rechnungen mit einem Betrag größer gleich __?___"
+				+ " GE ist und deren Empfänger ein Privatkunde mit dem Vornamen=__?__ und dem<br/>"
+				+ " Nachnamen=___?__ ist. </font></HTML>";
+		p68=new JPanel();
+		p68.setLayout(new FlowLayout());
+		ka29=new JTextField("(Umsatz)     ");
+		ka30=new JTextField("(Vorname)     ");
+		ka31=new JTextField("(Nachname)     ");
+	
+		k22=new JButton("Datensätze anzeigen");
+		k22.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p68.add(new JLabel(s2));
+		p68.add(ka29);
+		p68.add(ka30);
+		p68.add(ka31);
+		p68.add(k22);
+		
+		jp57.add(p68);
+		
+		String s3="<HTML>13.)<font size=3>Gib alle Geschäftskunden mit der"
+				+ " Unternehmensform = ___?___ und einem Kundenumsatz<br/>"
+				+ " zwischen ___?__ und __?___ GE aus. </font></HTML>";
+		p69=new JPanel();
+		p69.setLayout(new FlowLayout());
+		ka32=new JTextField("(Rechtsform)     ");
+		ka33=new JTextField("(Umsatz)     ");
+		ka34=new JTextField("(Umsatz)     ");
+		
+		k23=new JButton("Datensätze anzeigen");
+		k23.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p69.add(new JLabel(s3));
+		p69.add(ka32);
+		p69.add(ka33);
+		p69.add(ka34);
+		p69.add(k23);
+		
+		jp57.add(p69);
+		
+		String s4="<HTML>14.)<font size=3> Gib die Rechnungen aller Kunden aus,"
+				+ " deren Straße = ____?____ ist und deren<br/>"
+				+ " Zahlungsart = ___?___ ist.</font></HTML>";
+		p70=new JPanel();
+		p70.setLayout(new FlowLayout());
+		ka35=new JTextField("(Strasse)       ");
+		ka36=new JTextField("(1/2/3)     ");
+		
+		k24=new JButton("Datensätze anzeigen");
+		k24.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p70.add(new JLabel(s4));
+		p70.add(ka35);
+		p70.add(ka36);
+		p70.add(k24);
+		
+		jp57.add(p70);
+		
+		String s5="<HTML>15.)<font size=3>Gib alle Privatkunden aus, deren Zahlungsart = Kreditkarte<br/>"
+				+ " ist und die keine offenen Rechnungen haben und aus __?__ stammen. </font></HTML>";
+		p71=new JPanel();
+		p71.setLayout(new FlowLayout());
+		ka37=new JTextField("(Land)         ");
+		
+		
+		k25=new JButton("Datensätze anzeigen");
+		k25.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p71.add(new JLabel(s5));
+		p71.add(ka37);
+		p71.add(k25);
+		
+		jp57.add(p71);
+		
+		
+		tp.add("Komplexe Abfragen(2)", jp57);
+
 		
 		jf.add(tp);
 		jf.setVisible(true);
@@ -2443,14 +2623,7 @@ public class testGUI {
 	
 
 
-	public JComboBox geteA() {
-		return eA;
-	}
-
-
-	public void seteA(JComboBox eA) {
-		this.eA = eA;
-	}
+	
 	
 	
 
