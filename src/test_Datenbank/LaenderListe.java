@@ -56,10 +56,11 @@ public class LaenderListe {
 		getLaenderListe().entferneLand(la);
 	}
 	public void ändereLand(DB db, Land laNeu, Land laAlt) throws SQLException{
-		String sql="UPDATE land SET land=? WHERE ID=?;";
+		String sql="UPDATE land SET ID=?, Land=? WHERE ID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, laNeu.getLand());
-		db.getPs().setString(2, laNeu.getId());
+		db.getPs().setString(1, laNeu.getId());
+		db.getPs().setString(2, laNeu.getLand());
+		db.getPs().setString(3, laAlt.getId());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();

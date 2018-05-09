@@ -25,7 +25,7 @@ public class EventHandlerButtons implements ActionListener {
 				try{
 				 KundenListe.getkundenListe().fügeKundeEin(testgui.getVb(), k);
 				 }
-				 catch(Exception ex){}
+				 catch(Exception ex){throw new RuntimeException("Einfügen nicht möglich!");}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
@@ -37,7 +37,7 @@ public class EventHandlerButtons implements ActionListener {
 				 KundenListe.getkundenListe().löscheKunde(testgui.getVb(), k);
 				
 				 }
-				 catch(Exception ex){}
+				 catch(Exception ex){throw new RuntimeException("Einfügen nicht möglich!");}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
@@ -145,7 +145,7 @@ public class EventHandlerButtons implements ActionListener {
 			Rechnung.Rechnungsposition rp= r.new Rechnungsposition(testgui.getRptf2().getText(), testgui.getRptf3().getText(), testgui.getRptf4().getText());
 			if(true){
 				try{
-					testgui.getVb().fügeRechnungspositionEin(rp);
+					RechnungspositionsListe.getRechnungspositionsListe().fügeRechnungspositionEin(testgui.getVb(), rp);
 				}catch(Exception ex){}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -156,17 +156,25 @@ public class EventHandlerButtons implements ActionListener {
 			Rechnung.Rechnungsposition rp= r.new Rechnungsposition(testgui.getRptf2().getText(), testgui.getRptf3().getText(), testgui.getRptf4().getText());
 			if(true){
 				try{
-					testgui.getVb().löscheRechnungsposition(rp);
+					RechnungspositionsListe.getRechnungspositionsListe().löscheRechnungsposition(testgui.getVb(), rp);
 					}catch(Exception ex){}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else if(e.getSource()==testgui.getRpÄndern()){
+			Rechnung.Rechnungsposition rpAlt=(Rechnung.Rechnungsposition)testgui.getRpCb().getSelectedItem();
+			Rechnung r=new Rechnung(rpAlt.getNr(), null, null, null ,null, null);
+			Rechnung.Rechnungsposition rpNeu= r.new Rechnungsposition(testgui.getRptf6().getText(), testgui.getRptf7().getText(), testgui.getRptf8().getText());
+			try{
+				RechnungspositionsListe.getRechnungspositionsListe().ändereRechnungsposition(testgui.getVb(), rpNeu, rpAlt);
+			}catch(Exception ex){};
+		}
 		else if(e.getSource()==testgui.getLaSende()){
 			Land la=new Land(testgui.getLatf1().getText(), testgui.getLatf2().getText());
 			if(true){
 				try{
-					testgui.getVb().fügeLandEin(la);
+					LaenderListe.getLaenderListe().fügeLandEin(testgui.getVb(), la);
 				}catch(Exception ex){}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -176,12 +184,72 @@ public class EventHandlerButtons implements ActionListener {
 			Land la=new Land(testgui.getLatf1().getText(), testgui.getLatf2().getText());
 			if(true){
 				try{
-					testgui.getVb().löscheLand(la);
+					LaenderListe.getLaenderListe().löscheLand(testgui.getVb(), la);
 				}catch(Exception ex){}
 			}else{
 				JOptionPane.showMessageDialog(null, "Datensatz fehlerhaft!", "Fehler", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+		else if(e.getSource()==testgui.getLaÄndern()){
+			Land laAlt=(Land)testgui.getLaCb().getSelectedItem();
+			Land laNeu=new Land(testgui.getLatf3().getText(), testgui.getLatf4().getText());
+			try{
+				LaenderListe.getLaenderListe().ändereLand(testgui.getVb(), laNeu, laAlt);
+			}catch(Exception ex){}
+		}
+		else if(e.getSource()==testgui.getArSende()){
+			Artikel ar=new Artikel(testgui.getArtf1().getText(), testgui.getArtf2().getText());
+			try{
+				ArtikelListe.getArtikelListe().fügeArtikelEin(testgui.getVb(), ar);
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==testgui.getArLösche()){
+			Artikel ar=new Artikel(testgui.getArtf1().getText(), testgui.getArtf2().getText());
+			try{
+				ArtikelListe.getArtikelListe().löscheArtikel(testgui.getVb(), ar);
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==testgui.getArÄndern()){
+			Artikel arAlt=(Artikel)testgui.getArCb().getSelectedItem();
+			Artikel arNeu=new Artikel(arAlt.getId(), testgui.getArtf3().getText(), testgui.getArtf4().getText());
+			try{
+				ArtikelListe.getArtikelListe().ändereArtikel(testgui.getVb(), arNeu, arAlt);
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==testgui.getUfSende()){
+			Rechtsform rf=new Rechtsform(testgui.getUftf1().getText());
+			try{
+				RechtsformListe.getRechtsformListe().fügeRechtsformEin(testgui.getVb(), rf);
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==testgui.getUfLösche()){
+			Rechtsform rf=new Rechtsform(testgui.getUftf1().getText());
+			try{
+				RechtsformListe.getRechtsformListe().löscheRechtsform(testgui.getVb(), rf);
+			}catch(Exception ex){};
+		}
+		else if(e.getSource()==testgui.getZaSende()){
+			Zahlungsart za=new Zahlungsart(testgui.getZatf1().getText(), testgui.getZatf2().getText());
+			try{
+				ZahlungsartListe.getZahlungsartListe().fügeZahlungsartEin(testgui.getVb(), za);
+			}catch(Exception ex){}
+		}
+		else if(e.getSource()==testgui.getZaLösche()){
+			Zahlungsart za=new Zahlungsart(testgui.getZatf1().getText(), testgui.getZatf2().getText());
+			try{
+				ZahlungsartListe.getZahlungsartListe().löscheZahlungsart(testgui.getVb(), za);
+			}catch(Exception ex){}
+		}
+		else if(e.getSource()==testgui.getZaÄndern()){
+			Zahlungsart zaAlt=(Zahlungsart)testgui.getZaCb().getSelectedItem();
+			Zahlungsart zaNeu=new Zahlungsart(zaAlt.getTransNr(), testgui.getZatf3().getText(), testgui.getZatf4().getText());
+			try{
+				ZahlungsartListe.getZahlungsartListe().ändereZahlungsart(testgui.getVb(), zaNeu, zaAlt);
+			}catch(Exception ex){}
+		}
+		
+		
+		
 				
 		
 	}

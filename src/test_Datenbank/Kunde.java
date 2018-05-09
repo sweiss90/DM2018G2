@@ -62,7 +62,10 @@ public class Kunde {
 		this.nr = nr;
 	}
 	
-	//HashCode fehlt -> sonst funktioniert equals nicht
+	@Override
+	public int hashCode(){
+		return Integer.parseInt(nr);
+	}
 	
 	@Override
 	public boolean equals(Object kd){

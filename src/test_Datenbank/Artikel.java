@@ -6,9 +6,12 @@ public class Artikel {
 	private String preis;
 	
 	public Artikel(String id, String bezeichnung, String preis) {
+		this(bezeichnung, preis);
 		this.id = id;
-		this.bezeichnung = bezeichnung;
-		this.preis = preis;
+	}
+	public Artikel(String bezeichnung, String preis){
+		this.bezeichnung=bezeichnung;
+		this.preis=preis;
 	}
 	public String getId() {
 		return id;

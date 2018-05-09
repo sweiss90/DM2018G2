@@ -59,6 +59,19 @@ public class RechnungspositionsListe {
 		db.getPs().execute();
 		getRechnungspositionsListe().entfernePosition(rp);
 	}
+	public void ändereRechnungsposition(DB db, Rechnung.Rechnungsposition rpNeu, Rechnung.Rechnungsposition rpAlt ) throws SQLException{
+		String sql="UPDATE rechnungsposition SET PositionsNr=?, ArtikelID=?, Menge=? WHERE RechnungsID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, rpNeu.getPositionsNr());
+		db.getPs().setString(2, rpNeu.getArtikelID());
+		db.getPs().setString(3, rpNeu.getMenge());
+		db.getPs().setString(4, rpNeu.getNr());
+		
+		//SQL-Befehl absetzen
+		db.getPs().executeUpdate();
+		getRechnungspositionsListe().entfernePosition(rpAlt);
+		getRechnungspositionsListe().fügePositionEin(rpNeu);
+	}
 	public void rechnungsPositionsListeAktualisieren(DB db) throws SQLException{
 		getRechnungspositionsListe().leereListe();
 		String sql="SELECT * FROM rechnungsposition;";

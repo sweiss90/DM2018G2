@@ -53,7 +53,7 @@ public class ZahlungsartListe {
 		db.getPs().execute();
 		getZahlungsartListe().löscheZahlungsart(za);
 	}
-	public void ändereAnschrift(DB db, Zahlungsart zaNeu, Zahlungsart zaAlt) throws SQLException{
+	public void ändereZahlungsart(DB db, Zahlungsart zaNeu, Zahlungsart zaAlt) throws SQLException{
 		String sql="UPDATE zahlungsart SET ZANr=?, KDNr=? WHERE TransID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, zaNeu.getZahlungsartNummer());

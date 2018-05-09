@@ -34,7 +34,7 @@ public class ArtikelListe {
 		aListe.clear();
 	}
 	public void fügeArtikelEin(DB db, Artikel ar) throws SQLException{
-		String sql="INSERT INTO artikel(Id, Bezeichnung, Preis) VALUES(?,?,?);";
+		String sql="INSERT INTO artikel(ID, Bezeichnung, Preis) VALUES(?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, ar.getId());
 		db.getPs().setString(2, ar.getBezeichnung());
@@ -45,11 +45,11 @@ public class ArtikelListe {
 		getArtikelListe().fügeArtikelEin(ar);
 	}
 	public void löscheArtikel(DB db, Artikel ar) throws SQLException{
-		String sql="DELETE FROM artikel WHERE Id=? AND Bezeichnung=? AND Preis=?;";
+		String sql="DELETE FROM artikel WHERE Bezeichnung=? AND Preis=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, ar.getId());
-		db.getPs().setString(2, ar.getBezeichnung());
-		db.getPs().setString(3, ar.getPreis());
+		//db.getPs().setString(1, ar.getId());
+		db.getPs().setString(1, ar.getBezeichnung());
+		db.getPs().setString(2, ar.getPreis());
 		
 		//SQL-Befehl ausführen
 		db.getPs().execute();

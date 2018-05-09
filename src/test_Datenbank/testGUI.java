@@ -1,4 +1,6 @@
 package test_Datenbank;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 //import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
@@ -113,6 +115,7 @@ public class testGUI {
 	private JComboBox beCb=null;
 	@SuppressWarnings("rawtypes")
 	private JComboBox kkCb=null;
+	private JComboBox eA=null;
 	
 	
 	private TextField rtf1=null;
@@ -254,6 +257,12 @@ public class testGUI {
 	private JLabel kkDatensatz=null;
 	
 	private DB vb=null;
+	
+	//Einfache Abfragen
+	JTextField l11, l12, l13, l14, l15, l16, l162, l17, l18, l19, l21;
+	JPanel p46, p47, p48, p49, p50, p51, p52, p53, p54, p55;
+	JButton b11, b12, b13, b14, b15, b16, b17, b18, b19, b21;
+	
 	
 	public testGUI(DB vb) throws SQLException{
 		
@@ -920,11 +929,223 @@ public class testGUI {
 		
 		tp.add("Kreditkarte", p41);	
 						
-			//-----------------------------------------------------------------------------------------------	
+		//--------------------------------------------------------------------------------------------------	
+		//---------------------Einfache Abfragen-------------------------------------------------------------
+		JPanel p45=new JPanel();
+		
+		p45.setLayout(new GridLayout(7, 3));
+			p46=new JPanel();
+			p46.setLayout(new FlowLayout());
+			String n1="<HTML>1.) <font size=4>Gib alle Rechnungen aus der Liste aller Rechnungen, welche ___?___ wurden/sind.</font></HTML>";
+			l11=new JTextField("(0/1)     ");
+			b11=new JButton("Datensätze anzeigen");
+			b11.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p46.add(new JLabel(n1));
+			p46.add(l11);
+			p46.add(b11);
+			p45.add(p46);
+			
+			p47=new JPanel();
+			p47.setLayout(new FlowLayout());
+			String n2="<HTML>2.) <font size=3>Gib alle Rechnungen aus der Liste aller Rechnungen, welche mindestens den Betrag ___?___ haben.</font></HTML>";
+			l12=new JTextField("(Betrag)         ");
+			b12=new JButton("Datensätze anzeigen");
+			b12.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p47.add(new JLabel(n2));
+			p47.add(l12);
+			p47.add(b12);
+			p45.add(p47);
+			
+			p48=new JPanel();
+			p48.setLayout(new FlowLayout());
+			String n3="<HTML>3.) <font size=4>Gib alle Rechnungen aus der Liste aller Rechnungen, welche am  __?__  erstellt wurden.</font></HTML>";
+			l13=new JTextField("(Datum)           ");
+			b13=new JButton("Datensätze anzeigen");
+			b13.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p48.add(new JLabel(n3));
+			p48.add(l13);
+			p48.add(b13);
+			p45.add(p48);
+			
+			p49=new JPanel();
+			p49.setLayout(new FlowLayout());
+			String n4="<HTML>4.) <font size=4>Gib alle Kunden mit dem Wohnort  ___?___</font></HTML>";
+			l14=new JTextField("(Wohnort)         ");
+			b14=new JButton("Datensätze anzeigen");
+			b14.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p49.add(new JLabel(n4));
+			p49.add(l14);
+			p49.add(b14);
+			p45.add(p49);
+			
+			p50=new JPanel();
+			p50.setLayout(new FlowLayout());
+			String n5="<HTML>5.) <font size=4>Gib alle Privatkunden, die mindestens __?__ offene Rechnung(en) haben.</font></HTML>";
+			l15=new JTextField("(offene Rechnungen)    ");
+			b15=new JButton("Datensätze anzeigen");
+			b15.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p50.add(new JLabel(n5));
+			p50.add(l15);
+			p50.add(b15);
+			p45.add(p50);
+			
+			
+			//fehlt noch etwas
+			p51=new JPanel();
+			p51.setLayout(new FlowLayout());
+			String n6="<HTML>6.) <font size=4>Gib alle Geschäftskunden, die __?__ __?__ Rechnung(en) haben</font></HTML>";
+			l16=new JTextField("(Anzahl)  ");
+			l162=new JTextField("(0/1)  ");
+			b16=new JButton("Datensätze anzeigen");
+			b16.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p51.add(new JLabel(n6));
+			p51.add(l16);
+			p51.add(l162);
+			p51.add(b16);
+			p45.add(p51);
+			
+			p52=new JPanel();
+			p52.setLayout(new FlowLayout());
+			String n7="<HTML>7.) <font size=4>Gib alle Artikel mit einen Preis von mindestens __?__</font></HTML>";
+			l17=new JTextField("(Mindestpreis)    ");
+			b17=new JButton("Datensätze anzeigen");
+			b17.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p52.add(new JLabel(n7));
+			p52.add(l17);
+			p52.add(b17);
+			p45.add(p52);
+			
+			p53=new JPanel();
+			p53.setLayout(new FlowLayout());
+			String n8="<HTML>8.) <font size=4>Gib alle Geschäftskunden, deren Unternehmensform eine __?__ ist.</font></HTML>";
+			l18=new JTextField("(Rechtsform)      ");
+			b18=new JButton("Datensätze anzeigen");
+			b18.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p53.add(new JLabel(n8));
+			p53.add(l18);
+			p53.add(b18);
+			p45.add(p53);
+			
+			p54=new JPanel();
+			p54.setLayout(new FlowLayout());
+			String n9="<HTML>9.) <font size=4>Gib alle Privatkunden mit dem Vornamen __?__ aus.</font></HTML>";
+			l19=new JTextField("(Vorname)        ");
+			b19=new JButton("Datensätze anzeigen");
+			b19.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p54.add(new JLabel(n9));
+			p54.add(l19);
+			p54.add(b19);
+			p45.add(p54);
+			
+			p55=new JPanel();
+			p55.setLayout(new FlowLayout());
+			String n10="<HTML>10.)<font size=4>Gib alle Geschäftskunden, deren Unternehmensform keine __?___ ist</font></HTML>";
+			l21=new JTextField("(Rechtsform)      ");
+			b21=new JButton("Datensätze anzeigen");
+			b21.addActionListener(new EventHandlerEinfacheAbfragen(this));
+			p55.add(new JLabel(n10));
+			p55.add(l21);
+			p55.add(b21);
+			p45.add(p55);
+			
+		tp.add("Einfache Abfragen", p45);
+		
+		//-------------------------------------------------------------------------------------------------------
+		//------------------Komplexe Abfragen-------------------------------------------------------------------
+		JPanel p56=new JPanel();
+		p56.setLayout(new FlowLayout());
+		
+		JPanel p57, p58, p59, p60, p61, p62, p63;
+		JTextField ka1, ka2, ka3, ka4, ka5, ka6, ka7, ka8, ka9, ka10, ka11, ka12, ka13, ka14, ka15;
+		JButton k11, k12, k13, k14, k15, k16, k17, k18, k19;
 		
 		
+		String k1="<HTML>1.)<font size=3>Gib alle Namen von Privatkunden sowie den Betrag von deren Rechnungen aus,"
+				+ " bei denen das <br/> Land=___?___und Zahlungsart=Kreditkarte und mindestens __?__ unbezahlte Rechnungen haben. </font></HTML>";
+		p57=new JPanel();
+		p57.setLayout(new FlowLayout());
+		ka1=new JTextField("(Land)    ");
+		ka2=new JTextField("(Anzahl)  ");
+		k11=new JButton("Datensätze anzeigen");
+		k11.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p57.add(new JLabel(k1));
+		p57.add(ka1);
+		p57.add(ka2);
+		p57.add(k11);
+		p56.add(p57);
 		
+		String k2="<HTML>2.)<font size=3>Gib den Firmennamen sowie die Anschrift als auch den"
+				+ " Ansprechpartner aller Geschäftskunden<br/> aus bei denen Land=__?__, Unternehmensform=__?__ "
+				+ "und Kundenumsatz >1.000.000 GE ist. </font></HTML>";
+		p58=new JPanel();
+		p58.setLayout(new FlowLayout());
+		ka3=new JTextField("(Land)    ");
+		ka4=new JTextField("(Rechtsform)  ");
+		k12=new JButton("Datensätze anzeigen");
+		k12.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p58.add(new JLabel(k2));
+		p58.add(ka3);
+		p58.add(ka4);
+		p58.add(k12);
+		p56.add(p58);
 		
+		String k3="<HTML>3.)<font size=3>Gib von allen Rechnungspositionen den Einzel Artikelpreis aus, welche mindestens<br/> eine Menge"
+				+ " von __?__ ME haben und deren dazugehörige Rechnung __?___ ist.</font></HTML>";
+		p59=new JPanel();
+		p59.setLayout(new FlowLayout());
+		ka5=new JTextField("(Menge)    ");
+		ka6=new JTextField("(Bezahlt/Unbezahlt)  ");
+		k13=new JButton("Datensätze anzeigen");
+		k13.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p59.add(new JLabel(k3));
+		p59.add(ka5);
+		p59.add(ka6);
+		p59.add(k13);
+		p56.add(p59);
+		
+		String k4="<HTML>4.)<font size=3>Gib den Betrag von allen Rechnungen sowie die dazugehörigen Firmennamen und "
+				+ "Ansprechpartner als auch<br/> die dazugehörige E-Mail und Telefonnummer aller Geschäftskunden aus, "
+				+ "die mehr als __?__ __?__ Rechnungen sowie deren<br/> Kunden Umsatz < __?__ GE als auch deren dazugehörige" 
+                + "Unternehmensform ungleich __?__ oder __?__ ist. </font></HTML>";
+		p60=new JPanel();
+		p60.setLayout(new FlowLayout());
+		ka7=new JTextField("(Menge)    ");
+		ka8=new JTextField("(Bezahlt/Unbezahlt)  ");
+		ka9=new JTextField("(Umsatz)    ");
+		ka10=new JTextField("(Rechtsform1)  ");
+		ka11=new JTextField("(Rechtsform2)    ");
+		
+		k14=new JButton("Datensätze anzeigen");
+		k14.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p60.add(new JLabel(k4));
+		p60.add(ka7);
+		p60.add(ka8);
+		p60.add(ka9);
+		p60.add(ka10);
+		p60.add(ka11);
+		p60.add(k14);
+		p56.add(p60);
+		
+		String k5="<HTML>5.)<font size=3>Gib alle Firmennamen sowie die dazugehörige Unternehmensform als auch die dazugehörige<br/> "
+				+ "Anschrift von Geschäftskunden aus, welche einen Kundenumsatz >= __?__ GE sowie deren<br/> __?__ Rechnungen <2 als"
+				+ " auch deren Land __?__ ist</font></HTML>";
+		p61=new JPanel();
+		p61.setLayout(new FlowLayout());
+		ka12=new JTextField("(Umsatz)    ");
+		ka13=new JTextField("(0/1)  ");
+		ka14=new JTextField("(Land)    ");
+	
+		k15=new JButton("Datensätze anzeigen");
+		k15.addActionListener(new EventHandlerKomplexeAbfragen(this));
+		p61.add(new JLabel(k5));
+		p61.add(ka12);
+		p61.add(ka13);
+		p61.add(ka14);
+		p61.add(k15);
+		
+		p56.add(p61);
+		
+		tp.add("Komplexe Abfragen", p56);
 		
 		jf.add(tp);
 		jf.setVisible(true);
@@ -933,6 +1154,16 @@ public class testGUI {
 		
 	}
 	
+
+	public JTextField getL162() {
+		return l162;
+	}
+
+
+	public void setL162(JTextField l162) {
+		this.l162 = l162;
+	}
+
 
 	public JButton getaSende() {
 		return aSende;
@@ -2207,6 +2438,221 @@ public class testGUI {
 
 	public JLabel getKkDatensatz() {
 		return kkDatensatz;
+	}
+	
+	
+
+
+	public JComboBox geteA() {
+		return eA;
+	}
+
+
+	public void seteA(JComboBox eA) {
+		this.eA = eA;
+	}
+	
+	
+
+
+	public JButton getB11() {
+		return b11;
+	}
+
+
+	public void setB11(JButton b11) {
+		this.b11 = b11;
+	}
+
+
+	public JButton getB12() {
+		return b12;
+	}
+
+
+	public void setB12(JButton b12) {
+		this.b12 = b12;
+	}
+
+
+	public JButton getB13() {
+		return b13;
+	}
+
+
+	public void setB13(JButton b13) {
+		this.b13 = b13;
+	}
+
+
+	public JButton getB14() {
+		return b14;
+	}
+
+
+	public void setB14(JButton b14) {
+		this.b14 = b14;
+	}
+
+
+	public JButton getB15() {
+		return b15;
+	}
+
+
+	public void setB15(JButton b15) {
+		this.b15 = b15;
+	}
+
+
+	public JButton getB16() {
+		return b16;
+	}
+
+
+	public void setB16(JButton b16) {
+		this.b16 = b16;
+	}
+
+
+	public JButton getB17() {
+		return b17;
+	}
+
+
+	public void setB17(JButton b17) {
+		this.b17 = b17;
+	}
+
+
+	public JButton getB18() {
+		return b18;
+	}
+
+
+	public void setB18(JButton b18) {
+		this.b18 = b18;
+	}
+
+
+	public JButton getB19() {
+		return b19;
+	}
+
+
+	public void setB19(JButton b19) {
+		this.b19 = b19;
+	}
+
+
+	public JButton getB21() {
+		return b21;
+	}
+
+
+	public void setB21(JButton b21) {
+		this.b21 = b21;
+	}
+	
+
+
+	public JTextField getL11() {
+		return l11;
+	}
+
+
+	public void setL11(JTextField l11) {
+		this.l11 = l11;
+	}
+
+
+	public JTextField getL12() {
+		return l12;
+	}
+
+
+	public void setL12(JTextField l12) {
+		this.l12 = l12;
+	}
+
+
+	public JTextField getL13() {
+		return l13;
+	}
+
+
+	public void setL13(JTextField l13) {
+		this.l13 = l13;
+	}
+
+
+	public JTextField getL14() {
+		return l14;
+	}
+
+
+	public void setL14(JTextField l14) {
+		this.l14 = l14;
+	}
+
+
+	public JTextField getL15() {
+		return l15;
+	}
+
+
+	public void setL15(JTextField l15) {
+		this.l15 = l15;
+	}
+
+
+	public JTextField getL16() {
+		return l16;
+	}
+
+
+	public void setL16(JTextField l16) {
+		this.l16 = l16;
+	}
+
+
+	public JTextField getL17() {
+		return l17;
+	}
+
+
+	public void setL17(JTextField l17) {
+		this.l17 = l17;
+	}
+
+
+	public JTextField getL18() {
+		return l18;
+	}
+
+
+	public void setL18(JTextField l18) {
+		this.l18 = l18;
+	}
+
+
+	public JTextField getL19() {
+		return l19;
+	}
+
+
+	public void setL19(JTextField l19) {
+		this.l19 = l19;
+	}
+
+
+	public JTextField getL21() {
+		return l21;
+	}
+
+
+	public void setL21(JTextField l21) {
+		this.l21 = l21;
 	}
 
 
