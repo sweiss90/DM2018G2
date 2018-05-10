@@ -21,225 +21,41 @@ public class testGUI {
 		this.vb = vb;
 	}
 
-
 	private JFrame jf=null;
 	private JTabbedPane tp=null;
+	private DB vb=null;
 	
-	private JPanel p1=null;
-	private JPanel p2=null;
-	private JPanel p3=null;
-	private JPanel p4=null;
-	//private JLabel l1=null;
+	private JPanel p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28,
+		p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40, p41, p42, p43, p44;
+		
+	private TextField ktf1, ktf2, ktf3, ktf4, ktf5, ktf6, ktf7, ktf8, ktf9, ktf10;
 	
-	private JPanel p5=null;
-	private JPanel p6=null;
-	private JPanel p7=null;
-	private JPanel p8=null;
+	private JComboBox kCb, rCb, gkCb, anCb, arCb, laCb, ufCb, rpCb, zaCb, beCb, kkCb;
 	
-	private JPanel p9=null;
-	private JPanel p10=null;
-	private JPanel p11=null;
-	private JPanel p12=null;
+	private TextField rtf1, rtf2, rtf3, rtf4, rtf5, rtf6, rtf7, rtf8, rtf9, rtf10;
 	
-	private JPanel p13=null;
-	private JPanel p14=null;
-	private JPanel p15=null;
-	private JPanel p16=null;
+	private TextField gktf1, gktf2, gktf3, gktf4, gktf5, gktf6;
 	
-	private JPanel p17=null;
-	private JPanel p18=null;
-	private JPanel p19=null;
-	private JPanel p20=null;
+	private TextField atf1, atf2, atf3, atf4, atf5, atf6, atf7, atf8, atf9, atf10;
 	
-	private JPanel p21=null;
-	private JPanel p22=null;
-	private JPanel p23=null;
-	private JPanel p24=null;
+	private TextField rptf1, rptf2, rptf3, rptf4, rptf5, rptf6, rptf7, rptf8;
 	
-	private JPanel p25=null;
-	private JPanel p26=null;
-	private JPanel p27=null;
-	private JPanel p28=null;
+	private TextField uftf1, uftf2;
 	
-	private JPanel p29=null;
-	private JPanel p30=null;
-	private JPanel p31=null;
-	private JPanel p32=null;
+	private TextField artf1, artf2, artf3, artf4;
 	
-	private JPanel p33=null;
-	private JPanel p34=null;
-	private JPanel p35=null;
-	private JPanel p36=null;
+	private TextField latf1, latf2, latf3, latf4;
 	
-	private JPanel p37=null;
-	private JPanel p38=null;
-	private JPanel p39=null;
-	private JPanel p40=null;
+	private TextField zatf1, zatf2, zatf3, zatf4;
 	
-	private JPanel p41=null;
-	private JPanel p42=null;
-	private JPanel p43=null;
-	private JPanel p44=null;
+	private TextField betf1, betf2, betf3, betf4;
 	
-	private TextField ktf1=null;
-	private TextField ktf2=null;
-	private TextField ktf3=null;
-	private TextField ktf4=null;
-	private TextField ktf5=null;
+	private TextField kktf1, kktf2, kktf3, kktf4;
 	
-	private TextField ktf6=null;
-	private TextField ktf7=null;
-	private TextField ktf8=null;
-	private TextField ktf9=null;
-	private TextField ktf10=null;
-	
-	@SuppressWarnings("rawtypes")
-	private JComboBox kCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox rCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox gkCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox anCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox arCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox laCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox ufCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox rpCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox zaCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox beCb=null;
-	@SuppressWarnings("rawtypes")
-	private JComboBox kkCb=null;
-
-	private TextField rtf1=null;
-	private TextField rtf2=null;
-	private TextField rtf3=null;
-	private TextField rtf4=null;
-	private TextField rtf5=null;
-	
-	private TextField rtf6=null;
-	private TextField rtf7=null;
-	private TextField rtf8=null;
-	private TextField rtf9=null;
-	private TextField rtf10=null;
-	
-	private TextField gktf1=null;
-	private TextField gktf2=null;
-	private TextField gktf3=null;
-	
-	private TextField gktf4=null;
-	private TextField gktf5=null;
-	private TextField gktf6=null;
-	
-	private TextField atf1=null;
-	private TextField atf2=null;
-	private TextField atf3=null;
-	private TextField atf4=null;
-	private TextField atf5=null;
-	
-	private TextField atf6=null;
-	private TextField atf7=null;
-	private TextField atf8=null;
-	private TextField atf9=null;
-	private TextField atf10=null;
-	
-	private TextField rptf1=null;
-	private TextField rptf2=null;
-	private TextField rptf3=null;
-	private TextField rptf4=null;
-	
-	private TextField rptf5=null;
-	private TextField rptf6=null;
-	private TextField rptf7=null;
-	private TextField rptf8=null;
-	
-	private TextField uftf1=null;
-	private TextField uftf2=null;
-	
-	private TextField artf1=null;
-	private TextField artf2=null;
-	private TextField artf3=null;
-	private TextField artf4=null;
-	
-	private TextField latf1=null;
-	private TextField latf2=null;
-	private TextField latf3=null;
-	private TextField latf4=null;
-	
-	private TextField zatf1=null;
-	private TextField zatf2=null;
-	private TextField zatf3=null;
-	private TextField zatf4=null;
-	
-	private TextField betf1=null;
-	private TextField betf2=null;
-	private TextField betf3=null;
-	private TextField betf4=null;
-	
-	private TextField kktf1=null;
-	private TextField kktf2=null;
-	private TextField kktf3=null;
-	private TextField kktf4=null;
-	
-	private JButton kSende=null;
-	private JButton kÄndern=null;
-	private JButton kLösche=null;
-	private JButton kAktualisiere=null;
-	
-	private JButton rSende=null;
-	private JButton rÄndern=null;
-	private JButton rLösche=null;
-	private JButton rAktualisiere=null;
-	
-	private JButton gkSende=null;
-	private JButton gkÄndern=null;
-	private JButton gkLösche=null;
-	private JButton gkAktualisiere=null;
-	
-	private JButton aSende=null;
-	private JButton aÄndern=null;
-	private JButton aLösche=null;
-	private JButton aAktualisiere=null;
-	
-	private JButton rpSende=null;
-	private JButton rpÄndern=null;
-	private JButton rpLösche=null;
-	private JButton rpAktualisiere=null;
-	
-	private JButton ufSende=null;
-	private JButton ufÄndern=null;
-	private JButton ufLösche=null;
-	private JButton ufAktualisiere=null;
-	
-	private JButton arSende=null;
-	private JButton arÄndern=null;
-	private JButton arLösche=null;
-	private JButton arAktualisiere=null;
-	
-	private JButton laSende=null;
-	private JButton laÄndern=null;
-	private JButton laLösche=null;
-	private JButton laAktualisiere=null;
-	
-	private JButton zaSende=null;
-	private JButton zaÄndern=null;
-	private JButton zaLösche=null;
-	private JButton zaAktualisiere=null;
-	
-	private JButton beSende=null;
-	private JButton beÄndern=null;
-	private JButton beLösche=null;
-	private JButton beAktualisiere=null;
-	
-	private JButton kkSende=null;
-	private JButton kkÄndern=null;
-	private JButton kkLösche=null;
-	private JButton kkAktualisiere=null;
+	private JButton kSende, kÄndern, kLösche, kAktualisiere, rSende, rÄndern, rLösche, rAktualisiere, gkSende, gkÄndern, gkLösche, gkAktualisiere,
+			aSende, aÄndern, aLösche, aAktualisiere, rpSende, rpÄndern, rpLösche, rpAktualisiere, ufSende, ufÄndern, ufLösche, ufAktualisiere,
+			arSende, arÄndern, arLösche, arAktualisiere, laSende, laÄndern, laLösche, laAktualisiere, zaSende, zaÄndern, zaLösche, zaAktualisiere,
+			beSende, beÄndern, beLösche, beAktualisiere, kkSende, kkÄndern, kkLösche, kkAktualisiere;
 
 
 	private JLabel kDatensatz=null;
@@ -254,12 +70,16 @@ public class testGUI {
 	private JLabel beDatensatz=null;
 	private JLabel kkDatensatz=null;
 	
-	private DB vb=null;
-	
 	//Einfache Abfragen
 	JTextField l11, l12, l13, l14, l15, l16, l162, l17, l18, l19, l21;
 	JPanel p46, p47, p48, p49, p50, p51, p52, p53, p54, p55;
 	JButton b11, b12, b13, b14, b15, b16, b17, b18, b19, b21;
+	
+	//Komplexe Abfragen
+	JPanel p57, p58, p59, p60, p61, p62, p63, p64, p65, p66, p67, p68, p69, p70, p71;
+	JTextField ka1, ka2, ka3, ka4, ka5, ka6, ka7, ka8, ka9, ka10, ka11, ka12, ka13, ka14, ka15, ka16, ka17, ka18, ka19, ka20, ka21, ka22, ka23,
+			ka24, ka25, ka26, ka27, ka28, ka29, ka30, ka31, ka32, ka33, ka34, ka35, ka36, ka37;
+	JButton k11, k12, k13, k14, k15, k16, k17, k18, k19, k20, k21, k22, k23, k24, k25, k26, k27;
 	
 	
 	public testGUI(DB vb) throws SQLException{
@@ -1054,10 +874,7 @@ public class testGUI {
 		JPanel p56=new JPanel();
 		p56.setLayout(new FlowLayout());
 		
-		JPanel p57, p58, p59, p60, p61, p62, p63, p64, p65, p66, p67, p68, p69, p70, p71;
-		JTextField ka1, ka2, ka3, ka4, ka5, ka6, ka7, ka8, ka9, ka10, ka11, ka12, ka13, ka14, ka15, ka16, ka17, ka18, ka19, ka20, ka21, ka22, ka23,
-				ka24, ka25, ka26, ka27, ka28, ka29, ka30, ka31, ka32, ka33, ka34, ka35, ka36, ka37;
-		JButton k11, k12, k13, k14, k15, k16, k17, k18, k19, k20, k21, k22, k23, k24, k25, k26, k27;
+		
 		
 		
 		String k1="<HTML>1.)<font size=3>Gib alle Namen von Privatkunden sowie den Betrag von deren Rechnungen aus,"
@@ -2620,19 +2437,10 @@ public class testGUI {
 		return kkDatensatz;
 	}
 	
-	
-
-
-	
-	
-	
-
-
 	public JButton getB11() {
 		return b11;
 	}
-
-
+	
 	public void setB11(JButton b11) {
 		this.b11 = b11;
 	}
@@ -2826,6 +2634,552 @@ public class testGUI {
 
 	public void setL21(JTextField l21) {
 		this.l21 = l21;
+	}
+	
+	
+	
+	
+
+
+	public JButton getK11() {
+		return k11;
+	}
+
+
+	public void setK11(JButton k11) {
+		this.k11 = k11;
+	}
+
+
+	public JButton getK12() {
+		return k12;
+	}
+
+
+	public void setK12(JButton k12) {
+		this.k12 = k12;
+	}
+
+
+	public JButton getK13() {
+		return k13;
+	}
+
+
+	public void setK13(JButton k13) {
+		this.k13 = k13;
+	}
+
+
+	public JButton getK14() {
+		return k14;
+	}
+
+
+	public void setK14(JButton k14) {
+		this.k14 = k14;
+	}
+
+
+	public JButton getK15() {
+		return k15;
+	}
+
+
+	public void setK15(JButton k15) {
+		this.k15 = k15;
+	}
+
+
+	public JButton getK16() {
+		return k16;
+	}
+
+
+	public void setK16(JButton k16) {
+		this.k16 = k16;
+	}
+
+
+	public JButton getK17() {
+		return k17;
+	}
+
+
+	public void setK17(JButton k17) {
+		this.k17 = k17;
+	}
+
+
+	public JButton getK18() {
+		return k18;
+	}
+
+
+	public void setK18(JButton k18) {
+		this.k18 = k18;
+	}
+
+
+	public JButton getK19() {
+		return k19;
+	}
+
+
+	public void setK19(JButton k19) {
+		this.k19 = k19;
+	}
+
+
+	public JButton getK20() {
+		return k20;
+	}
+
+
+	public void setK20(JButton k20) {
+		this.k20 = k20;
+	}
+
+
+	public JButton getK21() {
+		return k21;
+	}
+
+
+	public void setK21(JButton k21) {
+		this.k21 = k21;
+	}
+
+
+	public JButton getK22() {
+		return k22;
+	}
+
+
+	public void setK22(JButton k22) {
+		this.k22 = k22;
+	}
+
+
+	public JButton getK23() {
+		return k23;
+	}
+
+
+	public void setK23(JButton k23) {
+		this.k23 = k23;
+	}
+
+
+	public JButton getK24() {
+		return k24;
+	}
+
+
+	public void setK24(JButton k24) {
+		this.k24 = k24;
+	}
+
+
+	public JButton getK25() {
+		return k25;
+	}
+
+
+	public void setK25(JButton k25) {
+		this.k25 = k25;
+	}
+
+
+	public JButton getK26() {
+		return k26;
+	}
+
+
+	public void setK26(JButton k26) {
+		this.k26 = k26;
+	}
+
+
+	public JButton getK27() {
+		return k27;
+	}
+
+
+	public void setK27(JButton k27) {
+		this.k27 = k27;
+	}
+	
+	
+
+
+	public JTextField getKa3() {
+		return ka3;
+	}
+
+
+	public void setKa3(JTextField ka3) {
+		this.ka3 = ka3;
+	}
+
+
+	public JTextField getKa5() {
+		return ka5;
+	}
+
+
+	public void setKa5(JTextField ka5) {
+		this.ka5 = ka5;
+	}
+
+
+	public JTextField getKa6() {
+		return ka6;
+	}
+
+
+	public void setKa6(JTextField ka6) {
+		this.ka6 = ka6;
+	}
+
+
+	public JTextField getKa7() {
+		return ka7;
+	}
+
+
+	public void setKa7(JTextField ka7) {
+		this.ka7 = ka7;
+	}
+
+
+	public JTextField getKa8() {
+		return ka8;
+	}
+
+
+	public void setKa8(JTextField ka8) {
+		this.ka8 = ka8;
+	}
+
+
+	public JTextField getKa9() {
+		return ka9;
+	}
+
+
+	public void setKa9(JTextField ka9) {
+		this.ka9 = ka9;
+	}
+
+
+	public JTextField getKa1() {
+		return ka1;
+	}
+
+
+	public void setKa1(JTextField ka1) {
+		this.ka1 = ka1;
+	}
+
+
+	public JTextField getKa2() {
+		return ka2;
+	}
+
+
+	public void setKa2(JTextField ka2) {
+		this.ka2 = ka2;
+	}
+
+
+	public JTextField getKa4() {
+		return ka4;
+	}
+
+
+	public void setKa4(JTextField ka4) {
+		this.ka4 = ka4;
+	}
+
+
+	public JTextField getKa10() {
+		return ka10;
+	}
+
+
+	public void setKa10(JTextField ka10) {
+		this.ka10 = ka10;
+	}
+
+
+	public JTextField getKa11() {
+		return ka11;
+	}
+
+
+	public void setKa11(JTextField ka11) {
+		this.ka11 = ka11;
+	}
+
+
+	public JTextField getKa12() {
+		return ka12;
+	}
+
+
+	public void setKa12(JTextField ka12) {
+		this.ka12 = ka12;
+	}
+
+
+	public JTextField getKa13() {
+		return ka13;
+	}
+
+
+	public void setKa13(JTextField ka13) {
+		this.ka13 = ka13;
+	}
+
+
+	public JTextField getKa14() {
+		return ka14;
+	}
+
+
+	public void setKa14(JTextField ka14) {
+		this.ka14 = ka14;
+	}
+
+
+	public JTextField getKa15() {
+		return ka15;
+	}
+
+
+	public void setKa15(JTextField ka15) {
+		this.ka15 = ka15;
+	}
+
+
+	public JTextField getKa16() {
+		return ka16;
+	}
+
+
+	public void setKa16(JTextField ka16) {
+		this.ka16 = ka16;
+	}
+
+
+	public JTextField getKa17() {
+		return ka17;
+	}
+
+
+	public void setKa17(JTextField ka17) {
+		this.ka17 = ka17;
+	}
+
+
+	public JTextField getKa18() {
+		return ka18;
+	}
+
+
+	public void setKa18(JTextField ka18) {
+		this.ka18 = ka18;
+	}
+
+
+	public JTextField getKa19() {
+		return ka19;
+	}
+
+
+	public void setKa19(JTextField ka19) {
+		this.ka19 = ka19;
+	}
+
+
+	public JTextField getKa20() {
+		return ka20;
+	}
+
+
+	public void setKa20(JTextField ka20) {
+		this.ka20 = ka20;
+	}
+
+
+	public JTextField getKa21() {
+		return ka21;
+	}
+
+
+	public void setKa21(JTextField ka21) {
+		this.ka21 = ka21;
+	}
+
+
+	public JTextField getKa22() {
+		return ka22;
+	}
+
+
+	public void setKa22(JTextField ka22) {
+		this.ka22 = ka22;
+	}
+
+
+	public JTextField getKa23() {
+		return ka23;
+	}
+
+
+	public void setKa23(JTextField ka23) {
+		this.ka23 = ka23;
+	}
+
+
+	public JTextField getKa24() {
+		return ka24;
+	}
+
+
+	public void setKa24(JTextField ka24) {
+		this.ka24 = ka24;
+	}
+
+
+	public JTextField getKa25() {
+		return ka25;
+	}
+
+
+	public void setKa25(JTextField ka25) {
+		this.ka25 = ka25;
+	}
+
+
+	public JTextField getKa26() {
+		return ka26;
+	}
+
+
+	public void setKa26(JTextField ka26) {
+		this.ka26 = ka26;
+	}
+
+
+	public JTextField getKa27() {
+		return ka27;
+	}
+
+
+	public void setKa27(JTextField ka27) {
+		this.ka27 = ka27;
+	}
+
+
+	public JTextField getKa28() {
+		return ka28;
+	}
+
+
+	public void setKa28(JTextField ka28) {
+		this.ka28 = ka28;
+	}
+
+
+	public JTextField getKa29() {
+		return ka29;
+	}
+
+
+	public void setKa29(JTextField ka29) {
+		this.ka29 = ka29;
+	}
+
+
+	public JTextField getKa30() {
+		return ka30;
+	}
+
+
+	public void setKa30(JTextField ka30) {
+		this.ka30 = ka30;
+	}
+
+
+	public JTextField getKa31() {
+		return ka31;
+	}
+
+
+	public void setKa31(JTextField ka31) {
+		this.ka31 = ka31;
+	}
+
+
+	public JTextField getKa32() {
+		return ka32;
+	}
+
+
+	public void setKa32(JTextField ka32) {
+		this.ka32 = ka32;
+	}
+
+
+	public JTextField getKa33() {
+		return ka33;
+	}
+
+
+	public void setKa33(JTextField ka33) {
+		this.ka33 = ka33;
+	}
+
+
+	public JTextField getKa34() {
+		return ka34;
+	}
+
+
+	public void setKa34(JTextField ka34) {
+		this.ka34 = ka34;
+	}
+
+
+	public JTextField getKa35() {
+		return ka35;
+	}
+
+
+	public void setKa35(JTextField ka35) {
+		this.ka35 = ka35;
+	}
+
+
+	public JTextField getKa36() {
+		return ka36;
+	}
+
+
+	public void setKa36(JTextField ka36) {
+		this.ka36 = ka36;
+	}
+
+
+	public JTextField getKa37() {
+		return ka37;
+	}
+
+
+	public void setKa37(JTextField ka37) {
+		this.ka37 = ka37;
 	}
 
 

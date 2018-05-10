@@ -14,12 +14,12 @@ import javax.swing.JLabel;
 public class EventHandlerEinfacheAbfragen implements ActionListener {
 	private testGUI gui;
 	private JInternalFrame itf;
-	
+	PreparedStatementsEinfach pse;
 	public EventHandlerEinfacheAbfragen(testGUI gui){
 		this.gui=gui;
 	}
 	public void actionPerformed(ActionEvent e){
-		PreparedStatementsEinfach pse=new PreparedStatementsEinfach(gui);
+		pse=new PreparedStatementsEinfach(gui);
 		if(e.getSource()==gui.getB11()){
 			try {
 				String result=konvertiereErgebnisTabelle(pse.erstesStatement(gui.getL11().getText()));
@@ -128,10 +128,10 @@ public class EventHandlerEinfacheAbfragen implements ActionListener {
 		
 		
 	}
-	private String konvertiereErgebnisTabelle(ArrayList<LinkedHashMap<String, String>> result) {
+	private static String konvertiereErgebnisTabelle(ArrayList<LinkedHashMap<String, String>> result) {
 		String erg=new String("<HTML>");
 		for(LinkedHashMap<String, String> datensatz:result){
-			erg+=datensatz+"<br>";
+			erg+=datensatz+"<br/>";
 		}
 		return (erg+="</HTML>");
 	}
