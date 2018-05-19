@@ -1,20 +1,35 @@
 package test_Datenbank;
 
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Rechtsform")
 public class Rechtsform {
-	private String id;
+	@Id
+	@GeneratedValue
+	private Integer id;
 	private String rechtsform;
 	
-	public Rechtsform(String id, String rechtsform) {
+	@OneToMany(mappedBy="rechtsform")
+	private Set<Geschäftskunde> geschäftskunden;
+	
+	public Rechtsform(Integer id, String rechtsform) {
 		this(rechtsform);
 		this.id = id;
 	}
 	public Rechtsform(String rechtsform){
 		this.rechtsform=rechtsform;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getRechtsform() {

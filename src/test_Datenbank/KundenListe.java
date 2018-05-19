@@ -34,8 +34,9 @@ public class KundenListe {
 	public boolean entferneKunde(Kunde k){
 		Iterator<Kunde> it= kListe.iterator();
 		while(it.hasNext()){
-			if(it.next().equals(k)){
-				kListe.remove(it.next());
+			Kunde kd=it.next();
+			if(kd.equals(k)){
+				kListe.remove(kd);
 				return true;
 			}
 		}
@@ -43,6 +44,15 @@ public class KundenListe {
 	}
 	public void leereKundenListe(){
 		kListe.clear();
+	}
+	public Kunde gibKunde(Kunde k){
+		Iterator<Kunde> it=kListe.iterator();
+		while(it.hasNext()){
+			Kunde aK=it.next();
+			if(aK.equals(k))
+				return aK;
+			}
+		return null;
 	}
 	public static KundenListe getkundenListe() {
 		if(kundenListe==null)
@@ -54,46 +64,17 @@ public class KundenListe {
 	}
 	
 	public void fügeKundeEin(DB db, Kunde k) throws SQLException{
-		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, k.getVorname());
-		db.getPs().setString(2, k.getNachname());
-		db.getPs().setString(3, k.getEmail());
-		db.getPs().setString(4, k.getTelefonNr());
-		db.getPs().setString(5, k.getAnID());
-		
-		//SQL-Befehl absenden
-		db.getPs().execute();
 		getkundenListe().fügeKundeHinzu(k);
+		getkundenListe().gibKunde(k).persistiere(db);
 	}
 	public void löscheKunde(DB db, Kunde k) throws SQLException{
-		String sql="DELETE FROM kunde WHERE Vorname=? AND Nachname=? AND EMail=? AND TelefonNr=? AND AnID=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, k.getVorname());
-		db.getPs().setString(2, k.getNachname());
-		db.getPs().setString(3, k.getEmail());
-		db.getPs().setString(4, k.getTelefonNr());
-		db.getPs().setString(5, k.getAnID());
-		
-		//SQL-Befehl absenden
-		db.getPs().execute();
+		getkundenListe().gibKunde(k).lösche(db);
 		getkundenListe().entferneKunde(k);
 	}
 	public void ändereKunde(DB db, Kunde kundeNeu, Kunde kundeAlt) throws SQLException{
-		String sql="UPDATE kunde SET Vorname=?, Nachname=?, TelefonNr=?, Email=?, AnID=? WHERE Nr=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, kundeNeu.getVorname());
-		db.getPs().setString(2, kundeNeu.getNachname());
-		db.getPs().setString(3, kundeNeu.getTelefonNr());
-		db.getPs().setString(4, kundeNeu.getEmail());
-		db.getPs().setString(5, kundeNeu.getAnID());
-		db.getPs().setString(6, kundeNeu.getNr());
-
-		
-		//SQL-Befehl absenden
-		db.getPs().executeUpdate();
 		getkundenListe().entferneKunde(kundeAlt);
 		getkundenListe().fügeKundeHinzu(kundeNeu);
+		getkundenListe().gibKunde(kundeNeu).ändere(db);
 		
 	}
 	public void kundenListeAktualisieren(DB db) throws SQLException{

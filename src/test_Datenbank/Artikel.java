@@ -1,25 +1,40 @@
 package test_Datenbank;
 
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Artikel")
 public class Artikel {
-	private String id;
+	@Id
+	@GeneratedValue
+	private Integer id;
 	private String bezeichnung;
-	private String preis;
+	private Double preis;
 	
-	public Artikel(String id, String bezeichnung, String preis) {
+	@OneToMany(mappedBy="artikel")
+	private Set<Rechnung.Rechnungsposition> rechnungspositionen;
+	
+	public Artikel(Integer id, String bezeichnung, Double preis) {
 		this(bezeichnung, preis);
 		this.id = id;
 	}
-	public Artikel(String bezeichnung, String preis){
+	public Artikel(String bezeichnung, Double preis){
 		this.bezeichnung=bezeichnung;
 		this.preis=preis;
 	}
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 	public String getBezeichnung() {
 		return bezeichnung;
 	}
-	public String getPreis() {
+	public Double getPreis() {
 		return preis;
 	}
 	@Override

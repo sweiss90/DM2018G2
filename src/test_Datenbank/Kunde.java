@@ -1,21 +1,86 @@
 package test_Datenbank;
 
+import java.sql.SQLException;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.*;
+
+@Entity
+@Table(name="Kunde")
 public class Kunde {
-	private String nr;
+	@Id 
+	@GeneratedValue
+	private int nr;
 	private String vorname;
 	private String nachname;
 	private String telefonNr;
 	private String email;
-	private String anID;
 	
-	public Kunde(String nr, String vorname, String nachname, String telefonNr, String email, String anID) {
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="anschrift_Id", nullable=false, referencedColumnName="ID")
+	private Anschrift anschrift;
+	
+	@OneToMany(mappedBy="kunde")
+	private Set<Rechnung> rechnungen;
+	
+	public Kunde(){
+		//notwendig wegen JPA
+	}
+	public Kunde(int nr, String vorname, String nachname, String telefonNr, String email, Anschrift anID) {
 		this.nr = nr;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.telefonNr = telefonNr;
 		this.email = email;
-		this.anID = anID;
+		this.anschrift = anID;
 	}
+	
+	public void persistiere(DB db) throws SQLException{
+		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getVorname());
+		db.getPs().setString(2, this.getNachname());
+		db.getPs().setString(3, this.getEmail());
+		db.getPs().setString(4, this.getTelefonNr());
+		db.getPs().setString(5, this.getAnID());
+		
+		//SQL-Befehl absenden
+		db.getPs().execute();
+	}
+	public void lösche(DB db) throws SQLException{
+		String sql="DELETE FROM kunde WHERE Vorname=? AND Nachname=? AND Email=? AND TelefonNr=? AND AnID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getVorname());
+		db.getPs().setString(2, this.getNachname());
+		db.getPs().setString(3, this.getEmail());
+		db.getPs().setString(4, this.getTelefonNr());
+		db.getPs().setString(5, this.getAnID());
+		
+		//SQL-Befehl absenden
+		db.getPs().execute();
+	}
+	public void ändere(DB db) throws SQLException{
+		String sql="UPDATE kunde SET Vorname=?, Nachname=?, TelefonNr=?, Email=?, AnID=? WHERE Nr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getVorname());
+		db.getPs().setString(2, this.getNachname());
+		db.getPs().setString(3, this.getTelefonNr());
+		db.getPs().setString(4, this.getEmail());
+		db.getPs().setString(5, this.getAnID());
+		db.getPs().setString(6, this.getNr());
+		
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+	}
+	
+	
+	
 	public String getVorname() {
 		return vorname;
 	}
@@ -48,23 +113,23 @@ public class Kunde {
 		this.email = email;
 	}
 
-	public String getAnID() {
-		return anID;
+	public Anschrift getAnID() {
+		return anschrift;
 	}
 
-	public void setAnID(String anID) {
-		this.anID = anID;
+	public void setAnID(Anschrift anID) {
+		this.anschrift = anID;
 	}
-	public String getNr() {
+	public int getNr() {
 		return nr;
 	}
-	public void setNr(String nr) {
+	public void setNr(int nr) {
 		this.nr = nr;
 	}
 	
 	@Override
 	public int hashCode(){
-		return Integer.parseInt(nr);
+		return nr;
 	}
 	
 	@Override

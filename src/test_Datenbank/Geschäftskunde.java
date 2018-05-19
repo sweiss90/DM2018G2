@@ -2,12 +2,21 @@ package test_Datenbank;
 
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.swing.JOptionPane;
 
+@Entity
+@Table(name="Geschäftskunde")
 public class Geschäftskunde extends Kunde{
 	private String KDNr;
 	private String Firmenname;
-	private String RechtsformID;
+	
+	@ManyToOne
+	@JoinColumn(name="Rechtsform", nullable=false)
+	private Rechtsform rechtsform;
 	
 	public Geschäftskunde(String kDNr, String firmenname, String rechtsformID) {
 		super(null, null, null, null, null, null);

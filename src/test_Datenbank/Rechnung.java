@@ -1,30 +1,54 @@
 package test_Datenbank;
 
+import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Rechnung")
 public class Rechnung {
-	private String nr;
+	@Id
+	@GeneratedValue
+	private Integer nr;
 	private String datum;
 	private String bezahlt;
 	private String zahlungsziel;
-	private String kdNr;
+	
+	@ManyToOne
+	@JoinColumn(name="kunde", nullable=false)
+	private Kunde kunde;
+	
+	@OneToMany(mappedBy="rechnung")
+	private Set<Rechnung.Rechnungsposition> rechnungspositionen;
+	
 	private String transNr;
 	
-	public Rechnung(String Datum, String bezahlt, String Zahlungsziel, String KdNr, String TransNr){
+	public Rechnung(){
+		//notwendig wegen JPA
+	}
+	
+	public Rechnung(String Datum, String bezahlt, String Zahlungsziel, Kunde kunde, String TransNr){
 		this.datum=Datum;
 		this.bezahlt=bezahlt;
 		this.zahlungsziel=Zahlungsziel;
-		this.kdNr=KdNr;
+		this.kunde=kunde;
 		this.transNr=TransNr;
 	}
-	public Rechnung(String nr, String Datum, String bezahlt, String Zahlungsziel, String KdNr, String TransNr){
-		this(Datum, bezahlt, Zahlungsziel, KdNr, TransNr);
+	public Rechnung(Integer nr, String Datum, String bezahlt, String Zahlungsziel, Kunde kunde, String TransNr){
+		this(Datum, bezahlt, Zahlungsziel, kunde, TransNr);
 		this.nr=nr;
 	}
 	
-	public String getNr() {
+	public Integer getNr() {
 		return nr;
 	}
 
-	public void setNr(String nr) {
+	public void setNr(Integer nr) {
 		this.nr = nr;
 	}
 
@@ -52,12 +76,12 @@ public class Rechnung {
 		this.zahlungsziel = zahlungsziel;
 	}
 
-	public String getKdNr() {
-		return kdNr;
+	public Kunde getKdNr() {
+		return kunde;
 	}
 
-	public void setKdNr(String kdNr) {
-		this.kdNr = kdNr;
+	public void setKdNr(Kunde kdNr) {
+		this.kunde = kdNr;
 	}
 
 	public String getTransNr() {
@@ -67,12 +91,21 @@ public class Rechnung {
 	public void setTransNr(String transNr) {
 		this.transNr = transNr;
 	}
-	
+	   @Entity
+	   @Table(name="Rechnungsposition")
 	   class Rechnungsposition{
 		 
 		private String positionsNr;
 		private String artikelID;
 		private String menge;
+		
+		@ManyToOne
+		@JoinColumn(name="rechnung", nullable=false)
+		private Rechnung rechnung;
+		
+		@ManyToOne
+		@JoinColumn(name="artikel", nullable=false)
+		private Artikel artikel;
 		
 		public Rechnungsposition(String positionsNr, String artikelID, String menge) {
 			
@@ -80,7 +113,7 @@ public class Rechnung {
 			this.artikelID = artikelID;
 			this.menge = menge;
 		}
-		public String getNr(){
+		public Integer getNr(){
 			return nr;
 		}
 
