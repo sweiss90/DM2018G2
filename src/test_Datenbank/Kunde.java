@@ -13,6 +13,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="Kunde")
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="Typ")
 public class Kunde {
 	@Id 
 	@GeneratedValue
@@ -23,11 +25,14 @@ public class Kunde {
 	private String email;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="anschrift_Id", nullable=false, referencedColumnName="ID")
+	@JoinColumn(name="anschrift_Id", nullable=false, referencedColumnName="id")
 	private Anschrift anschrift;
 	
 	@OneToMany(mappedBy="kunde")
 	private Set<Rechnung> rechnungen;
+	
+	@OneToMany(mappedBy="kunde")
+	private Set<Zahlungsart> zahlungsarten;
 	
 	public Kunde(){
 		//notwendig wegen JPA
@@ -48,7 +53,7 @@ public class Kunde {
 		db.getPs().setString(2, this.getNachname());
 		db.getPs().setString(3, this.getEmail());
 		db.getPs().setString(4, this.getTelefonNr());
-		db.getPs().setString(5, this.getAnID());
+		db.getPs().setString(5, this.getAnID().getId().toString());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -60,7 +65,7 @@ public class Kunde {
 		db.getPs().setString(2, this.getNachname());
 		db.getPs().setString(3, this.getEmail());
 		db.getPs().setString(4, this.getTelefonNr());
-		db.getPs().setString(5, this.getAnID());
+		db.getPs().setString(5, this.getAnID().getId().toString());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -72,8 +77,8 @@ public class Kunde {
 		db.getPs().setString(2, this.getNachname());
 		db.getPs().setString(3, this.getTelefonNr());
 		db.getPs().setString(4, this.getEmail());
-		db.getPs().setString(5, this.getAnID());
-		db.getPs().setString(6, this.getNr());
+		db.getPs().setString(5, this.getAnID().getId().toString());
+		db.getPs().setString(6, new Integer(this.getNr()).toString());
 		
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();

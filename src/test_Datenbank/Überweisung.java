@@ -2,8 +2,12 @@ package test_Datenbank;
 
 import java.util.Iterator;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.swing.JOptionPane;
 
+@Entity
+@DiscriminatorValue("3")
 public class Überweisung extends Zahlungsart {
 	private String erhalten;
 	
@@ -20,6 +24,7 @@ public class Überweisung extends Zahlungsart {
 			//Instanz auf NULL setzen wenn KNDR fehlerhaft oder nicht vorhanden
 			//this=null;
 	}
+	public Überweisung(){}
 	
 	public String getErhalten() {
 		return erhalten;

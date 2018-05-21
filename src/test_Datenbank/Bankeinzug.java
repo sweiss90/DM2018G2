@@ -2,11 +2,17 @@ package test_Datenbank;
 
 import java.util.*;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 import javax.swing.JOptionPane;
 
+@Entity
+@DiscriminatorValue("1")
 public class Bankeinzug extends Zahlungsart{
 	private String iban;
 	private String bic;
+	
+	public Bankeinzug(){}
 	
 	public Bankeinzug(String transNr, String iban, String bic){
 		super(null, null, null);

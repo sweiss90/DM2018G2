@@ -26,6 +26,7 @@ public class Rechtsform {
 	public Rechtsform(String rechtsform){
 		this.rechtsform=rechtsform;
 	}
+	public Rechtsform(){}
 	public Integer getId() {
 		return id;
 	}

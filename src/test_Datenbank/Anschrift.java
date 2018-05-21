@@ -58,7 +58,7 @@ public class Anschrift {
 		return ort;
 	}
 
-	public Land getLaID() {
+	public Land getLand() {
 		return land;
 	}
 	public Integer getId() {
@@ -67,7 +67,7 @@ public class Anschrift {
 	@Override
 	public String toString(){
 		return "{ "+ this.getId()+", "+this.getStrasse()+", "+this.getHausNr()+
-				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLaID()+" }";
+				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLand()+" }";
 	}
 	public void setId(Integer id) {
 		this.id = id;

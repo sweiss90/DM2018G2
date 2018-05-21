@@ -18,7 +18,7 @@ public class Artikel {
 	private Double preis;
 	
 	@OneToMany(mappedBy="artikel")
-	private Set<Rechnung.Rechnungsposition> rechnungspositionen;
+	private Set<Rechnungsposition> rechnungspositionen;
 	
 	public Artikel(Integer id, String bezeichnung, Double preis) {
 		this(bezeichnung, preis);
@@ -28,6 +28,7 @@ public class Artikel {
 		this.bezeichnung=bezeichnung;
 		this.preis=preis;
 	}
+	public Artikel(){}
 	public Integer getId() {
 		return id;
 	}

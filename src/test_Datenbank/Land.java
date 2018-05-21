@@ -2,9 +2,17 @@ package test_Datenbank;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Land")
 public class Land {
+	@Id
+	@GeneratedValue
 	private String id;
 	private String land;
 	
@@ -16,6 +24,7 @@ public class Land {
 		this.land=land;
 	}
 
+	public Land(){}
 	public String getId() {
 		return id;
 	}
