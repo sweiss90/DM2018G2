@@ -3,6 +3,7 @@ package test_Datenbank;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 public class RechnungsListe {
@@ -33,6 +34,16 @@ public class RechnungsListe {
 		return rechnungsListe;
 	}
 	
+	public Rechnung gibRechnung(Rechnung r){
+		Iterator<Rechnung> it=rListe.iterator();
+		while(it.hasNext()){
+			Rechnung rk=it.next();
+			if(rk.equals(r))
+				return rk;
+			}
+		return null;
+	}
+	
 	public ArrayList<Rechnung> getRListe(){
 		return rListe;
 	}
@@ -40,46 +51,17 @@ public class RechnungsListe {
 		rListe.clear();
 	}
 	public void fügeRechnungEin(DB db, Rechnung r) throws SQLException{
-		String sql="INSERT INTO rechnung(Datum, Bezahlt, Zahlungsziel, KdNr, TransNr) VALUES (?,?,?,?,?);";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, r.getDatum());
-		db.getPs().setString(2, r.getBezahlt());
-		db.getPs().setString(3, r.getZahlungsziel());
-		db.getPs().setString(4, r.getKdNr());
-		db.getPs().setString(5, r.getTransNr());
-		
-		//SQL-Befehl absetzen
-		db.getPs().execute();
 		getRechnungsListe().fügeRechnungHinzu(r);
+		getRechnungsListe().gibRechnung(r).persistiere(db);
 	}
 	public void löscheRechnung(DB db, Rechnung r) throws SQLException{
-		String sql="DELETE FROM rechnung WHERE Datum=? AND Bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, r.getDatum());
-		db.getPs().setString(2, r.getBezahlt());
-		db.getPs().setString(3, r.getZahlungsziel());
-		db.getPs().setString(4, r.getKdNr());
-		db.getPs().setString(5, r.getTransNr());
-		
-		//SQL-Befehl absetzen
-		db.getPs().execute();
+		getRechnungsListe().gibRechnung(r).lösche(db);
 		getRechnungsListe().entferneRechnung(r);
 	}
 	public void ändereRechnung(DB db, Rechnung rechnungNeu, Rechnung rechnungAlt) throws SQLException{
-		String sql="UPDATE rechnung SET Datum=?, Bezahlt=?, Zahlungsziel=?, KdNr=?, TransNr=? WHERE Nr=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rechnungNeu.getDatum());
-		db.getPs().setString(2, rechnungNeu.getBezahlt());
-		db.getPs().setString(3, rechnungNeu.getZahlungsziel());
-		db.getPs().setString(4, rechnungNeu.getKdNr());
-		db.getPs().setString(5, rechnungNeu.getTransNr());
-		db.getPs().setString(6, rechnungNeu.getNr());
-
-		
-		//SQL-Befehl absenden
-		db.getPs().executeUpdate();
 		getRechnungsListe().entferneRechnung(rechnungAlt);
 		getRechnungsListe().fügeRechnungHinzu(rechnungNeu);
+		getRechnungsListe().gibRechnung(rechnungNeu).ändere(db);
 		
 	}
 	

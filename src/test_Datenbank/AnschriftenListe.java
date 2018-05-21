@@ -38,10 +38,10 @@ public class AnschriftenListe {
 		String sql="INSERT INTO anschrift(Strasse, HausNr, PLZ, Ort, LaID) VALUES(?,?,?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, a.getStrasse());
-		db.getPs().setString(2, a.getHausNr());
+		db.getPs().setInt(2, a.getHausNr());
 		db.getPs().setString(3, a.getPlZ());
 		db.getPs().setString(4, a.getOrt());
-		db.getPs().setString(5, a.getLaID());
+		db.getPs().setString(5, a.getLand().getId());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -51,10 +51,10 @@ public class AnschriftenListe {
 		String sql="DELETE FROM anschrift WHERE Strasse=? AND HausNr=? AND PLZ=? AND Ort=? AND LaID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, a.getStrasse());
-		db.getPs().setString(2, a.getHausNr());
+		db.getPs().setInt(2, a.getHausNr());
 		db.getPs().setString(3, a.getPlZ());
 		db.getPs().setString(4, a.getOrt());
-		db.getPs().setString(5, a.getLaID());
+		db.getPs().setString(5, a.getLand().getId());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -64,11 +64,11 @@ public class AnschriftenListe {
 		String sql="UPDATE anschrift SET Strasse=?, HausNr=?, PLZ=?, Ort=?, LaID=? WHERE ID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, anNeu.getStrasse());
-		db.getPs().setString(2, anNeu.getHausNr());
+		db.getPs().setInt(2, anNeu.getHausNr());
 		db.getPs().setString(3, anNeu.getPlZ());
 		db.getPs().setString(4, anNeu.getOrt());
-		db.getPs().setString(5, anNeu.getLaID());
-		db.getPs().setString(6, anNeu.getId());
+		db.getPs().setString(5, anNeu.getLand().getId());
+		db.getPs().setInt(6, anNeu.getId());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();
@@ -82,9 +82,15 @@ public class AnschriftenListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Anschrift a=new Anschrift(datensatz.get("ID"), datensatz.get("Strasse"), datensatz.get("HausNr"), datensatz.get("PLZ"), 
-						datensatz.get("Ort"), datensatz.get("LaID"));
-			this.fügeAnschriftEin(a);
+			String laId=datensatz.get("LaID");
+			for(Land la:LaenderListe.getLaenderListe().getLaListe()){
+				if(la.getId().equals(laId)){
+				Anschrift a=new Anschrift(Integer.parseInt(datensatz.get("ID")), datensatz.get("Strasse"), Integer.parseInt(datensatz.get("HausNr")), datensatz.get("PLZ"), 
+						datensatz.get("Ort"), la);
+				this.fügeAnschriftEin(a);
+				}
+			}
+			
 		}
 	}
 	

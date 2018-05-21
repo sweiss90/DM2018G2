@@ -3,6 +3,7 @@ package test_Datenbank;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 public class RechtsformListe {
@@ -33,36 +34,29 @@ public class RechtsformListe {
 	public void leereListe(){
 		rfListe.clear();
 	}
+	
+	public Rechtsform gibRechtsform(Rechtsform rf){
+		Iterator<Rechtsform> it=rfListe.iterator();
+		while(it.hasNext()){
+			Rechtsform r=it.next();
+			if(r.equals(rf))
+				return r;
+			}
+		return null;
+	}
+	
 	public void fügeRechtsformEin(DB db, Rechtsform rf) throws SQLException{
-		String sql="INSERT INTO rechtsform(ID, Rechtsform) VALUES(?,?);";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rf.getId());
-		db.getPs().setString(2, rf.getRechtsform());
-		
-		//SQL-Befehl absetzen
-		db.getPs().execute();
 		getRechtsformListe().fügeRechtsformHinzu(rf);
+		getRechtsformListe().gibRechtsform(rf).persistiere(db);
 	}
 	public void löscheRechtsform(DB db, Rechtsform rf) throws SQLException{
-		String sql="DELETE FROM unternehmensform WHERE ID=? AND Rechtsform=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rf.getId());
-		db.getPs().setString(2, rf.getRechtsform());
-		
-		//SQL-Befehl absetzen
-		db.getPs().execute();
+		getRechtsformListe().gibRechtsform(rf).lösche(db);
 		getRechtsformListe().entferneRechtsform(rf);
 	}
 	public void ändereRechtsform(DB db, Rechtsform rfNeu, Rechtsform rfAlt) throws SQLException{
-		String sql="UPDATE unternehmensform SET Rechtsform=? WHERE ID=?;";
-		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rfNeu.getRechtsform());
-		db.getPs().setString(2, rfNeu.getId());
-
-		//SQL-Befehl absenden
-		db.getPs().executeUpdate();
 		getRechtsformListe().entferneRechtsform(rfAlt);
 		getRechtsformListe().fügeRechtsformHinzu(rfNeu);
+		getRechtsformListe().gibRechtsform(rfNeu).ändere(db);
 	}
 	public void rechtsformListeAktualisieren(DB db) throws SQLException{
 		getRechtsformListe().leereListe();//suboptimal, da wenig performant 
@@ -70,7 +64,7 @@ public class RechtsformListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Rechtsform rf=new Rechtsform(datensatz.get("ID"), datensatz.get("Rechtsform"));
+			Rechtsform rf=new Rechtsform(Integer.parseInt(datensatz.get("ID")), datensatz.get("Rechtsform"));
 			this.fügeRechtsformHinzu(rf);
 		}
 	}

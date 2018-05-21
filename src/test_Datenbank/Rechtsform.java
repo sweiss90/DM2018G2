@@ -1,5 +1,6 @@
 package test_Datenbank;
 
+import java.sql.SQLException;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -42,6 +43,34 @@ public class Rechtsform {
 	@Override
 	public String toString(){
 		return "{ ID= "+getId()+", Rechtsform= "+getRechtsform()+" }";
+	}
+	
+	public void persistiere(DB db) throws SQLException{
+		String sql="INSERT INTO unternehmensform(ID, Rechtsform) VALUES(?,?);";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setInt(1, this.getId());
+		db.getPs().setString(2, this.getRechtsform());
+		
+		//SQL-Befehl absetzen
+		db.getPs().execute();
+	}
+	public void lösche(DB db) throws SQLException{
+		String sql="DELETE FROM unternehmensform WHERE ID=? AND Rechtsform=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setInt(1, this.getId());
+		db.getPs().setString(2, this.getRechtsform());
+		
+		//SQL-Befehl absetzen
+		db.getPs().execute();
+	}
+	public void ändere(DB db) throws SQLException{
+		String sql="UPDATE unternehmensform SET Rechtsform=? WHERE ID=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getRechtsform());
+		db.getPs().setInt(2, this.getId());
+
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
 	}
 	
 	

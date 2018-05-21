@@ -74,7 +74,7 @@ public class ArtikelListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Artikel a=new Artikel(datensatz.get("ID"), datensatz.get("Bezeichnung"), datensatz.get("Preis"));
+			Artikel a=new Artikel(Integer.parseInt(datensatz.get("ID")), datensatz.get("Bezeichnung"), Double.parseDouble(datensatz.get("Preis")));
 			this.fügeArtikelEin(a);
 		}
 	}

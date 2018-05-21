@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class Anschrift {
 	
 	@Id 
-	@GeneratedValue
+	//@GeneratedValue
 	private Integer id;
 	private String strasse;
 	private Integer hausNr;
@@ -30,7 +30,7 @@ public class Anschrift {
 	@OneToMany(mappedBy="anschrift")
 	private Set<Kunde> kunden;
 	
-	public Anschrift(Integer id,String strasse, Integer hausNr, String plZ, String ort, Land land) {
+	public Anschrift(Integer id, String strasse, Integer hausNr, String plZ, String ort, Land land) {
 		this.id=id;
 		this.strasse = strasse;
 		this.hausNr = hausNr;

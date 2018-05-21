@@ -1,5 +1,6 @@
 package test_Datenbank;
 
+import java.sql.SQLException;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,9 +47,56 @@ public class Rechnung {
 		this(Datum, bezahlt, Zahlungsziel, kunde, zArt);
 		this.nr=nr;
 	}
+	public void persistiere(DB db) throws SQLException{
+		String sql="INSERT INTO rechnung(Datum, Bezahlt, Zahlungsziel, KdNr, TransNr) VALUES (?,?,?,?,?);";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getDatum());
+		db.getPs().setString(2, this.getBezahlt());
+		db.getPs().setString(3, this.getZahlungsziel());
+		db.getPs().setInt(4, this.getKdNr().getNr());
+		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		
+		
+		//SQL-Befehl absenden
+		db.getPs().execute();
+	}
+	public void lösche(DB db) throws SQLException{
+		String sql="DELETE FROM rechnung WHERE Datum=? AND Bezahlt=? AND Zahlungsziel=? AND KdNr=? AND TransNr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getDatum());
+		db.getPs().setString(2, this.getBezahlt());
+		db.getPs().setString(3, this.getZahlungsziel());
+		db.getPs().setInt(4, this.getKdNr().getNr());
+		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		
+		//SQL-Befehl absenden
+		db.getPs().execute();
+	}
+	public void ändere(DB db) throws SQLException{
+		String sql="UPDATE rechnung SET Datum=?, Bezahlt=?, Zahlungsziel=?, KdNr=?, TransNr=? WHERE Nr=?;";
+		db.setPs(db.getCon().prepareStatement(sql));
+		db.getPs().setString(1, this.getDatum());
+		db.getPs().setString(2, this.getBezahlt());
+		db.getPs().setString(3, this.getZahlungsziel());
+		db.getPs().setInt(4, this.getKdNr().getNr());
+		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		db.getPs().setInt(6, this.getNr());
+
+		
+		//SQL-Befehl absenden
+		db.getPs().executeUpdate();
+	}
 	
 	public Integer getNr() {
 		return nr;
+	}
+
+	public Zahlungsart getZahlungsart() {
+		return zahlungsart;
+	}
+
+	public void setZahlungsart(Zahlungsart zahlungsart) {
+		this.zahlungsart = zahlungsart;
 	}
 
 	public void setNr(Integer nr) {

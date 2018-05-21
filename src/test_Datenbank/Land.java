@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="Land")
 public class Land {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private String id;
 	private String land;
 	

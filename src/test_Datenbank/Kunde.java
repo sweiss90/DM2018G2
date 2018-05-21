@@ -17,12 +17,13 @@ import javax.persistence.*;
 @DiscriminatorColumn(name="Typ")
 public class Kunde {
 	@Id 
-	@GeneratedValue
+	//@GeneratedValue
 	private int nr;
 	private String vorname;
 	private String nachname;
 	private String telefonNr;
 	private String email;
+	//private String anID;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="anschrift_Id", nullable=false, referencedColumnName="id")
@@ -37,7 +38,7 @@ public class Kunde {
 	public Kunde(){
 		//notwendig wegen JPA
 	}
-	public Kunde(int nr, String vorname, String nachname, String telefonNr, String email, Anschrift anID) {
+	public Kunde(Integer nr, String vorname, String nachname, String telefonNr, String email, Anschrift anID) {
 		this.nr = nr;
 		this.vorname = vorname;
 		this.nachname = nachname;
@@ -45,6 +46,10 @@ public class Kunde {
 		this.email = email;
 		this.anschrift = anID;
 	}
+	
+
+	
+	
 	
 	public void persistiere(DB db) throws SQLException{
 		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";

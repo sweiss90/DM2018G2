@@ -83,9 +83,17 @@ public class KundenListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Kunde k=new Kunde(datensatz.get("Nr"), datensatz.get("Vorname"), datensatz.get("Nachname"), 
-						datensatz.get("TelefonNr"), datensatz.get("Email"), datensatz.get("AnID"));
-			this.fügeKundeHinzu(k);
+			String anId=datensatz.get("AnID");
+			for(Anschrift a:AnschriftenListe.getAnschriftenListe().getaListe()){
+				if(a.getId().toString().equals(anId)){
+					Kunde k=new Kunde(Integer.parseInt(datensatz.get("Nr")), datensatz.get("Vorname"), datensatz.get("Nachname"), 
+							datensatz.get("TelefonNr"), datensatz.get("Email"), a);
+					this.fügeKundeHinzu(k);
+				}
+					
+			}
+			
+			
 		}
 	}
 	@Override
