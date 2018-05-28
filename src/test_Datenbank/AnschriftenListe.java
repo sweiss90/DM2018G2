@@ -14,7 +14,6 @@ public class AnschriftenListe {
 		aListe=new ArrayList<>();
 	}
 	public void fügeAnschriftEin(Anschrift an){
-		//NULL-Prüfungen notwendig?
 		aListe.add(an);
 	}
 	public void entferneAnschrift(Anschrift an){
@@ -90,10 +89,8 @@ public class AnschriftenListe {
 				this.fügeAnschriftEin(a);
 				}
 			}
-			
 		}
 	}
-	
 	@Override
 	public String toString(){
 		String erg=new String("<HTML>");

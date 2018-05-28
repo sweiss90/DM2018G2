@@ -1,5 +1,6 @@
 package test_Datenbank;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -15,7 +16,6 @@ import javax.persistence.Table;
 @Table(name="Rechnung")
 public class Rechnung {
 	@Id
-	@GeneratedValue
 	private Integer nr;
 	private String datum;
 	private String bezahlt;
@@ -28,23 +28,18 @@ public class Rechnung {
 	@OneToMany(mappedBy="rechnung")
 	private Set<Rechnungsposition> rechnungspositionen;
 	
-	@OneToOne
-	@JoinColumn(name="TransNr")
-	private Zahlungsart zahlungsart;
-	
 	public Rechnung(){
 		//notwendig wegen JPA
 	}
 	
-	public Rechnung(String Datum, String bezahlt, String Zahlungsziel, Kunde kunde, Zahlungsart zArt){
+	public Rechnung(String Datum, String bezahlt, String Zahlungsziel, Kunde kunde){
 		this.datum=Datum;
 		this.bezahlt=bezahlt;
 		this.zahlungsziel=Zahlungsziel;
 		this.kunde=kunde;
-		this.zahlungsart=zArt;
 	}
-	public Rechnung(Integer nr, String Datum, String bezahlt, String Zahlungsziel, Kunde kunde, Zahlungsart zArt){
-		this(Datum, bezahlt, Zahlungsziel, kunde, zArt);
+	public Rechnung(Integer nr, String Datum, String bezahlt, String Zahlungsziel, Kunde kunde){
+		this(Datum, bezahlt, Zahlungsziel, kunde);
 		this.nr=nr;
 	}
 	public void persistiere(DB db) throws SQLException{
@@ -54,7 +49,7 @@ public class Rechnung {
 		db.getPs().setString(2, this.getBezahlt());
 		db.getPs().setString(3, this.getZahlungsziel());
 		db.getPs().setInt(4, this.getKdNr().getNr());
-		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		//db.getPs().setString(5, this.getZahlungsart().getTransNr());
 		
 		
 		//SQL-Befehl absenden
@@ -67,7 +62,7 @@ public class Rechnung {
 		db.getPs().setString(2, this.getBezahlt());
 		db.getPs().setString(3, this.getZahlungsziel());
 		db.getPs().setInt(4, this.getKdNr().getNr());
-		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		//db.getPs().setString(5, this.getZahlungsart().getTransNr());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -79,7 +74,7 @@ public class Rechnung {
 		db.getPs().setString(2, this.getBezahlt());
 		db.getPs().setString(3, this.getZahlungsziel());
 		db.getPs().setInt(4, this.getKdNr().getNr());
-		db.getPs().setString(5, this.getZahlungsart().getTransNr());
+		//db.getPs().setString(5, this.getZahlungsart().getTransNr());
 		db.getPs().setInt(6, this.getNr());
 
 		
@@ -89,14 +84,6 @@ public class Rechnung {
 	
 	public Integer getNr() {
 		return nr;
-	}
-
-	public Zahlungsart getZahlungsart() {
-		return zahlungsart;
-	}
-
-	public void setZahlungsart(Zahlungsart zahlungsart) {
-		this.zahlungsart = zahlungsart;
 	}
 
 	public void setNr(Integer nr) {
@@ -139,7 +126,7 @@ public class Rechnung {
 	@Override
 	public String toString(){
 		return "{ "+this.getNr()+", "+this.getDatum()+", "+this.getBezahlt()+
-				", "+this.getZahlungsziel()+", "+this.getKdNr()+", "+zahlungsart.getTransNr().toString()+" }";
+				", "+this.getZahlungsziel()+", "+this.getKdNr()+" }";
 	}
 	   
 

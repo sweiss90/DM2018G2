@@ -36,8 +36,8 @@ public class ZahlungsartListe {
 	public void fügeZahlungsartEin(DB db, Zahlungsart za) throws SQLException{
 		String sql="INSERT INTO zahlungsart(ZANr, KDNr) VALUES(?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, za.getZahlungsartNummer());
-		db.getPs().setString(2, za.getKundennummer());
+		//db.getPs().setString(1, za.getZahlungsartNummer());
+		//db.getPs().setString(2, za.getKundennummer());
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -46,8 +46,8 @@ public class ZahlungsartListe {
 	public void löscheZahlungsart(DB db, Zahlungsart za) throws SQLException{
 		String sql="DELETE FROM zahlungsart WHERE ZANr=? AND KDNr=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, za.getZahlungsartNummer());
-		db.getPs().setString(2, za.getKundennummer());;
+	//	db.getPs().setString(1, za.getZahlungsartNummer());
+	//	db.getPs().setString(2, za.getKundennummer());;
 		
 		//SQL-Befehl absenden
 		db.getPs().execute();
@@ -56,9 +56,9 @@ public class ZahlungsartListe {
 	public void ändereZahlungsart(DB db, Zahlungsart zaNeu, Zahlungsart zaAlt) throws SQLException{
 		String sql="UPDATE zahlungsart SET ZANr=?, KDNr=? WHERE TransID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, zaNeu.getZahlungsartNummer());
-		db.getPs().setString(2, zaNeu.getKundennummer());
-		db.getPs().setString(3, zaNeu.getTransNr());
+	//	db.getPs().setString(1, zaNeu.getZahlungsartNummer());
+	//	db.getPs().setString(2, zaNeu.getKundennummer());
+	//	db.getPs().setString(3, zaNeu.getTransNr());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();
@@ -71,8 +71,14 @@ public class ZahlungsartListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Zahlungsart za=new Zahlungsart(datensatz.get("TransID"), datensatz.get("ZANr"), datensatz.get("KDNr"));
-			this.zahlungsartHinzufügen(za);
+			String kdNr=datensatz.get("KDNr");
+			for(Kunde kd:KundenListe.getkundenListe().getkListe()){
+				if(kdNr.equals(String.valueOf(kd.getNr()))){
+					Zahlungsart za=new Zahlungsart(Integer.parseInt(datensatz.get("TransID")), kd);
+					this.zahlungsartHinzufügen(za);
+		}
+			
+	}
 		}
 	}
 	@Override

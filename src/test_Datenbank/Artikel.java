@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Table(name="Artikel")
 public class Artikel {
 	@Id
-	@GeneratedValue
 	private Integer id;
 	private String bezeichnung;
 	private Double preis;
@@ -28,7 +27,9 @@ public class Artikel {
 		this.bezeichnung=bezeichnung;
 		this.preis=preis;
 	}
-	public Artikel(){}
+	public Artikel(){
+		// notwendig wegen JPA
+	}
 	public Integer getId() {
 		return id;
 	}

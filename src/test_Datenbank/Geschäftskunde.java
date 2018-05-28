@@ -21,7 +21,9 @@ public class Geschäftskunde extends Kunde{
 	
 	public Geschäftskunde(){}
 	
-	public Geschäftskunde(String firmenname, Rechtsform rechtsform) {
+	public Geschäftskunde(Integer nr,String vorname, String nachname, String telefonNr, String eMail, 
+			Anschrift an, String firmenname, Rechtsform rechtsform) {
+		super(nr, vorname, nachname, telefonNr, eMail, an);
 		setFirmenname(firmenname);
 		setRechtsform(rechtsform);
 	}
@@ -38,7 +40,7 @@ public class Geschäftskunde extends Kunde{
 	}
 
 	public void setRechtsform(Rechtsform rechtsform) {
-		rechtsform=rechtsform;
+		this.rechtsform=rechtsform;
 	}
 	
 	@Override

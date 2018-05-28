@@ -28,8 +28,6 @@ public class KundenListe {
 				return true;
 			}
 		return false;
-		//alternativ:
-		// return kundenListe.contains(k);
 	}
 	public boolean entferneKunde(Kunde k){
 		Iterator<Kunde> it= kListe.iterator();
@@ -79,7 +77,26 @@ public class KundenListe {
 	}
 	public void kundenListeAktualisieren(DB db) throws SQLException{
 		kundenListe.leereKundenListe();
-		String sql="SELECT * FROM kunde;";
+		String sql="SELECT * FROM `kunde` WHERE kunde.Nr NOT IN (SELECT KDNr FROM geschäftskunde);";
+		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
+		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
+		for(LinkedHashMap<String, String> datensatz:ergebnis){
+			String anId=datensatz.get("AnID");
+			for(Anschrift a:AnschriftenListe.getAnschriftenListe().getaListe()){
+				if(a.getId().toString().equals(anId)){
+					Kunde k=new Kunde(Integer.parseInt(datensatz.get("Nr")), datensatz.get("Vorname"), datensatz.get("Nachname"), 
+							datensatz.get("TelefonNr"), datensatz.get("Email"), a);
+					this.fügeKundeHinzu(k);
+				}
+					
+			}
+			
+			
+		}
+	}
+	public void kundenListeAktualisieren2(DB db) throws SQLException{
+		kundenListe.leereKundenListe();
+		String sql="SELECT * FROM `kunde`;";
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){

@@ -16,7 +16,6 @@ import javax.persistence.Table;
 public class Anschrift {
 	
 	@Id 
-	//@GeneratedValue
 	private Integer id;
 	private String strasse;
 	private Integer hausNr;
@@ -40,7 +39,7 @@ public class Anschrift {
 	}
 	
 	public Anschrift(){
-		//notwendig wegen JPA
+		// notwendig wegen JPA
 	}
 	public String getStrasse() {
 		return strasse;
@@ -64,17 +63,18 @@ public class Anschrift {
 	public Integer getId() {
 		return id;
 	}
-	@Override
-	public String toString(){
-		return "{ "+ this.getId()+", "+this.getStrasse()+", "+this.getHausNr()+
-				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLand()+" }";
-	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
 	public void setHausNr(Integer hausNr) {
 		this.hausNr = hausNr;
 	}
+	@Override
+	public String toString(){
+		return "{ "+ this.getId()+", "+this.getStrasse()+", "+this.getHausNr()+
+				", "+this.getPlZ()+", "+this.getOrt()+", "+this.getLand()+" }";
+	}
+	
 
 	
 }

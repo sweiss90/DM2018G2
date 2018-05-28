@@ -1,4 +1,6 @@
 package test_Datenbank;
+import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -12,55 +14,42 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="Zahlungsart", discriminatorType=DiscriminatorType.STRING)
+@Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="Zahlungsart", discriminatorType=DiscriminatorType.INTEGER)
 public class Zahlungsart {
 	@Id
-	@GeneratedValue
-	private String transNr;
-	private String zahlungsartNummer;
-	private String kundennummer;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="kunde", nullable=false, referencedColumnName="nr")
+	private Integer transNr;
+	@ManyToOne()
+	@JoinColumn(name="kunde", referencedColumnName="NR")
 	private Kunde kunde;
 	
-	@OneToOne(mappedBy="zahlungsart")
-	private Rechnung rechnung;
-	
-	public Zahlungsart(String zahlungsartNummer, String kundennummer) {
-		this.zahlungsartNummer = zahlungsartNummer;
-		this.kundennummer = kundennummer;
+	public Zahlungsart(Kunde kunde) {
+		this.kunde = Objects.requireNonNull(kunde);
 	}
-	public Zahlungsart(String transNr, String zahlungsartNummer, String kundennummer){
-		this(zahlungsartNummer, kundennummer);
+	public Zahlungsart(Integer transNr, Kunde kunde){
+		this(kunde);
 		this.transNr=transNr;
 	}
 	public Zahlungsart(){
-		
+		//notwendig wegen JPA
 	}
 
-	public String getTransNr() {
+	public Integer getTransNr() {
 		return transNr;
 	}
-	public void setTransNr(String transNr) {
+	public void setTransNr(Integer transNr) {
 		this.transNr = transNr;
 	}
-	public String getZahlungsartNummer() {
-		return zahlungsartNummer;
+	
+	public Kunde getKunde() {
+		return kunde;
 	}
-	public void setZahlungsartNummer(String zahlungsartNummer) {
-		this.zahlungsartNummer = zahlungsartNummer;
-	}
-	public String getKundennummer() {
-		return kundennummer;
-	}
-	public void setKundennummer(String kundennummer) {
-		this.kundennummer = kundennummer;
+	public void setKunde(Kunde kunde) {
+		this.kunde = kunde;
 	}
 	@Override
 	public String toString(){
-		return "{ TransNr = "+getTransNr()+", ZahlungsartNr= "+getZahlungsartNummer()+", Kundennummer= "+getKundennummer()+" }";
+		return "{ TransNr = "+getTransNr()+", Kundennummer= "+getKunde()+" }";
 	}
 	
 

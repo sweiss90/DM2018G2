@@ -36,7 +36,7 @@ public class ÜberweisungListe {
 	public void fügeÜberweisungEin(DB db, Überweisung u) throws SQLException{
 		String sql="INSERT INTO überweisung(TransID, erhalten) VALUES(?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, u.getTransNr());
+		//db.getPs().setString(1, u.getTransNr());
 		db.getPs().setString(2, u.getErhalten());
 		
 		//SQL-Befehl absenden
@@ -46,7 +46,7 @@ public class ÜberweisungListe {
 	public void löscheÜberweisung(DB db, Überweisung u) throws SQLException{
 		String sql="DELETE FROM überweisung WHERE TransID=? AND erhalten=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, u.getTransNr());
+		//db.getPs().setString(1, u.getTransNr());
 		db.getPs().setString(2, u.getErhalten());
 		
 		//SQL-Befehl absenden
@@ -56,9 +56,9 @@ public class ÜberweisungListe {
 	public void ändereÜberweisung(DB db, Überweisung uNeu, Überweisung uAlt) throws SQLException{
 		String sql="UPDATE überweisung SET TransID=?, erhalten=? WHERE TransID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, uNeu.getTransNr());
+	//	db.getPs().setString(1, uNeu.getTransNr());
 		db.getPs().setString(2, uNeu.getErhalten());
-		db.getPs().setString(3, uAlt.getTransNr());
+		//db.getPs().setString(3, uAlt.getTransNr());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();
@@ -67,12 +67,18 @@ public class ÜberweisungListe {
 	}
 	public void überweisungListeAktualisieren(DB db) throws SQLException{
 		getÜberweisungListe().leereListe();
-		String sql="SELECT * FROM überweisung;";
+		String sql="SELECT * FROM überweisung INNER JOIN zahlungsart ON überweisung.TransID=zahlungsart.TransID;";
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Überweisung u=new Überweisung(datensatz.get("TransID"), datensatz.get("erhalten"));
-			this.ÜberweisungHinzufügen(u);
+			String kdnr=datensatz.get("KDNr");
+			for(Kunde k:KundenListe.getkundenListe().getkListe()){
+				if(kdnr.equals(String.valueOf(k.getNr()))){
+					Überweisung u=new Überweisung(Integer.parseInt(datensatz.get("TransID")),  k, datensatz.get("erhalten"));
+					this.ÜberweisungHinzufügen(u);
+				}
+			}
+			
 		}
 	}
 	@Override

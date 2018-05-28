@@ -15,15 +15,14 @@ import javax.persistence.*;
 @Table(name="Kunde")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="Typ")
+@DiscriminatorValue("P_Kunde")
 public class Kunde {
 	@Id 
-	//@GeneratedValue
 	private int nr;
 	private String vorname;
 	private String nachname;
 	private String telefonNr;
 	private String email;
-	//private String anID;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="anschrift_Id", nullable=false, referencedColumnName="id")
@@ -46,11 +45,6 @@ public class Kunde {
 		this.email = email;
 		this.anschrift = anID;
 	}
-	
-
-	
-	
-	
 	public void persistiere(DB db) throws SQLException{
 		String sql="INSERT INTO kunde(Vorname, Nachname, Email, TelefonNr, AnID) VALUES (?,?,?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
@@ -146,11 +140,9 @@ public class Kunde {
 	public boolean equals(Object kd){
 		if(kd==null) return false;;
 		if(kd==this) return true;
+		if(this.getClass()!=kd.getClass()) return false;
 		Kunde kneu=(Kunde) kd;
-		if(this.getNr()==kneu.getNr())
-			return true;
-		else 
-			return false;
+		return (this.getNr()==kneu.getNr());
 	}
 	@Override
 	public String toString(){

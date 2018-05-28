@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Table(name="Land")
 public class Land {
 	@Id
-	//@GeneratedValue
 	private String id;
 	private String land;
 	
@@ -24,7 +23,9 @@ public class Land {
 		this.land=land;
 	}
 
-	public Land(){}
+	public Land(){
+		//notwendig wegen JPA
+	}
 	public String getId() {
 		return id;
 	}

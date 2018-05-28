@@ -18,34 +18,34 @@ public class EventHandlerJComboBoxes implements ActionListener {
 			testgui.getKtf7().setText(k.getNachname());
 			testgui.getKtf8().setText(k.getEmail());
 			testgui.getKtf9().setText(k.getTelefonNr());
-			testgui.getKtf10().setText(k.getAnID());
+			testgui.getKtf10().setText(k.getAnID().toString());
 		}
 		else if(e.getSource()==testgui.getrCb()){
 			Rechnung r=(Rechnung)testgui.getrCb().getSelectedItem();
 			testgui.getRtf6().setText(r.getDatum());
 			testgui.getRtf7().setText(r.getBezahlt());
 			testgui.getRtf8().setText(r.getZahlungsziel());
-			testgui.getRtf9().setText(r.getKdNr());
-			testgui.getRtf10().setText(r.getTransNr());
+			testgui.getRtf9().setText(r.getKdNr().toString());
+			//testgui.getRtf10().setText(r.getTransNr());
 		}
 		else if(e.getSource()==testgui.getGkCb()){
 			Geschäftskunde gk=(Geschäftskunde)testgui.getGkCb().getSelectedItem();
-			testgui.getGktf4().setText(gk.getKDNr());
+			//testgui.getGktf4().setText(gk.getKDNr());
 			testgui.getGktf5().setText(gk.getFirmenname());
-			testgui.getGktf6().setText(gk.getRechtsformID());
+			//testgui.getGktf6().setText(gk.getRechtsformID());
 		}
 		else if(e.getSource()==testgui.getAnCb()){
 			Anschrift a=(Anschrift)testgui.getAnCb().getSelectedItem();
 			testgui.getAtf6().setText(a.getStrasse());
-			testgui.getAtf7().setText(a.getHausNr());
+			testgui.getAtf7().setText(a.getHausNr().toString());
 			testgui.getAtf8().setText(a.getPlZ());
 			testgui.getAtf9().setText(a.getOrt());
-			testgui.getAtf10().setText(a.getLaID());
+			//testgui.getAtf10().setText(a.getLaID());
 		}
 		else if(e.getSource()==testgui.getArCb()){
 			Artikel a=(Artikel)testgui.getArCb().getSelectedItem();
 			testgui.getArtf3().setText(a.getBezeichnung());
-			testgui.getArtf4().setText(a.getPreis());
+			//testgui.getArtf4().setText(a.getPreis());
 		}
 		else if(e.getSource()==testgui.getLaCb()){
 			Land la=(Land)testgui.getLaCb().getSelectedItem();
@@ -54,19 +54,19 @@ public class EventHandlerJComboBoxes implements ActionListener {
 		}
 		else if(e.getSource()==testgui.getUfCb()){
 			Rechtsform rf=(Rechtsform)testgui.getUfCb().getSelectedItem();
-			testgui.getUftf2().setText(rf.getId());
+		//	testgui.getUftf2().setText(rf.getId());
 		}
 		else if(e.getSource()==testgui.getZaCb()){
 			Zahlungsart za=(Zahlungsart)testgui.getZaCb().getSelectedItem();
-			testgui.getZatf3().setText(za.getZahlungsartNummer());
-			testgui.getZatf4().setText(za.getKundennummer());
+		//	testgui.getZatf3().setText(za.getZahlungsartNummer());
+		//	testgui.getZatf4().setText(za.getKundennummer());
 		}
 		else if(e.getSource()==testgui.getRpCb()){
-			Rechnung.Rechnungsposition rp=(Rechnung.Rechnungsposition)testgui.getRpCb().getSelectedItem();
-			testgui.getRptf5().setText(rp.getNr());
-			testgui.getRptf6().setText(rp.getPositionsNr());
-			testgui.getRptf7().setText(rp.getArtikelID());
-			testgui.getRptf8().setText(rp.getMenge());
+		//	Rechnung.Rechnungsposition rp=(Rechnung.Rechnungsposition)testgui.getRpCb().getSelectedItem();
+			//testgui.getRptf5().setText(rp.getNr());
+			//testgui.getRptf6().setText(rp.getPositionsNr());
+			//testgui.getRptf7().setText(rp.getArtikelID());
+			//testgui.getRptf8().setText(rp.getMenge());
 		}
 		else if(e.getSource()==testgui.getBeCb()){
 			Bankeinzug be=(Bankeinzug)testgui.getBeCb().getSelectedItem();

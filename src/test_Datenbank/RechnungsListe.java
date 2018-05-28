@@ -72,9 +72,16 @@ public class RechnungsListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Rechnung r=new Rechnung(datensatz.get("Nr"), datensatz.get("Datum"), datensatz.get("Bezahlt"), 
-						datensatz.get("Zahlungsziel"), datensatz.get("KdNr"), datensatz.get("TransNr"));
+			String kdnr=datensatz.get("KdNr");
+			String zaNr=datensatz.get("TransNr");
+			for(Kunde k:KundenListe.getkundenListe().getkListe()){
+				if(String.valueOf(k.getNr()).equals(kdnr)){
+					Rechnung r=new Rechnung(Integer.parseInt(datensatz.get("Nr")), datensatz.get("Datum"), datensatz.get("Bezahlt"), 
+						datensatz.get("Zahlungsziel"), k );
 			this.fügeRechnungHinzu(r);
+					
+				}
+			}
 		}
 	}
 	@Override

@@ -8,19 +8,18 @@ import java.util.LinkedHashMap;
 public class RechnungspositionsListe {
 	//Singleton-Pattern
 	private static RechnungspositionsListe rechnungspositionsListe;
-	private ArrayList<Rechnung.Rechnungsposition> rpListe;
+	private ArrayList<Rechnungsposition> rpListe;
 	
 	private RechnungspositionsListe(){
 		rpListe=new ArrayList<>();
 	}
-	public void fügePositionEin(Rechnung.Rechnungsposition rp){
-		//NULL-Prüfungen notwendig?
+	public void fügePositionEin(Rechnungsposition rp){
 		rpListe.add(rp);
 	}
-	public void entfernePosition(Rechnung.Rechnungsposition rp){
+	public void entfernePosition(Rechnungsposition rp){
 		rpListe.remove(rp);
 	}
-	public boolean enthaeltPosition(Rechnung.Rechnungsposition rp){
+	public boolean enthaeltPosition(Rechnungsposition rp){
 		return rpListe.contains(rp);
 	}
 	public static RechnungspositionsListe getRechnungspositionsListe(){
@@ -28,44 +27,44 @@ public class RechnungspositionsListe {
 			rechnungspositionsListe=new RechnungspositionsListe();
 		return rechnungspositionsListe;
 	}
-	public ArrayList<Rechnung.Rechnungsposition> getRpListe() {
+	public ArrayList<Rechnungsposition> getRpListe() {
 		return rpListe;
 	}
 	public void leereListe(){
 		rpListe.clear();
 	}
-	public void fügeRechnungspositionEin(DB db, Rechnung.Rechnungsposition rp) throws SQLException{
+	public void fügeRechnungspositionEin(DB db, Rechnungsposition rp) throws SQLException{
 		String sql="INSERT INTO rechnungsposition(RechnungsID, PositionsNr, ArtikelID, Menge) VALUES(?,?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rp.getNr());
-		db.getPs().setString(2, rp.getPositionsNr());
-		db.getPs().setString(3, rp.getArtikelID());
-		db.getPs().setString(4, rp.getMenge());
+		//db.getPs().setString(1, rp.getNr());
+		//db.getPs().setString(2, rp.getPositionsNr());
+		//db.getPs().setString(3, rp.getArtikelID());
+		//db.getPs().setString(4, rp.getMenge());
 		
 		//SQL-Befehl absetzen
 		db.getPs().execute();
 		getRechnungspositionsListe().fügePositionEin(rp);
 		
 	}
-	public void löscheRechnungsposition(DB db, Rechnung.Rechnungsposition rp) throws SQLException{
+	public void löscheRechnungsposition(DB db, Rechnungsposition rp) throws SQLException{
 		String sql="DELETE FROM rechnungsposition WHERE RechnungsID=? AND PositionsNr=? AND ArtikelID=? AND Menge=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rp.getNr());
-		db.getPs().setString(2, rp.getPositionsNr());
-		db.getPs().setString(3, rp.getArtikelID());
-		db.getPs().setString(4, rp.getMenge());
+		//db.getPs().setString(1, rp.getNr());
+		//db.getPs().setString(2, rp.getPositionsNr());
+		//db.getPs().setString(3, rp.getArtikelID());
+		//db.getPs().setString(4, rp.getMenge());
 		
 		//SQL-Befehl absetzen
 		db.getPs().execute();
 		getRechnungspositionsListe().entfernePosition(rp);
 	}
-	public void ändereRechnungsposition(DB db, Rechnung.Rechnungsposition rpNeu, Rechnung.Rechnungsposition rpAlt ) throws SQLException{
+	public void ändereRechnungsposition(DB db, Rechnungsposition rpNeu, Rechnungsposition rpAlt ) throws SQLException{
 		String sql="UPDATE rechnungsposition SET PositionsNr=?, ArtikelID=?, Menge=? WHERE RechnungsID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, rpNeu.getPositionsNr());
-		db.getPs().setString(2, rpNeu.getArtikelID());
-		db.getPs().setString(3, rpNeu.getMenge());
-		db.getPs().setString(4, rpNeu.getNr());
+		//db.getPs().setString(1, rpNeu.getPositionsNr());
+		//db.getPs().setString(2, rpNeu.getArtikelID());
+		//db.getPs().setString(3, rpNeu.getMenge());
+		//db.getPs().setString(4, rpNeu.getNr());
 		
 		//SQL-Befehl absetzen
 		db.getPs().executeUpdate();
@@ -78,15 +77,26 @@ public class RechnungspositionsListe {
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Rechnung r=new Rechnung(datensatz.get("RechnungsID"), null, null, null, null, null);
-			Rechnung.Rechnungsposition rp=r.new Rechnungsposition(datensatz.get("PositionsNr"), datensatz.get("ArtikelID"), datensatz.get("Menge"));
-			this.fügePositionEin(rp);
+			String rId=datensatz.get("RechnungsID");
+			String aId=datensatz.get("ArtikelID");
+			for(Rechnung r:RechnungsListe.getRechnungsListe().getRListe()){
+				if(String.valueOf(r.getNr()).equals(rId)){
+					for(Artikel a:ArtikelListe.getArtikelListe().getaListe()){
+						if(String.valueOf(a.getId()).equals(aId)){
+							Rechnungsposition rp=new Rechnungsposition(Integer.parseInt(datensatz.get("PositionsNr")),  
+									Integer.parseInt(datensatz.get("Menge")), r, a);
+							this.fügePositionEin(rp);
+						}
+					}
+				}
+			}
+			
 		}
 	}
 	@Override
 	public String toString(){
 		String erg=new String("<HTML>");
-		for(Rechnung.Rechnungsposition rp:rpListe){
+		for(Rechnungsposition rp:rpListe){
 			erg+=rp+"<br>";
 		}
 		return erg+="</HTML>";

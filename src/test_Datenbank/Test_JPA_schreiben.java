@@ -11,18 +11,9 @@ public class Test_JPA_schreiben {
 		EntityManager db=null;
 		DB dbank=new DB();
 		try{
-			
-			/*Land la=new Land("CHE", "Schweiz");
-			Anschrift a=new Anschrift("Huberweg",
-				27, "0179", "München", la);
-			Kunde k1=new Kunde("Thomas", "Müller", "thomas.müller@web.de", "017663273672", a);*/
 			factory=Persistence.createEntityManagerFactory("rechnungsverwaltung2");
 			db=factory.createEntityManager();
 			db.getTransaction().begin();
-			/*db.persist(la);
-			db.persist(a);
-			db.persist(k1);
-			*/
 			
 			RechtsformListe.getRechtsformListe().rechtsformListeAktualisieren(dbank);
 			for(Rechtsform rf:RechtsformListe.getRechtsformListe().getRfListe()){
@@ -42,10 +33,43 @@ public class Test_JPA_schreiben {
 			}
 			KundenListe.getkundenListe().kundenListeAktualisieren(dbank);
 			for(Kunde k:KundenListe.getkundenListe().getkListe()){
-				System.out.println("Kunde: "+k);
 				db.persist(k);
+				}
+			
+			GeschaeftskundenListe.getGeschaeftskundenListe().geschaeftskundenListeAktualisieren(dbank);
+			for(Geschäftskunde gk:GeschaeftskundenListe.getGeschaeftskundenListe().getGkListe()){
+				db.persist(gk);
+			}
+			KundenListe.getkundenListe().kundenListeAktualisieren2(dbank);
+			
+			ZahlungsartListe.getZahlungsartListe().zahlungsartListeAktualisieren(dbank);
+			db.getTransaction().commit();
+			db.getTransaction().begin();
+			
+			BankeinzugListe.getBankeinzugListe().bankeinzugListeAktualisieren(dbank);
+			for(Bankeinzug be:BankeinzugListe.getBankeinzugListe().getbeListe()){
+				db.persist(be);
+			}
+			KreditkarteListe.getKreditkarteListe().kreditkarteListeAktualisieren(dbank);
+			for(Kreditkarte kk:KreditkarteListe.getKreditkarteListe().getkkListe()){
+				db.persist(kk);
+			}
+			ÜberweisungListe.getÜberweisungListe().überweisungListeAktualisieren(dbank);
+			for(Überweisung ub:ÜberweisungListe.getÜberweisungListe().getuewListe()){
+				db.persist(ub);
+			}
+			ZahlungsartListe.getZahlungsartListe().zahlungsartListeAktualisieren(dbank);
+			
+			RechnungsListe.getRechnungsListe().rechnungsListeAktualisieren(dbank);
+			for(Rechnung r:RechnungsListe.getRechnungsListe().getRListe()){
+				db.persist(r);
+			}
+			RechnungspositionsListe.getRechnungspositionsListe().rechnungsPositionsListeAktualisieren(dbank);
+			for(Rechnungsposition rp:RechnungspositionsListe.getRechnungspositionsListe().getRpListe()){
+				db.persist(rp);
 			}
 			db.getTransaction().commit();
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}finally{

@@ -37,7 +37,7 @@ public class BankeinzugListe {
 	public void fügeBankeinzugEin(DB db, Bankeinzug be) throws SQLException{
 		String sql="INSERT INTO bankeinzug(TransID, IBAN, BIC) VALUES(?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, be.getTransNr());
+		db.getPs().setInt(1, be.getTransNr());
 		db.getPs().setString(2, be.getIban());
 		db.getPs().setString(3, be.getBic());
 		
@@ -48,7 +48,7 @@ public class BankeinzugListe {
 	public void löscheBankeinzug(DB db, Bankeinzug be) throws SQLException{
 		String sql="DELETE FROM bankeinzug WHERE TransID=? AND IBAN=? AND BIC=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, be.getTransNr());
+		db.getPs().setInt(1, be.getTransNr());
 		db.getPs().setString(2, be.getIban());
 		db.getPs().setString(3, be.getBic());
 		
@@ -59,10 +59,10 @@ public class BankeinzugListe {
 	public void ändereBankeinzug(DB db, Bankeinzug beNeu, Bankeinzug beAlt) throws SQLException{
 		String sql="UPDATE bankeinzug SET TransID=?, IBAN=?, BIC=? WHERE TransID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, beNeu.getTransNr());
+		db.getPs().setInt(1, beNeu.getTransNr());
 		db.getPs().setString(2, beNeu.getIban());
 		db.getPs().setString(3, beNeu.getBic());
-		db.getPs().setString(4, beAlt.getTransNr());
+		db.getPs().setInt(4, beAlt.getTransNr());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();
@@ -71,12 +71,17 @@ public class BankeinzugListe {
 	}
 	public void bankeinzugListeAktualisieren(DB db) throws SQLException{
 		getBankeinzugListe().leereListe();
-		String sql="SELECT * FROM bankeinzug;";
+		String sql="SELECT * FROM bankeinzug INNER JOIN zahlungsart ON zahlungsart.TransID=bankeinzug.TransID;";
 		ResultSet rs=db.getCon().createStatement().executeQuery(sql);
 		ArrayList<LinkedHashMap<String, String>> ergebnis= db.konvertiereJava(rs);
 		for(LinkedHashMap<String, String> datensatz:ergebnis){
-			Bankeinzug be=new Bankeinzug(datensatz.get("TransID"), datensatz.get("IBAN"), datensatz.get("BIC"));
-			this.BankeinzugHinzufügen(be);
+			String kdnr=datensatz.get("KDNr");
+			for(Kunde k:KundenListe.getkundenListe().getkListe()){
+				if(kdnr.equals(String.valueOf(k.getNr()))){
+					Bankeinzug be=new Bankeinzug(Integer.parseInt(datensatz.get("TransID")), k, datensatz.get("IBAN"), datensatz.get("BIC"));
+					this.BankeinzugHinzufügen(be);
+				}
+			}
 		}
 	}
 	@Override

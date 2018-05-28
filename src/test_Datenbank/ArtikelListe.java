@@ -36,9 +36,9 @@ public class ArtikelListe {
 	public void fügeArtikelEin(DB db, Artikel ar) throws SQLException{
 		String sql="INSERT INTO artikel(ID, Bezeichnung, Preis) VALUES(?,?,?);";
 		db.setPs(db.getCon().prepareStatement(sql));
-		db.getPs().setString(1, ar.getId());
+		db.getPs().setInt(1, ar.getId());
 		db.getPs().setString(2, ar.getBezeichnung());
-		db.getPs().setString(3, ar.getPreis());
+		db.getPs().setDouble(3, ar.getPreis());
 		
 		//SQL-Befehl ausführen
 		db.getPs().execute();
@@ -49,7 +49,7 @@ public class ArtikelListe {
 		db.setPs(db.getCon().prepareStatement(sql));
 		//db.getPs().setString(1, ar.getId());
 		db.getPs().setString(1, ar.getBezeichnung());
-		db.getPs().setString(2, ar.getPreis());
+		db.getPs().setDouble(2, ar.getPreis());
 		
 		//SQL-Befehl ausführen
 		db.getPs().execute();
@@ -59,8 +59,8 @@ public class ArtikelListe {
 		String sql="UPDATE artikel SET Bezeichnung=?, Preis=? WHERE ID=?;";
 		db.setPs(db.getCon().prepareStatement(sql));
 		db.getPs().setString(1, arNeu.getBezeichnung());
-		db.getPs().setString(2, arNeu.getPreis());
-		db.getPs().setString(3, arNeu.getId());
+		db.getPs().setDouble(2, arNeu.getPreis());
+		db.getPs().setInt(3, arNeu.getId());
 
 		//SQL-Befehl absenden
 		db.getPs().executeUpdate();
